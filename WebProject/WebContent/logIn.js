@@ -5,6 +5,8 @@ $.validator.addMethod( "alphanumeric", function( value, element ) {
 return this.optional( element ) || /^\w+$/i.test( value );
 }, "Letters, numbers, and underscores only please" );
 
+
+
 var $loginForm = $('#login');
 if($loginForm.length){
   $loginForm.validate({
@@ -39,3 +41,6 @@ if($loginForm.length){
        }
   });
 }
+
+
+ 
