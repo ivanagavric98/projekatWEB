@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="jquery-3.3.1.min.js"></script>
+  <script src="registration.js"></script>  
   <style>
   	.error{
     	color: red;
@@ -20,7 +22,7 @@
                 	Registration
                 </div>
                 <div class = "panel-body">
-                	<form id = "registration" action="#" method="post">
+                	<form id = "registration">
                         <input type = "text" class = "form-control" name = "fname" placeholder = "First Name *"/>
                         <br/>
                         <input type = "text" class = "form-control" name = "lname" placeholder = "Last Name *"/>
@@ -32,20 +34,21 @@
                         <input type = "password" class = "form-control" name = "confirm" placeholder = "Confirm Password *"/>
                         <br/>
                         <div class = "gender">
-                        	<label>Gender</label>
-							<label class="radio-inline"><input type="radio" name="gender" class = "form-contorl"/>Male</label>
-							<label class="radio-inline"><input type="radio" name="gender" class = "form-contorl"/>Female</label>       
+                        	<form id="myForm">
+	                        	<label>Gender</label>
+								<label class="radio-inline"><input type="radio" name="gender" value="MALE" class = "form-contorl"/>Male</label>
+								<label class="radio-inline"><input type="radio" name="gender" value="FEMALE" class = "form-contorl"/>Female</label>       
+                        	</form>
                         </div>
                         <br/>
-                	    	 <button type = "submit" class = "btn btn-primary">Submit</button>
+                	    	 <input id="submit_form" type="submit" value="Submit"></input>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="registration.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
 </body>
 </html>

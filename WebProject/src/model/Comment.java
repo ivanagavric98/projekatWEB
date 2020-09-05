@@ -1,15 +1,18 @@
 package model;
 
 public class Comment {
-	public String id; 		//jedinstveni identifikator
+	public long id; 		//jedinstveni identifikator
 	public String guest;
-	public String apartment;
+	public Long apartment;
 	public String text;
 	public String ratingOfApartments;
+	public boolean active;
 	
-	public Comment() {}
+	public Comment() {
+		active = true;
+	}
 	
-	public Comment(String id, String guest, String apartment, String text, String ratingOfApartments) {
+	public Comment(long id, String guest, Long apartment, String text, String ratingOfApartments) {
 		super();
 		this.id = id;
 		this.guest = guest;
@@ -17,11 +20,17 @@ public class Comment {
 		this.text = text;
 		this.ratingOfApartments = ratingOfApartments;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	public String getGuest() {
 		return guest;
@@ -29,10 +38,10 @@ public class Comment {
 	public void setGuest(String guest) {
 		this.guest = guest;
 	}
-	public String getApartment() {
+	public Long getApartment() {
 		return apartment;
 	}
-	public void setApartment(String apartment) {
+	public void setApartment(Long apartment) {
 		this.apartment = apartment;
 	}
 	public String getText() {

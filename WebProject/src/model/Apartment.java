@@ -1,32 +1,36 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import enumeration.ApartmentType;
 
 public class Apartment {
-	public String id;		//jedinstveni identifikator
+	public long id;		//jedinstveni identifikator
 	public ApartmentType type;
 	public int roomsNumber;
 	public int guestsNumber;
 	public Location location;
-	public ArrayList<Long> rentalDates;
-	public ArrayList<Long> availableDates;
+	public ArrayList<LocalDate> rentalDates;
+	public ArrayList<LocalDate> availableDates;
 	public String host;
 	public String comments;
 	public String photos;
 	public double pricePerNight;
 	public int checkInTime;
 	public int checkOutTime;
-	public ArrayList<String> amenities;
-	public ArrayList<String> reservations;
+	public ArrayList<Long> amenities;
+	public ArrayList<Long> reservations;
+	public boolean active;
 	
-	public Apartment() {}
+	public Apartment() {
+		active = true;
+	}
 	
-	public Apartment(String id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
-			ArrayList<Long> rentalDates, ArrayList<Long> availableDates, String host, String comments, String photos,
-			double pricePerNight, int checkInTime, int checkOutTime, ArrayList<String> amenities,
-			ArrayList<String> reservations) {
+	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
+			ArrayList<LocalDate> rentalDates, ArrayList<LocalDate> availableDates, String host, String comments, String photos,
+			double pricePerNight, int checkInTime, int checkOutTime, ArrayList<Long> amenities,
+			ArrayList<Long> reservations, boolean active) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -43,13 +47,25 @@ public class Apartment {
 		this.checkOutTime = checkOutTime;
 		this.amenities = amenities;
 		this.reservations = reservations;
+		this.active = active;
 	}
-	public String getId() {
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+
+	public void setId(long id) {
 		this.id = id;
 	}
+
 	public ApartmentType getType() {
 		return type;
 	}
@@ -74,16 +90,16 @@ public class Apartment {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	public ArrayList<Long> getRentalDates() {
+	public ArrayList<LocalDate> getRentalDates() {
 		return rentalDates;
 	}
-	public void setRentalDates(ArrayList<Long> rentalDates) {
+	public void setRentalDates(ArrayList<LocalDate> rentalDates) {
 		this.rentalDates = rentalDates;
 	}
-	public ArrayList<Long> getAvailableDates() {
+	public ArrayList<LocalDate> getAvailableDates() {
 		return availableDates;
 	}
-	public void setAvailableDates(ArrayList<Long> availableDates) {
+	public void setAvailableDates(ArrayList<LocalDate> availableDates) {
 		this.availableDates = availableDates;
 	}
 	public String getHost() {
@@ -122,16 +138,16 @@ public class Apartment {
 	public void setCheckOutTime(int checkOutTime) {
 		this.checkOutTime = checkOutTime;
 	}
-	public ArrayList<String> getAmenities() {
+	public ArrayList<Long> getAmenities() {
 		return amenities;
 	}
-	public void setAmenities(ArrayList<String> amenities) {
+	public void setAmenities(ArrayList<Long> amenities) {
 		this.amenities = amenities;
 	}
-	public ArrayList<String> getReservations() {
+	public ArrayList<Long> getReservations() {
 		return reservations;
 	}
-	public void setReservations(ArrayList<String> reservations) {
+	public void setReservations(ArrayList<Long> reservations) {
 		this.reservations = reservations;
 	}
 	

@@ -1,7 +1,7 @@
 package model;
 
 public class Address {
-	public String id;		//jedinstveni identifikator
+	public long id;		//jedinstveni identifikator
 	public String street;
 	public String number;
 	public String city;
@@ -9,7 +9,7 @@ public class Address {
 	
 	public Address() {}
 	
-	public Address(String id, String street, String number, String city, String postalCode) {
+	public Address(long id, String street, String number, String city, String postalCode) {
 		super();
 		this.id = id;
 		this.street = street;
@@ -18,10 +18,10 @@ public class Address {
 		this.postalCode = postalCode;
 	}
 	
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getStreet() {

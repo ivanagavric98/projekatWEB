@@ -22,7 +22,6 @@ public class LogInService {
 	ServletContext ctx;
 	
 	public LogInService() {
-		
 	}
 	
 	@PostConstruct
@@ -47,6 +46,17 @@ public class LogInService {
 			return Response.status(400).entity("Invalid username and/or password").build();
 		}
 		request.getSession().setAttribute("user", loggedUser);
+		return Response.status(200).build();
+	}
+	
+	@POST
+	@Path("/registration")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response registration(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		System.out.println("registration started");
+		boolean successfulRegistration = userDao.registerUser(user);
 		return Response.status(200).build();
 	}
 	

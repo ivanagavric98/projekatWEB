@@ -1,21 +1,27 @@
 package model;
 
+import java.time.LocalDate;
+
 import enumeration.ReservationStatus;
 
 public class Reservation {
-	public String id;		//jedinstveni identifikator
+	public long id;		//jedinstveni identifikator
 	public Apartment bookedApartment;
-	public Long startDate;
+	public LocalDate startDate;
 	public int nightsNumber;
 	public double totalPrice;
 	public String reservationMessage;
 	public String guest;
 	public ReservationStatus reservationStatus;
+	public boolean active;
 	
-	public Reservation() {}
+	public Reservation() {
+		nightsNumber = 1; 
+		active = true;
+	}
 	
-	public Reservation(String id, Apartment bookedApartment, Long startDate, int nightsNumber, double totalPrice,
-			String reservationMessage, String guest, ReservationStatus reservationStatus) {
+	public Reservation(long id, Apartment bookedApartment, LocalDate startDate, int nightsNumber, double totalPrice,
+			String reservationMessage, String guest, ReservationStatus reservationStatus, boolean active) {
 		super();
 		this.id = id;
 		this.bookedApartment = bookedApartment;
@@ -25,12 +31,19 @@ public class Reservation {
 		this.reservationMessage = reservationMessage;
 		this.guest = guest;
 		this.reservationStatus = reservationStatus;
+		this.active = active;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	public Apartment getBookedApartment() {
 		return bookedApartment;
@@ -38,10 +51,10 @@ public class Reservation {
 	public void setBookedApartment(Apartment bookedApartment) {
 		this.bookedApartment = bookedApartment;
 	}
-	public Long getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Long startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 	public int getNightsNumber() {

@@ -1,24 +1,24 @@
 package model;
 
 public class Location {
-	public String id;		//jedinstveni identifikator
+	public long id;		//jedinstveni identifikator
 	public String latitude;
 	public String longitude;
 	public Address address;
 	
 	public Location() {}
 	
-	public Location(String id, String latitude, String longitude, Address address) {
+	public Location(long id, String latitude, String longitude, Address address) {
 		super();
 		this.id = id;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.address = address;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getLatitude() {

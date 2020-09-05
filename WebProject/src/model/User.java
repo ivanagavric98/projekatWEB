@@ -14,12 +14,31 @@ public class User {
 		public ArrayList<String> rentalApartments;
 		public ArrayList<String> rentedApartments;
 		public ArrayList<String> reservations;
+		public boolean active;
 		
-		public User() {}
+		public User() {
+			active = true;
+			rentalApartments = new ArrayList();
+			rentedApartments = new ArrayList();
+			reservations = new ArrayList();
+		}
+		
+		public User(String username, String password, String firstName, String lastName, Gender gender, Role role) {
+			this.username = username;
+			this.password = password;
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.gender = gender;
+			this.role = role;
+			this.active = true;
+			this.rentalApartments = new ArrayList();
+			this.rentedApartments = new ArrayList();
+			this.reservations = new ArrayList();
+		}
 		
 		public User(String username, String password, String firstName, String lastName, Gender gender, Role role,
 				ArrayList<String> rentalApartments, ArrayList<String> rentedApartments,
-				ArrayList<String> reservations) {
+				ArrayList<String> reservations, boolean active) {
 			super();
 			this.username = username;
 			this.password = password;
@@ -30,15 +49,17 @@ public class User {
 			this.rentalApartments = rentalApartments;
 			this.rentedApartments = rentedApartments;
 			this.reservations = reservations;
+			this.active = active;
 		}
-		public User(String username, String password, String firstName, String lastName) {
-			super();
-			this.username = username;
-			this.password = password;
-			this.firstName = firstName;
-			this.lastName = lastName;
-			
+		
+		public void setActive(boolean active) {
+			this.active = active;
 		}
+		
+		public boolean isActive() {
+			return active;
+		}
+		
 		public String getUsername() {
 			return username;
 		}
