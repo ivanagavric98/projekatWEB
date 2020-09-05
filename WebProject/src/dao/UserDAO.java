@@ -1,14 +1,19 @@
 package dao;
 
-import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.StringTokenizer;
 
-import com.sun.tools.javac.jvm.Gen;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import enumeration.Gender;
 import enumeration.Role;
@@ -16,12 +21,17 @@ import model.User;
 
 public class UserDAO {
 	private Map<String, User> users = new HashMap<>();
+	private String path = "";
 	
 	public UserDAO() {
 	}
 
 	public UserDAO(String contextPath) {
-		loadUsers(contextPath);
+		path = contextPath;
+		loadUsers(path + "/users.json");
+		for (User user : users.values()) {
+			System.out.println("username: " + user.getUsername());
+		}
 	}
 	
 	public User find(String username, String password) {
@@ -39,43 +49,6 @@ public class UserDAO {
 		return users.values();
 	}
 	
-
-	private void loadUsers(String contextPath) {
-		BufferedReader in = null;
-		try {
-			File file = new File(contextPath + "/users.txt");
-			in = new BufferedReader(new FileReader(file));
-			String line;
-			StringTokenizer st;
-			while ((line = in.readLine()) != null) {
-				line = line.trim();
-				if (line.equals("") || line.indexOf('#') == 0)
-					continue;
-				st = new StringTokenizer(line, ";");
-				while (st.hasMoreTokens()) {
-					String firstName = st.nextToken().trim();
-					String lastName = st.nextToken().trim();
-					String username = st.nextToken().trim();
-					String password = st.nextToken().trim();
-					String gender = st.nextToken().trim();
-					String role = st.nextToken().trim();
-					
-					users.put(username, new User
-							(firstName, lastName, username, password, getGender(gender), getRole(role)));
-				}
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				}
-				catch (Exception e) { }
-			}
-		}
-	}
-
 	private Gender getGender(String gender) {
 		switch (gender) {
 			case "MALE":
@@ -103,18 +76,151 @@ public class UserDAO {
 			return false;
 		}
 		
-		createUser(user);
-		// TODO upisati ga u fajl
-		writeUserFile(user);
+		user.setRole(Role.GUEST);
+		users.put(user.getUsername(), user);
+		saveUsers();
+		return true;
+	}
+	
+	public boolean registerHost(User user) {
+		User registerUser = find(user.getUsername(), user.getPassword());
+		if(registerUser != null) {
+			return false;
+		}
+		
+		user.setRole(Role.HOST);
+		users.put(user.getUsername(), user);
+		saveUsers();
 		return true;
 	}
 
-	private void writeUserFile(User user) {
-		
-		
+	@SuppressWarnings({ "unchecked", "resource" })
+	public void saveUsers() {
+		 JSONArray list = new JSONArray();
+		 for (String username : users.keySet()) {
+		    	User user = users.get(username);
+		    	JSONObject obj = new JSONObject();
+		        obj.put("username",user.getUsername());
+		    	obj.put("password",user.getPassword());
+		    	obj.put("firstName",user.getFirstName());
+		    	obj.put("lastName",user.getLastName());
+		    	obj.put("gender", user.getGender().toString());
+		    	obj.put("active",user.isActive());
+		    	obj.put("role",user.getRole().toString());
+		    	
+		    	JSONArray rentedApartments = new JSONArray();
+		    	JSONArray rentalApartments = new JSONArray();
+		    	JSONArray reservationList = new JSONArray();
+		    	if(user.getRole().equals(Role.GUEST)) {
+		    		for(Long apartment_id: user.getRentedApartments()) {
+		    			rentedApartments.add(apartment_id);
+		    		}
+		    		for(Long reservation_id: user.getReservations()) {
+		    			reservationList.add(reservation_id);
+		    		}
+		    	} else if (user.getRole().equals(Role.HOST)) {
+		    		for(Long host_apartment_id: user.getRentalApartments()) {
+		    			rentalApartments.add(host_apartment_id);
+		    		}
+		    	}
+		        obj.put("rentedApartments",rentedApartments);	 
+		        obj.put("rentalApartments",rentalApartments);	
+		        obj.put("reservations",rentedApartments);	 
+		    	list.add(obj);
+		   }
+		   try{
+				FileWriter fw = new FileWriter(path+"/users.json"); 
+				fw.write(list.toJSONString());
+				fw.flush();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}   
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void loadUsers(String loadPath) {
+		System.out.println("load users");
+		JSONParser parser = new JSONParser(); 
+		try {
+			Object obj = parser.parse(new FileReader(loadPath));
+			JSONArray jsonArray = (JSONArray) obj; //tu mi je sada lista json objekata
+			
+			Iterator<JSONObject> iterator = jsonArray.iterator();
+			while (iterator.hasNext()) {
+				JSONObject jsonObject = iterator.next();
+				User user = new User();
+				user.setUsername((String) jsonObject.get("username"));
+				user.setPassword((String) jsonObject.get("password"));
+				user.setFirstName((String) jsonObject.get("firstName"));
+				user.setLastName((String) jsonObject.get("lastName"));
+				user.setGender(getGender((String) jsonObject.get("gender")));
+				user.setActive((boolean) jsonObject.get("active"));
+				user.setRole(getRole((String)jsonObject.get("role")));
+				
+				if(user.getRole().equals("HOST")) {
+					JSONArray apartments = (JSONArray)jsonObject.get("rentalApartments");
+					if(!apartments.isEmpty()) {
+						ArrayList<Long> rentalApartments = new ArrayList<>();
+						for(int i=0; i<apartments.size(); i++) {
+							rentalApartments.add((Long) apartments.get(i));
+						}
+						user.setRentalApartments(rentalApartments);
+					}
+				}else if(user.getRole().equals("GUEST")) {
+					JSONArray rentedApartmentsJSON = (JSONArray)jsonObject.get("rentedApartments");
+					if(!rentedApartmentsJSON.isEmpty()) {
+						ArrayList<Long> rentedApartments = new ArrayList<>();
+						for(int i=0; i<rentedApartmentsJSON.size(); i++) {
+							rentedApartments.add((Long) rentedApartmentsJSON.get(i));
+						}
+						user.setRentalApartments(rentedApartments);
+					}
+					JSONArray reservationsJSON = (JSONArray)jsonObject.get("reservations");
+					if(!reservationsJSON.isEmpty()) {
+						ArrayList<Long> reservations = new ArrayList<>();
+						for(int i=0; i<reservationsJSON.size(); i++) {
+							reservations.add((Long) reservationsJSON.get(i));
+						}
+						user.setRentalApartments(reservations);
+					}
+				}			
+				
+				users.put(user.getUsername(), user);
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	 }
+
+	public User getUser(String username) {
+		return users.get(username);
 	}
 
-	private void createUser(User user) {
-		users.put(user.getUsername(), user);
+	public User editUser(String username, User newUserData) {
+		User user = users.get(username);
+		if(user == null) {
+			return null;
+		}
+		User newUser = createNewUser(newUserData, username, user.getRole());
+		saveUsers();
+		
+		return newUser;
+	}
+
+	private User createNewUser(User newUserData, String username, Role role) {
+		User newUser = new User();
+		newUser.setUsername(username);
+		newUser.setPassword(newUserData.getPassword());
+		newUser.setFirstName(newUserData.getFirstName());
+		newUser.setLastName(newUserData.getLastName());
+		newUser.setRole(role);
+		newUser.setGender(newUserData.getGender());
+		users.put(newUser.getUsername(), newUser);
+		return newUser;
 	}
 }
