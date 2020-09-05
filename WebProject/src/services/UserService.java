@@ -25,12 +25,9 @@ public class UserService {
 	}
 	
 	@PostConstruct
-	// ctx polje je null u konstruktoru, mora se pozvati nakon konstruktora (@PostConstruct anotacija)
 	public void init() {
-		// Ovaj objekat se instancira vi�e puta u toku rada aplikacije
-		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("userDAO") == null) {
-			String p = ctx.getRealPath("")+"/data";   //preuzimam putanju
+			String p = ctx.getRealPath("")+"/data";   
 			ctx.setAttribute("userDAO", new UserDAO(p));
 		}
 	}
