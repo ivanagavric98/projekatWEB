@@ -11,9 +11,9 @@ public class User {
 		public String lastName;
 		public Gender gender;
 		public Role role;
-		public ArrayList<String> rentalApartments;
-		public ArrayList<String> rentedApartments;
-		public ArrayList<String> reservations;
+		public ArrayList<Long> rentalApartments;
+		public ArrayList<Long> rentedApartments;
+		public ArrayList<Long> reservations;
 		public boolean active;
 		
 		public User() {
@@ -37,8 +37,8 @@ public class User {
 		}
 		
 		public User(String username, String password, String firstName, String lastName, Gender gender, Role role,
-				ArrayList<String> rentalApartments, ArrayList<String> rentedApartments,
-				ArrayList<String> reservations, boolean active) {
+				ArrayList<Long> rentalApartments, ArrayList<Long> rentedApartments,
+				ArrayList<Long> reservations, boolean active) {
 			super();
 			this.username = username;
 			this.password = password;
@@ -96,22 +96,22 @@ public class User {
 		public void setRole(Role role) {
 			this.role = role;
 		}
-		public ArrayList<String> getRentalApartments() {
+		public ArrayList<Long> getRentalApartments() {
 			return rentalApartments;
 		}
-		public void setRentalApartments(ArrayList<String> rentalApartments) {
+		public void setRentalApartments(ArrayList<Long> rentalApartments) {
 			this.rentalApartments = rentalApartments;
 		}
-		public ArrayList<String> getRentedApartments() {
+		public ArrayList<Long> getRentedApartments() {
 			return rentedApartments;
 		}
-		public void setRentedApartments(ArrayList<String> rentedApartments) {
+		public void setRentedApartments(ArrayList<Long> rentedApartments) {
 			this.rentedApartments = rentedApartments;
 		}
-		public ArrayList<String> getReservations() {
+		public ArrayList<Long> getReservations() {
 			return reservations;
 		}
-		public void setReservations(ArrayList<String> reservations) {
+		public void setReservations(ArrayList<Long> reservations) {
 			this.reservations = reservations;
 		}
 		

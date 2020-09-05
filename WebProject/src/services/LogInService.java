@@ -30,8 +30,8 @@ public class LogInService {
 		// Ovaj objekat se instancira vi�e puta u toku rada aplikacije
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("userDAO") == null) {
-	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("userDAO", new UserDAO(contextPath));
+			String p = ctx.getRealPath("")+"/data";   //preuzimam putanju
+			ctx.setAttribute("userDAO", new UserDAO(p));
 		}
 	}
 	

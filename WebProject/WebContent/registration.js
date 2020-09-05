@@ -6,16 +6,14 @@ $(document).ready(function(){
 		console.log('register');
 
 		let firstName = inputElem.val();
-		let gender = $('input[name=gender]:checked', '#myForm').val();
-		
+		let gender = $("#registration input[type='radio']:checked").val();
 		let data = {
 			"firstName" : $("input[name=fname]").val(),
 			"lastName" : $("input[name=lname]").val(),
 			"username" : $("input[name=username]").val(),
 			"password" : $("input[name=password]").val(),
-			"gender" : "MALE"
+			"gender" : gender
 		};
-		console.log(data);
 		
 		$.ajax({
             type: 'POST',
