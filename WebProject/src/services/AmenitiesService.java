@@ -44,7 +44,7 @@ public class AmenitiesService {
 		if(successfulAdd) {
 			return Response.status(200).build();	
 		}else {
-			return Response.status(400).build();
+			return Response.status(400).entity("Amenity is used").build();
 		}
 		
 	}

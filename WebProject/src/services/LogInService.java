@@ -24,14 +24,34 @@ public class LogInService {
 	public LogInService() {
 	}
 	
+	
 	@PostConstruct
 	public void init() {
 
 		if (ctx.getAttribute("userDAO") == null) {
-			String p = ctx.getRealPath("")+"/data";  
-			ctx.setAttribute("userDAO", new UserDAO(p));
+			String contextPath = ctx.getRealPath("");  
+			ctx.setAttribute("userDAO", new UserDAO(contextPath));
 		}
 	}
+	
+	
+	@POST
+	@Path("/registration")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response registerNewUser(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		System.out.println("registration started");
+		boolean successfulRegistration = userDao.registerUser(user);
+		
+		if(successfulRegistration) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(400).entity("Username or password is already used.").build();
+			
+		}
+	}
+	
 	
 	@POST
 	@Path("/login")
@@ -39,23 +59,15 @@ public class LogInService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(User user, @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		User loggedUser = userDao.find(user.getUsername(), user.getPassword());
-		if (loggedUser != null) {
-			return Response.status(400).entity("Invalid username and/or password").build();
+		
+		User logged = userDao.findUser(user.getUsername(), user.getPassword());
+		
+		if (logged != null) {
+			request.getSession().setAttribute("user", logged);
+			return Response.status(200).build();
 		}
-		request.getSession().setAttribute("user", loggedUser);
-		return Response.status(200).build();
-	}
-	
-	@POST
-	@Path("/registration")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response registration(User user, @Context HttpServletRequest request) {
-		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		System.out.println("registration started");
-		boolean successfulRegistration = userDao.registerUser(user);
-		return Response.status(200).build();
+		
+		return Response.status(400).entity("Username or password is incorrect.").build();
 	}
 	
 	
@@ -67,11 +79,4 @@ public class LogInService {
 		request.getSession().invalidate();
 	}
 	
-	@GET
-	@Path("/currentUser")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public User login(@Context HttpServletRequest request) {
-		return (User) request.getSession().getAttribute("user");
-	}
 }
