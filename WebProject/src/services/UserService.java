@@ -46,11 +46,11 @@ public class UserService {
 	@Path("/{username}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User editUser(@PathParam("username") String username,
+	public User editPersonalData(@PathParam("username") String username,
 						 User newUserData,	
 						 @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		return userDao.editUser(username, newUserData);
+		return userDao.editPersonalData(username, newUserData);
 	}
 	
 }

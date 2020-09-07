@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 
 
 import model.Amenities;
+import model.User;
 
 public class AmenitiesDAO {
 
@@ -23,7 +24,6 @@ public class AmenitiesDAO {
 	private String contextPath;
 	
 	public AmenitiesDAO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public AmenitiesDAO(String contextPath) {
@@ -31,6 +31,7 @@ public class AmenitiesDAO {
 		loadAmenities();
 	}
 	
+	// dodavanje sadrzaja u apartman
 	public boolean addAmenities(Amenities amenitie) {
 		boolean isUnique = true;
 		for(Amenities a : amenities.values()) {
@@ -38,6 +39,7 @@ public class AmenitiesDAO {
 				isUnique = false;
 			}
 		}
+		
 		if(isUnique) {
 			amenitie.setId(amenities.size() + 1);
 			amenities.put(amenitie.getId(), amenitie);
@@ -47,11 +49,24 @@ public class AmenitiesDAO {
 		return false;
 	}
 	
+	public boolean deleteAmenitie(String name) {
+		for(Amenities amenitie : amenities.values()) {
+			if(amenitie.getName().equals(name) && amenitie.isActive()) {
+				amenitie.setActive(false);
+				saveAmenities();
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	
 	public Collection<Amenities> getAmenities(){
 		return amenities.values();
 	}
 	
-	
+
 	@SuppressWarnings("resource")
 	public void saveAmenities() {
 		 System.out.println("save amenities");
@@ -65,8 +80,8 @@ public class AmenitiesDAO {
 		    	listAmenities.add(obj);
 		   }
 		   try{
-				System.out.println(contextPath+"/amenities.json");		
-				FileWriter fw = new FileWriter(contextPath+"/amenities.json"); 
+				System.out.println(contextPath + "/amenities.json");		
+				FileWriter fw = new FileWriter(contextPath + "/amenities.json"); 
 				fw.write(listAmenities.toJSONString());
 				fw.flush();
 			}catch(Exception e) {

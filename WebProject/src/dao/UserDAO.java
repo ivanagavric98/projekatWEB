@@ -29,10 +29,7 @@ public class UserDAO {
 	public UserDAO(String contextPath) {
 		this.contextPath = contextPath;
 		loadUsers();
-		System.out.println(contextPath);
-		for (User user : users.values()) {
-			System.out.println("username: " + user.getUsername());
-		}
+	
 	}
 	
 	public User findUser(String username, String password) {
@@ -40,6 +37,7 @@ public class UserDAO {
 			return null;
 		}
 		User user = users.get(username);
+		
 		if (!user.getPassword().equals(password)) {
 			return null;
 		}
@@ -75,7 +73,7 @@ public class UserDAO {
 
 	public boolean registerUser(User user) {
 		User registerUser = findUser(user.getUsername(), user.getPassword());
-		if(registerUser == null) {
+		if(registerUser != null) {
 			return false;
 		}
 		
@@ -91,7 +89,7 @@ public class UserDAO {
 		return users.get(username);
 	}
 
-	public User editUser(String username, User newUserData) {
+	public User editPersonalData(String username, User newUserData) {
 		User user = users.get(username);
 		if(user == null) {
 			return null;
@@ -110,10 +108,13 @@ public class UserDAO {
 		newUser.setLastName(newUserData.getLastName());
 		newUser.setRole(role);
 		newUser.setGender(newUserData.getGender());
+		
 		users.put(newUser.getUsername(), newUser);
+		
 		return newUser;
 	}
 	
+	//metoda za ucitavanje korisnika iz json datoteke
 	@SuppressWarnings("unchecked")
 	public void loadUsers() {
 		System.out.println("load users");
@@ -139,7 +140,33 @@ public class UserDAO {
 				user.setActive((boolean) jsonObject.get("active"));
 				user.setRole(getRole((String)jsonObject.get("role")));
 				
-				
+				if(user.getRole().equals("HOST")) {
+					JSONArray apartments = (JSONArray)jsonObject.get("rentalApartments");
+					if(!apartments.isEmpty()) {
+						ArrayList<Long> rentalApartments = new ArrayList<>();
+						for(int i=0; i<apartments.size(); i++) {
+							rentalApartments.add((Long) apartments.get(i));
+						}
+						user.setRentalApartments(rentalApartments);
+					}
+				}else if(user.getRole().equals("GUEST")) {
+					JSONArray rentedApartmentsJSON = (JSONArray)jsonObject.get("rentedApartments");
+					if(!rentedApartmentsJSON.isEmpty()) {
+						ArrayList<Long> rentedApartments = new ArrayList<>();
+						for(int i=0; i<rentedApartmentsJSON.size(); i++) {
+							rentedApartments.add((Long) rentedApartmentsJSON.get(i));
+						}
+						user.setRentalApartments(rentedApartments);
+					}
+					JSONArray reservationsJSON = (JSONArray)jsonObject.get("reservations");
+					if(!reservationsJSON.isEmpty()) {
+						ArrayList<Long> reservations = new ArrayList<>();
+						for(int i=0; i<reservationsJSON.size(); i++) {
+							reservations.add((Long) reservationsJSON.get(i));
+						}
+						user.setRentalApartments(reservations);
+					}
+				}	
 				
 				users.put(user.getUsername(), user);
 			}
@@ -153,6 +180,7 @@ public class UserDAO {
 		}
 	 }
 	
+	//metoda za cuvanje korisnika u json datoteku
 	@SuppressWarnings({ "unchecked", "resource" })
 	public void saveUsers() {
 		 JSONArray listUsers = new JSONArray();
@@ -170,9 +198,30 @@ public class UserDAO {
 		    	obj.put("active",user.isActive());
 		    	obj.put("role",user.getRole().toString());
 		  
+		    	JSONArray rentedApartments = new JSONArray();
+		    	JSONArray rentalApartments = new JSONArray();
+		    	JSONArray reservationList = new JSONArray();
+		   
+		    	if(user.getRole().equals(Role.GUEST)) {
+		    		for(Long apartment_id: user.getRentedApartments()) {
+		    			rentedApartments.add(apartment_id);
+		    		}
+		    		for(Long reservation_id: user.getReservations()) {
+		    			reservationList.add(reservation_id);
+		    		}
+		    	} else if (user.getRole().equals(Role.HOST)) {
+		    		for(Long host_apartment_id: user.getRentalApartments()) {
+		    			rentalApartments.add(host_apartment_id);
+		    		}
+		    	}
+		        obj.put("rentedApartments",rentedApartments);	 
+		        obj.put("rentalApartments",rentalApartments);	
+		        obj.put("reservations",rentedApartments);	
+		    	
 		    	listUsers.add(obj);
 		   }
 		   try{
+			   
 				FileWriter fw = new FileWriter(contextPath + "/users.json"); 
 				fw.write(listUsers.toJSONString());
 				fw.flush();
