@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import enumeration.ApartmentType;
+import enumeration.Status;
 
 public class Apartment {
 	public long id;		//jedinstveni identifikator
@@ -19,6 +20,7 @@ public class Apartment {
 	public double pricePerNight;
 	public int checkInTime;
 	public int checkOutTime;
+	public Status status;
 	public ArrayList<Long> amenities;
 	public ArrayList<Long> reservations;
 	public boolean active;
@@ -29,7 +31,7 @@ public class Apartment {
 	
 	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
 			ArrayList<LocalDate> rentalDates, ArrayList<LocalDate> availableDates, String host, String comments, String photos,
-			double pricePerNight, int checkInTime, int checkOutTime, ArrayList<Long> amenities,
+			double pricePerNight, int checkInTime, int checkOutTime, Status status, ArrayList<Long> amenities,
 			ArrayList<Long> reservations, boolean active) {
 		super();
 		this.id = id;
@@ -45,11 +47,27 @@ public class Apartment {
 		this.pricePerNight = pricePerNight;
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
+		this.status = status;
 		this.amenities = amenities;
 		this.reservations = reservations;
 		this.active = active;
 	}
 
+	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
+			String host, double pricePerNight, int checkInTime, int checkOutTime, Status status, boolean active) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.roomsNumber = roomsNumber;
+		this.guestsNumber = guestsNumber;
+		this.location = location;
+		this.host = host;
+		this.pricePerNight = pricePerNight;
+		this.checkInTime = checkInTime;
+		this.checkOutTime = checkOutTime;
+		this.status = status;
+		this.active = active;
+	}
 	public boolean isActive() {
 		return active;
 	}
@@ -138,6 +156,14 @@ public class Apartment {
 	public void setCheckOutTime(int checkOutTime) {
 		this.checkOutTime = checkOutTime;
 	}
+	public Status getStatus() {
+		return Status.INACTIVE;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
 	public ArrayList<Long> getAmenities() {
 		return amenities;
 	}

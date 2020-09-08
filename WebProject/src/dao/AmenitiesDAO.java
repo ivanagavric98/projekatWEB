@@ -49,6 +49,7 @@ public class AmenitiesDAO {
 		return false;
 	}
 	
+	//brisanje sadrzaja apartmana
 	public boolean deleteAmenitie(String name) {
 		for(Amenities amenitie : amenities.values()) {
 			if(amenitie.getName().equals(name) && amenitie.isActive()) {
