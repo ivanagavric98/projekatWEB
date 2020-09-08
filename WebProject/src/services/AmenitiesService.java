@@ -1,5 +1,7 @@
 package services;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -18,7 +20,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.AmenitiesDAO;
+import dao.UserDAO;
 import model.Amenities;
+import model.Apartment;
+import model.User;
 
 @Path("/amenities")
 public class AmenitiesService {
@@ -30,7 +35,7 @@ public class AmenitiesService {
 	}
 	
 	@PostConstruct
-	public void init() {
+	public void init() throws NoSuchAlgorithmException, IOException {
 		if (ctx.getAttribute("amenitiesDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 			ctx.setAttribute("amenitiesDAO", new AmenitiesDAO(contextPath));
@@ -41,7 +46,7 @@ public class AmenitiesService {
 	@Path("/addAmenities")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response amenities(Amenities amenitie, @Context HttpServletRequest request) {
+	public Response amenities(Amenities amenitie, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		AmenitiesDAO amenitiesDAO = (AmenitiesDAO) ctx.getAttribute("amenitiesDAO");
 		System.out.println("successfully added");
 		
@@ -63,9 +68,22 @@ public class AmenitiesService {
 		
 	}
 	
+	@PUT
+	@Path("/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Amenities edit(@PathParam("id") Long id,
+						 Amenities amenitie,	
+						 @Context HttpServletRequest request) {
+		AmenitiesDAO amenitiesDao = (AmenitiesDAO) ctx.getAttribute("amenitiesDAO");
+		return amenitiesDao.editAmenitie(amenitie);
+	}
+	
+	
+	
 	@DELETE
 	@Path("/")
-	public Response deleteByName(@QueryParam("name") String name, @Context HttpServletRequest request) {
+	public Response deleteByName(@QueryParam("name") String name, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		AmenitiesDAO amenitiesDAO = (AmenitiesDAO) ctx.getAttribute("amenitiesDAO");
 		System.out.println(name);
 
