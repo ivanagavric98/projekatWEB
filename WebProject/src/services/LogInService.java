@@ -1,5 +1,9 @@
 package services;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Collection;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +30,7 @@ public class LogInService {
 	
 	
 	@PostConstruct
-	public void init() {
+	public void init() throws NoSuchAlgorithmException, IOException {
 
 		if (ctx.getAttribute("userDAO") == null) {
 			String contextPath = ctx.getRealPath("");  
@@ -39,7 +43,7 @@ public class LogInService {
 	@Path("/registration")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response registerNewUser(User user, @Context HttpServletRequest request) {
+	public Response registerNewUser(User user, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		System.out.println("registration started");
 		boolean successfulRegistration = userDao.registerUser(user);
@@ -52,12 +56,21 @@ public class LogInService {
 		}
 	}
 	
+	@GET
+	@Path("/findAllUsers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> findAll(@Context HttpServletRequest request){
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		return userDao.findAll();		
+	
+	}
 	
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(User user, @Context HttpServletRequest request) {
+		System.out.println();
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		
 		User logged = userDao.findUser(user.getUsername(), user.getPassword());

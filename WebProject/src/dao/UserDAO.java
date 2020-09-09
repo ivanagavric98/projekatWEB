@@ -1,9 +1,11 @@
 package dao;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,8 +18,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import enumeration.Gender;
 import enumeration.Role;
+import model.Amenities;
 import model.User;
 
 public class UserDAO {
@@ -27,9 +33,9 @@ public class UserDAO {
 	public UserDAO() {
 	}
 
-	public UserDAO(String contextPath) {
+	public UserDAO(String contextPath) throws NoSuchAlgorithmException, IOException {
 		this.contextPath = contextPath;
-		loadUsers();
+		loadUsers(contextPath);
 	
 	}
 	
@@ -72,7 +78,7 @@ public class UserDAO {
 		}
 	}
 
-	public boolean registerUser(User user) {
+	public boolean registerUser(User user) throws NoSuchAlgorithmException, IOException {
 		User registerUser = findUser(user.getUsername(), user.getPassword());
 		if(registerUser != null) {
 			return false;
@@ -80,7 +86,7 @@ public class UserDAO {
 		
 		user.setRole(Role.GUEST);
 		users.put(user.getUsername(), user);
-		saveUsers();
+		saveUsers(contextPath);
 		return true;
 	}
 	
@@ -90,13 +96,13 @@ public class UserDAO {
 		return users.get(username);
 	}
 
-	public User editPersonalData(String username, User newUserData) {
+	public User editPersonalData(String username, User newUserData) throws NoSuchAlgorithmException, IOException {
 		User user = users.get(username);
 		if(user == null) {
 			return null;
 		}
 		User newUser = createNewUser(newUserData, username, user.getRole());
-		saveUsers();
+		saveUsers(contextPath);
 		
 		return newUser;
 	}
@@ -117,7 +123,6 @@ public class UserDAO {
 	
 	public Collection<User> searchUserByUsername(String username) {
 		List <User> listUsers=new ArrayList<>();
-		loadUsers();
 		for(User u : users.values()) {
 			if(u.active && u.username.equals(username)) {
 				listUsers.add(u);
@@ -129,7 +134,7 @@ public class UserDAO {
 		
 		
 	}
-	
+	/*
 	//metoda za ucitavanje korisnika iz json datoteke
 	@SuppressWarnings("unchecked")
 	public void loadUsers() {
@@ -248,6 +253,24 @@ public class UserDAO {
 			}   
 	}
 
-	
+	*/
+	//ucitavanje liste korisnika iz fajla
+		public HashMap<String, User> loadUsers(String contextPath) throws IOException, NoSuchAlgorithmException {
+		    ObjectMapper mapper = new ObjectMapper();
+		    File usersFile = new File(contextPath + "/user.json");
+		    boolean success = usersFile.createNewFile();
+		    if (success) {
+		       mapper.writeValue(usersFile, users);
+		    }
+		    return mapper.readValue(usersFile, new TypeReference<HashMap<String,User>>() {});
+		}
+
+		//upisivanje u novi fajl 
+			public void saveUsers(String contextPath) throws IOException, NoSuchAlgorithmException {
+			    ObjectMapper mapper = new ObjectMapper();
+			    File usersFile = new File(contextPath + "/user.json");
+			    usersFile.createNewFile();
+			    mapper.writeValue(usersFile, users);
+			}
 	
 }

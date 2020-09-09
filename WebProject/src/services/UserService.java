@@ -1,5 +1,7 @@
 package services;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -27,10 +29,10 @@ public class UserService {
 	}
 	
 	@PostConstruct
-	public void init() {
+	public void init() throws NoSuchAlgorithmException, IOException {
 		if (ctx.getAttribute("userDAO") == null) {
-			String p = ctx.getRealPath("")+"/data";   
-			ctx.setAttribute("userDAO", new UserDAO(p));
+			String contextPath = ctx.getRealPath("");   
+			ctx.setAttribute("userDAO", new UserDAO(contextPath));
 		}
 	}
 	
@@ -50,7 +52,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User editPersonalData(@PathParam("username") String username,
 						 User newUserData,	
-						 @Context HttpServletRequest request) {
+						 @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		return userDao.editPersonalData(username, newUserData);
 	}
