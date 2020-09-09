@@ -37,7 +37,7 @@ public class UserService {
 	}
 	
 //	localhost:8080/PocetniRest/user/marija@gmail.com
-	@GET
+/*	@GET
 	@Path("/{username}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -45,7 +45,8 @@ public class UserService {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		return userDao.getUser(username);
 	}
-	
+
+	*/
 	@PUT
 	@Path("/{username}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -57,15 +58,5 @@ public class UserService {
 		return userDao.editPersonalData(username, newUserData);
 	}
 	//-------------------------------------------------
-	@GET
-	@Path("/{username}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<User> searchUserByUsername(@PathParam("username") String username, @Context HttpServletRequest request) {
-		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		Collection<User> ret = userDao.searchUserByUsername(username);
-		System.out.println("pretraga pocela");
-		
-		return ret;
-	
-	}
+
 }

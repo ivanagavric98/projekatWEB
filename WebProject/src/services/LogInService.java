@@ -11,6 +11,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -37,7 +38,17 @@ public class LogInService {
 			ctx.setAttribute("userDAO", new UserDAO(contextPath));
 		}
 	}
+	@GET
+	@Path("/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> searchUserByUsername(@PathParam("username") String username, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		Collection<User> ret = userDao.searchUserByUsername(username);
+		System.out.println("pretraga pocela");
+		
+		return ret;
 	
+	}
 	
 	@POST
 	@Path("/registration")

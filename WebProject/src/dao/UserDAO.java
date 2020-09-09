@@ -35,7 +35,7 @@ public class UserDAO {
 
 	public UserDAO(String contextPath) throws NoSuchAlgorithmException, IOException {
 		this.contextPath = contextPath;
-		loadUsers(contextPath);
+		users = loadUsers(contextPath);
 	
 	}
 	
@@ -93,6 +93,7 @@ public class UserDAO {
 
 	
 	public User getUser(String username) {
+		
 		return users.get(username);
 	}
 
@@ -124,16 +125,16 @@ public class UserDAO {
 	public Collection<User> searchUserByUsername(String username) {
 		List <User> listUsers=new ArrayList<>();
 		for(User u : users.values()) {
-			if(u.active && u.username.equals(username)) {
+			if(u.active && u.getUsername().equals(username)) {
 				listUsers.add(u);
 				}
 		
 			}
-		
 		return listUsers;
 		
 		
 	}
+	
 	/*
 	//metoda za ucitavanje korisnika iz json datoteke
 	@SuppressWarnings("unchecked")
@@ -257,7 +258,7 @@ public class UserDAO {
 	//ucitavanje liste korisnika iz fajla
 		public HashMap<String, User> loadUsers(String contextPath) throws IOException, NoSuchAlgorithmException {
 		    ObjectMapper mapper = new ObjectMapper();
-		    File usersFile = new File(contextPath + "/user.json");
+		    File usersFile = new File(contextPath + "/users.json");
 		    boolean success = usersFile.createNewFile();
 		    if (success) {
 		       mapper.writeValue(usersFile, users);
@@ -268,7 +269,7 @@ public class UserDAO {
 		//upisivanje u novi fajl 
 			public void saveUsers(String contextPath) throws IOException, NoSuchAlgorithmException {
 			    ObjectMapper mapper = new ObjectMapper();
-			    File usersFile = new File(contextPath + "/user.json");
+			    File usersFile = new File(contextPath + "/users.json");
 			    usersFile.createNewFile();
 			    mapper.writeValue(usersFile, users);
 			}
