@@ -106,13 +106,18 @@ public class ApartmentDAO {
 			List <Apartment> apartmentsList=new ArrayList<>();
 			
 			for(Apartment a : apartments.values()) {
-				if((a.getStatus().equals(Status.ACTIVE)) && a.getId() == Long.parseLong(id)) {
+				if((a.getStatus().equals(Status.INACTIVE)) && a.getId() == Long.parseLong(id)) {
+					System.out.println(a.getId());
 					apartmentsList.add(a);
 					}
 			
 				}
 			
 			return apartmentsList;
+		}
+
+		public Collection<Apartment> findAll() {
+			return apartments.values();
 		}
 
 

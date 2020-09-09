@@ -19,8 +19,10 @@ import javax.ws.rs.core.Response;
 
 import dao.AmenitiesDAO;
 import dao.ApartmentDAO;
+import dao.UserDAO;
 import model.Amenities;
 import model.Apartment;
+import model.User;
 
 @Path("apartment")
 public class ApartmentService {
@@ -40,6 +42,14 @@ public class ApartmentService {
 			ctx.setAttribute("apartmentDAO", new ApartmentDAO(contextPath));
 		}
 		
+	}
+	@GET
+	@Path("/findAllApartments")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Apartment> findAll(@Context HttpServletRequest request){
+		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		return apartmentsDAO.findAll();		
+	
 	}
 	
 	@POST
