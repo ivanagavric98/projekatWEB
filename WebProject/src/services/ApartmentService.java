@@ -2,13 +2,16 @@ package services;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -47,7 +50,7 @@ public class ApartmentService {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		System.out.println("successfully added");
 		
-		String host_username = (String) request.getSession().getAttribute("user");
+		String host_username = (String) request.getSession().getAttribute("users");
 		apartment.setHost(host_username);
 		Apartment successfulAdd = apartmentsDAO.addApartment(apartment);
 		
@@ -59,6 +62,16 @@ public class ApartmentService {
 		
 	}
 	
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Apartment> searchApById(@PathParam("id") long id, @Context HttpServletRequest request) {
+		ApartmentDAO apDao = (ApartmentDAO) ctx.getAttribute("apDAO");
+		Collection<Apartment> ret = ApartmentDAO.searchApById(id);
+		System.out.println("pretraga apartmana pocela");
+		
+		return ret;
 	
+	}
 	
 }

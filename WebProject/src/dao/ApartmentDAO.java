@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +40,7 @@ import model.Apartment;
 import model.Location;
 
 public class ApartmentDAO {
-	private Map<Long, Apartment> apartments = new HashMap<>();
+	private static Map<Long, Apartment> apartments = new HashMap<>();
 	
 
 	private String contextPath;
@@ -99,5 +101,19 @@ public class ApartmentDAO {
 		    apartmentFile.createNewFile();
 		    mapper.writeValue(apartmentFile, apartments);
 		}
+
+		public static Collection<Apartment> searchApById(long id) {
+			List <Apartment> apartmentsList=new ArrayList<>();
+			for(Apartment a : apartments.values()) {
+				if((a.getStatus() == Status.ACTIVE) && a.getId()==id) {
+					apartmentsList.add(a);
+					}
+			
+				}
+			
+			return apartmentsList;
+		}
+
+
 
 }
