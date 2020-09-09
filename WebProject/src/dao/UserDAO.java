@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -112,6 +113,21 @@ public class UserDAO {
 		users.put(newUser.getUsername(), newUser);
 		
 		return newUser;
+	}
+	
+	public Collection<User> searchUserByUsername(String username) {
+		List <User> listUsers=new ArrayList<>();
+		loadUsers();
+		for(User u : users.values()) {
+			if(u.active && u.username.equals(username)) {
+				listUsers.add(u);
+				}
+		
+			}
+		
+		return listUsers;
+		
+		
 	}
 	
 	//metoda za ucitavanje korisnika iz json datoteke
@@ -219,6 +235,8 @@ public class UserDAO {
 		        obj.put("reservations",rentedApartments);	
 		    	
 		    	listUsers.add(obj);
+				System.out.println(contextPath+"/users.json");
+
 		   }
 		   try{
 			   
@@ -229,5 +247,7 @@ public class UserDAO {
 				e.printStackTrace();
 			}   
 	}
+
+	
 	
 }

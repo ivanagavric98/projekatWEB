@@ -1,5 +1,7 @@
 package services;
 
+import java.util.Collection;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -52,5 +54,16 @@ public class UserService {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		return userDao.editPersonalData(username, newUserData);
 	}
+	//-------------------------------------------------
+	@GET
+	@Path("/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> searchUserByUsername(@PathParam("username") String username, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		Collection<User> ret = userDao.searchUserByUsername(username);
+		System.out.println("pretraga pocela");
+		
+		return ret;
 	
+	}
 }
