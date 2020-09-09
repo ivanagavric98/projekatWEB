@@ -47,7 +47,7 @@ public class ApartmentService {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		System.out.println("successfully added");
 		
-		String host_username = (String) request.getSession().getAttribute("user");
+		String host_username = (String) request.getSession().getAttribute("users");
 		apartment.setHost(host_username);
 		Apartment successfulAdd = apartmentsDAO.addApartment(apartment);
 		
