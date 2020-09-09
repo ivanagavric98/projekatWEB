@@ -8,11 +8,13 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -81,6 +83,19 @@ public class ApartmentService {
 
 		 return apartmentsDAO.searchApById(id);
 		
+	
+	}
+	
+	@DELETE
+	@Path("/")
+	public Response deleteApartment(@QueryParam("id") Long id, @Context HttpServletRequest request)  throws NoSuchAlgorithmException, IOException {
+		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+
+		boolean succesfulDeleted = apartmentsDAO.deleteApartment(id);
+		if(succesfulDeleted) {
+			return Response.status(200).build();
+		}
+		return Response.status(400).entity("Id is not existed!").build();
 	
 	}
 	

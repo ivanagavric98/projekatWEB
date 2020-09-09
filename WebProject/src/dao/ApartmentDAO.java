@@ -82,7 +82,39 @@ public class ApartmentDAO {
 		return a;
 	}
 	
+	public Collection<Apartment> findAll() {
+			return apartments.values();
+		}
+
+	public Collection<Apartment> searchApById(String id) {
+			List <Apartment> apartmentsList=new ArrayList<>();
+			
+			for(Apartment a : apartments.values()) {
+				if((a.getStatus().equals(Status.INACTIVE)) && a.getId() == Long.parseLong(id)) {
+					System.out.println(a.getId());
+					apartmentsList.add(a);
+					}
+			
+				}
+			
+			return apartmentsList;
+	}
+		
 	
+	public boolean deleteApartment(Long id) throws NoSuchAlgorithmException, IOException {
+			
+		Apartment apartment = apartments.get(id);
+		boolean delete_fleg = false;
+		
+		if(apartments.containsKey(id)) {
+			apartment.setActive(false);
+			delete_fleg = true;
+			saveApartments(contextPath);
+		}
+		return delete_fleg;
+	}
+	
+		
 	//ucitavanje liste korisnika iz fajla
 	public HashMap<Long,Apartment> loadApartments(String contextPath) throws IOException, NoSuchAlgorithmException {
 	    ObjectMapper mapper = new ObjectMapper();
@@ -102,24 +134,9 @@ public class ApartmentDAO {
 		    mapper.writeValue(apartmentFile, apartments);
 		}
 
-		public Collection<Apartment> searchApById(String id) {
-			List <Apartment> apartmentsList=new ArrayList<>();
-			
-			for(Apartment a : apartments.values()) {
-				if((a.getStatus().equals(Status.INACTIVE)) && a.getId() == Long.parseLong(id)) {
-					System.out.println(a.getId());
-					apartmentsList.add(a);
-					}
-			
-				}
-			
-			return apartmentsList;
-		}
+	
 
-		public Collection<Apartment> findAll() {
-			return apartments.values();
-		}
-
+		
 
 
 }
