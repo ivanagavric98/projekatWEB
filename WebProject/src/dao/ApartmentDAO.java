@@ -217,11 +217,14 @@ public class ApartmentDAO {
 		    Comparator<Apartment> compare = (Apartment o1, Apartment o2) -> Double.compare(o1.getRoomsNumber(), o2.getRoomsNumber());
 		    Collections.sort(apartmentsToSort,compare);
 		    
-			if(par.equals("asc")) {
+			
+		   
+			if(par.equals("asc"))  {
 				 Collections.sort(apartmentsToSort,compare);
 			}
 			else if(par.equals("desc")){
 				Collections.sort(apartmentsToSort,compare.reversed());
+
 			}
 			
 			System.out.println(Arrays.toString(apartmentsToSort.toArray()));

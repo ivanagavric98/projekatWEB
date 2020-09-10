@@ -112,7 +112,7 @@ public class ApartmentService {
 	*/
 
 	@GET
-	@Path("/sortByNumberOfRooms")
+	@Path("/{par}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Apartment> getSortApartment(@PathParam("par") String par,
 						@Context HttpServletRequest request) {
