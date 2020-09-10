@@ -44,6 +44,7 @@ public class ApartmentService {
 		}
 		
 	}
+	/*
 	@GET
 	@Path("/findAllApartments")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -84,7 +85,7 @@ public class ApartmentService {
 		
 	
 	}
-	
+	/*
 	@DELETE
 	@Path("/")
 	public Response deleteApartment(@QueryParam("id") Long id, @Context HttpServletRequest request)  throws NoSuchAlgorithmException, IOException {
@@ -96,8 +97,8 @@ public class ApartmentService {
 		}
 		return Response.status(400).entity("Id is not existed!").build();
 	
-	}
-	
+	}*/
+/*	
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -108,6 +109,17 @@ public class ApartmentService {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		return apartmentsDAO.editApartmanData(id,apartment);
 	}
-	
+	*/
+
+	@GET
+	@Path("/sortByNumberOfRooms")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Apartment> getSortApartment(@PathParam("par") String par,
+						@Context HttpServletRequest request) {
+		System.out.println("*****SORTIRANJE PO BROJU SOBA*****");
+		ApartmentDAO apartmentDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		Collection<Apartment> ret = apartmentDAO.getSort(par);
+		return ret;
+	}
 	
 }

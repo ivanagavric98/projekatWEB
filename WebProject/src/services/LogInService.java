@@ -38,6 +38,7 @@ public class LogInService {
 			ctx.setAttribute("userDAO", new UserDAO(contextPath));
 		}
 	}
+	/*
 	@GET
 	@Path("/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -49,7 +50,7 @@ public class LogInService {
 		return ret;
 	
 	}
-	
+	*/
 	@POST
 	@Path("/registration")
 	@Consumes(MediaType.APPLICATION_JSON)

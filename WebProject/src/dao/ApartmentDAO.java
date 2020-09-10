@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -187,8 +190,7 @@ public class ApartmentDAO {
 		}
 		return delete_fleg;
 	}
-	
-		
+			
 	//ucitavanje liste korisnika iz fajla
 	public HashMap<Long,Apartment> loadApartments(String contextPath) throws IOException, NoSuchAlgorithmException {
 	    ObjectMapper mapper = new ObjectMapper();
@@ -206,6 +208,22 @@ public class ApartmentDAO {
 		    File apartmentFile = new File(contextPath + "/apartments.json");
 		    apartmentFile.createNewFile();
 		    mapper.writeValue(apartmentFile, apartments);
+		}
+
+		public Collection<Apartment> getSort(String par) {
+			List<Apartment>apartmentsToSort=(List<Apartment>) findAll();
+		    Comparator<Apartment> compare = (Apartment o1, Apartment o2) -> Double.compare(o1.getRoomsNumber(), o2.getRoomsNumber());
+		    Collections.sort(apartmentsToSort,compare);
+			if(par.equals("asc")) {
+				 Collections.sort(apartmentsToSort,compare);
+			}
+			else if(par.equals("desc")){
+				Collections.sort(apartmentsToSort,compare.reversed());
+			}
+			
+			System.out.println(Arrays.toString(apartmentsToSort.toArray()));
+		   
+			return apartmentsToSort;
 		}
 
 	
