@@ -105,6 +105,21 @@ public class ApartmentDAO {
 			
 			return apartmentsList;
 	}
+	//----------------------------------------
+		//pretraga po i i host (za domacina)
+	public Collection<Apartment> searchApByIdAndHost(String id,String host ) {
+		List <Apartment> apartmentsList=new ArrayList<>();
+		
+		for(Apartment a : apartments.values()) {
+			if((a.getStatus().equals(Status.INACTIVE)) && a.getId() == Long.parseLong(id) && a.getHost().equals(host)) {
+				System.out.println(a.getId());
+				apartmentsList.add(a);
+				}
+		
+			}
+		
+		return apartmentsList;
+}
 	/*	
 	public Apartment editApartmentData(Apartment newApartment){
 		Apartment old_Apartment=null;

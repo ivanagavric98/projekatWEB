@@ -73,7 +73,8 @@ public class ApartmentService {
 		}
 		
 	}
-	/*
+	//--------------------------------------------------------------------------------------
+		//pretraga apartmana po  id
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -82,10 +83,21 @@ public class ApartmentService {
 		System.out.println("pretraga apartmana pocela");
 
 		 return apartmentsDAO.searchApById(id);
-		
-	
 	}
-	/*
+	
+	//pretraga apartmana po  id+hostid
+	@GET
+	@Path("/{id}/{host}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Apartment> searchApByIdAndHost(@QueryParam("id") String id,
+			@QueryParam("host") String host, @Context HttpServletRequest request) {
+		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		System.out.println("pretraga apartmana pocela");
+
+		 return apartmentsDAO.searchApByIdAndHost(id,host);
+	}
+	
+	
 	@DELETE
 	@Path("/")
 	public Response deleteApartment(@QueryParam("id") Long id, @Context HttpServletRequest request)  throws NoSuchAlgorithmException, IOException {
@@ -98,7 +110,7 @@ public class ApartmentService {
 		return Response.status(400).entity("Id is not existed!").build();
 	
 	}
-*/
+
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
