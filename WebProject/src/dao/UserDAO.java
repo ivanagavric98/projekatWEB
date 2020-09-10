@@ -298,5 +298,16 @@ public class UserDAO {
 			    usersFile.createNewFile();
 			    mapper.writeValue(usersFile, users);
 			}
+//---------------------------------------------------
+			//filtriranje korisnika po polu
+			public Collection<User> filtrateUsersByGender(String gender) {
+				List<User>filtratedUsers=new ArrayList<User>();
+				for(User u : users.values()) {
+					if( u.getGender().toString().equals(gender)) {
+						filtratedUsers.add(u);
+						}			
+					}
+				return filtratedUsers;
+			}
 	
 }

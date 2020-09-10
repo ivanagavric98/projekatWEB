@@ -70,7 +70,7 @@ public class LogInService {
 			
 		}
 	}
-	
+	/*
 	//------------------------------------------------
 		//filtriranje korisnika po ulogama
 	@GET
@@ -82,6 +82,18 @@ public class LogInService {
 		System.out.println("filtracija korisnika pocela");
 		 return userDao.filtrateUsersByRole(role);
 	}
+	*/
+	//------------------------------------------------
+			//filtriranje korisnika po polu
+		@GET
+		@Path("/{gender}")
+		@Produces(MediaType.APPLICATION_JSON)
+		public Collection<User> filtrateUsersByGender(@PathParam("gender") String gender,
+				@Context HttpServletRequest request) {
+			UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+			System.out.println("filtracija korisnika polu");
+			 return userDao.filtrateUsersByGender(gender);
+		}
 	
 //--------------------------------------------------------
 	/*
