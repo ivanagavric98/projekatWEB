@@ -299,6 +299,16 @@ public class ApartmentDAO {
 				}
 			return filtratedApartments;
 		}
-		
+	//-------------------------------------------------------------------------
+		//filtracija apartmana po statusu
+		public Collection<Apartment> filtrateApartmentsByStatus(String status) {
+			List<Apartment>filtratedApartments=new ArrayList<Apartment>();
+			for(Apartment a : apartments.values()) {
+				if( a.getStatus().toString().equals(status)) {
+					filtratedApartments.add(a);
+					}			
+				}
+			return filtratedApartments;
+		}
 		
 }
