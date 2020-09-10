@@ -73,6 +73,7 @@ public class ApartmentService {
 		}
 		
 	}
+	/*
 	//--------------------------------------------------------------------------------------
 		//pretraga apartmana po  id
 	@GET
@@ -84,7 +85,8 @@ public class ApartmentService {
 
 		 return apartmentsDAO.searchApById(id);
 	}
-	
+	*/
+	//----------------------------------------------------------------------------
 	//pretraga apartmana po  id+hostid
 	@GET
 	@Path("/{id}/{host}")
@@ -97,7 +99,20 @@ public class ApartmentService {
 		 return apartmentsDAO.searchApByIdAndHost(id,host);
 	}
 	
+	//---------------------------------------------------------------------------------
+	//filtracija apartmana po tipu
+	@GET
+	@Path("/{type}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Apartment> filtrateApartmentsByType(@PathParam("type") String type,
+			@Context HttpServletRequest request) {
+		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		System.out.println("filtracija apartmana pocela");
+		System.out.println(apartmentsDAO.filtrateApartmentsByType(type));
+		 return apartmentsDAO.filtrateApartmentsByType(type);
+	}
 	
+	/*
 	@DELETE
 	@Path("/")
 	public Response deleteApartment(@QueryParam("id") Long id, @Context HttpServletRequest request)  throws NoSuchAlgorithmException, IOException {
@@ -110,7 +125,8 @@ public class ApartmentService {
 		return Response.status(400).entity("Id is not existed!").build();
 	
 	}
-
+*/
+	/*
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -121,7 +137,7 @@ public class ApartmentService {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		return apartmentsDAO.editApartmanData(id,apartment);
 	}
-	
+	*/
 	/*
 //--------------------------
 	//sortiranje apartmana po broju soba
@@ -152,7 +168,7 @@ public class ApartmentService {
 	*/
 	//------------------------------------
 		//sortiranje apartmana po broju gostiju
-		
+/*		
 		@GET
 		@Path("/{par}")
 		@Produces(MediaType.APPLICATION_JSON)
@@ -163,5 +179,5 @@ public class ApartmentService {
 			Collection<Apartment> ret = apartmentDAO.getSortByPricePerNight(par);
 			return ret;
 		}
-	
+	*/
 }

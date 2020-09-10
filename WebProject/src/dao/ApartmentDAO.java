@@ -120,7 +120,7 @@ public class ApartmentDAO {
 		
 		return apartmentsList;
 }
-	/*	
+	/*
 	public Apartment editApartmentData(Apartment newApartment){
 		Apartment old_Apartment=null;
 		boolean isUnique=true;
@@ -287,8 +287,16 @@ public class ApartmentDAO {
 		   
 			return apartmentsToSort;
 		}
+//------------------------------------------------------------------------------
+		//filtracija apartmana po tipu
 
-		
-
-
+		public Collection<Apartment> filtrateApartmentsByType(String type) {
+			List<Apartment>filtratedApartments=new ArrayList<Apartment>();
+			for(Apartment a : apartments.values()) {
+				if( a.getType().toString().equals(type)) {
+					filtratedApartments.add(a);
+					}			
+				}
+			return filtratedApartments;
+		}
 }
