@@ -209,7 +209,8 @@ public class ApartmentDAO {
 		    apartmentFile.createNewFile();
 		    mapper.writeValue(apartmentFile, apartments);
 		}
-
+		//----------------------------------------------------------------------------------------
+				//sortiranje apartmana po broju soba
 		public Collection<Apartment> getSort(String par) {
 			ArrayList<Apartment>apartmentsToSort= new ArrayList<Apartment>(apartments.values());
 
@@ -228,7 +229,26 @@ public class ApartmentDAO {
 		   
 			return apartmentsToSort;
 		}
+//----------------------------------------------------------------------------------------
+		//sortiranje apartmana po broju gostiju
+		public Collection<Apartment> getSortByGuestsNumber(String par) {
+			ArrayList<Apartment>apartmentsToSort= new ArrayList<Apartment>(apartments.values());
 
+		    Comparator<Apartment> compare = (Apartment o1, Apartment o2) -> Double.compare(o1.getGuestsNumber(), o2.getGuestsNumber());
+		    Collections.sort(apartmentsToSort,compare);
+		   
+			if(par.equals("asc"))  {
+				 Collections.sort(apartmentsToSort,compare);
+			}
+			else if(par.equals("desc")){
+				Collections.sort(apartmentsToSort,compare.reversed());
+
+			}
+			
+			System.out.println(Arrays.toString(apartmentsToSort.toArray()));
+		   
+			return apartmentsToSort;
+		}
 	
 
 		

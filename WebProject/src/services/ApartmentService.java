@@ -44,7 +44,7 @@ public class ApartmentService {
 		}
 		
 	}
-	/*
+	
 	@GET
 	@Path("/findAllApartments")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -73,7 +73,7 @@ public class ApartmentService {
 		}
 		
 	}
-	
+	/*
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -97,8 +97,8 @@ public class ApartmentService {
 		}
 		return Response.status(400).entity("Id is not existed!").build();
 	
-	}*/
-/*	
+	}
+*/
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -109,16 +109,32 @@ public class ApartmentService {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		return apartmentsDAO.editApartmanData(id,apartment);
 	}
-	*/
-
+	
+	/*
+//--------------------------
+	//sortiranje apartmana po broju soba
 	@GET
 	@Path("/{par}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Apartment> getSortApartment(@PathParam("par") String par,
+	public Collection<Apartment> getSortApartmentByRoomNumber(@PathParam("par") String par,
 						@Context HttpServletRequest request) {
 		System.out.println("*****SORTIRANJE PO BROJU SOBA*****");
 		ApartmentDAO apartmentDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		Collection<Apartment> ret = apartmentDAO.getSort(par);
+		return ret;
+	}
+	*/
+//------------------------------------
+	//sortiranje apartmana po broju gostiju
+	
+	@GET
+	@Path("/{par}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Apartment> getSortApartmentByGuestNumber(@PathParam("par") String par,
+						@Context HttpServletRequest request) {
+		System.out.println("*****SORTIRANJE PO BROJU GOSTIJU*****");
+		ApartmentDAO apartmentDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		Collection<Apartment> ret = apartmentDAO.getSortByGuestsNumber(par);
 		return ret;
 	}
 	
