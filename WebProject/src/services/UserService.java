@@ -46,6 +46,9 @@ public class UserService {
 		return userDao.getUser(username);
 	}
 
+
+
+
 	*/
 	@PUT
 	@Path("/{username}")
