@@ -2,7 +2,9 @@ package services;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -50,16 +52,11 @@ public class UserService {
 
 
 	*/
-	@PUT
-	@Path("/{username}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public User editPersonalData(@PathParam("username") String username,
-						 User newUserData,	
-						 @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
-		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		return userDao.editPersonalData(username, newUserData);
-	}
+	
+	//------------------------------------------------------------------------------
+	//filtracija korisnika po ulozi
+
+	
 	//-------------------------------------------------
 
 }

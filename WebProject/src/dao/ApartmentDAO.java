@@ -299,4 +299,6 @@ public class ApartmentDAO {
 				}
 			return filtratedApartments;
 		}
+		
+		
 }

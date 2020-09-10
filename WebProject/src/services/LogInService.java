@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,7 +18,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import model.Apartment;
 import model.User;
+import dao.ApartmentDAO;
 import dao.UserDAO;
 
 @Path("")
@@ -68,6 +71,20 @@ public class LogInService {
 		}
 	}
 	
+	//------------------------------------------------
+		//filtriranje korisnika po ulogama
+	@GET
+	@Path("/{role}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> filtrateUsersByRole(@PathParam("role") String role,
+			@Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		System.out.println("filtracija korisnika pocela");
+		 return userDao.filtrateUsersByRole(role);
+	}
+	
+//--------------------------------------------------------
+	/*
 	@GET
 	@Path("/findAllUsers")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -76,7 +93,7 @@ public class LogInService {
 		return userDao.findAll();		
 	
 	}
-	
+	*/
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -95,7 +112,18 @@ public class LogInService {
 		return Response.status(400).entity("Username or password is incorrect.").build();
 	}
 	
-	
+	@PUT
+	@Path("/{username}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User editPersonalData(@PathParam("username") String username,
+						 User newUserData,	
+						 @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		System.out.println("editovanje korisnika");
+		return userDao.editPersonalData(username, newUserData);
+	} 
+	/*
 	@POST
 	@Path("/logout")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -103,5 +131,5 @@ public class LogInService {
 	public void logout(@Context HttpServletRequest request) {
 		request.getSession().invalidate();
 	}
-	
+*/	
 }

@@ -13,6 +13,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -255,6 +264,22 @@ public class UserDAO {
 	}
 
 	*/
+	
+	//-------------------------------------------------------------------
+		//filtriranje korisnika po ulozi(administrator)
+	public Collection<User> filtrateUsersByRole(String role) {
+		List<User>filtratedUsers=new ArrayList<User>();
+		for(User u : users.values()) {
+			if( u.getRole().toString().equals(role)) {
+				filtratedUsers.add(u);
+				}			
+			}
+		return filtratedUsers;
+	}
+	
+	
+	
+	
 	//ucitavanje liste korisnika iz fajla
 		public HashMap<String, User> loadUsers(String contextPath) throws IOException, NoSuchAlgorithmException {
 		    ObjectMapper mapper = new ObjectMapper();
