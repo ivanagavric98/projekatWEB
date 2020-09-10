@@ -158,6 +158,7 @@ public class ApartmentDAO {
 		
 		return newApartment;
 	}
+	
 	private Apartment createNewApartment(Apartment newApartmentData, Long id, Status status) {
 		Apartment newApartment = new Apartment();
 		newApartment.setId(id);
@@ -178,6 +179,7 @@ public class ApartmentDAO {
 		
 		return newApartment;
 	}
+	
 	public boolean deleteApartment(Long id) throws NoSuchAlgorithmException, IOException {
 			
 		Apartment apartment = apartments.get(id);
@@ -212,10 +214,11 @@ public class ApartmentDAO {
 		//----------------------------------------------------------------------------------------
 				//sortiranje apartmana po broju soba
 		public Collection<Apartment> getSort(String par) {
-			ArrayList<Apartment>apartmentsToSort= new ArrayList<Apartment>(apartments.values());
-
+			List<Apartment> apartmentsToSort=(List<Apartment>) findAll();
 		    Comparator<Apartment> compare = (Apartment o1, Apartment o2) -> Double.compare(o1.getRoomsNumber(), o2.getRoomsNumber());
 		    Collections.sort(apartmentsToSort,compare);
+		    
+			
 		   
 			if(par.equals("asc"))  {
 				 Collections.sort(apartmentsToSort,compare);
