@@ -252,7 +252,26 @@ public class ApartmentDAO {
 		   
 			return apartmentsToSort;
 		}
-	
+//---------------------------------------------------------------------------------------------
+		//sortiranje po cijeni nocenja
+		public Collection<Apartment> getSortByPricePerNight(String par) {
+			ArrayList<Apartment>apartmentsToSort= new ArrayList<Apartment>(apartments.values());
+
+		    Comparator<Apartment> compare = (Apartment o1, Apartment o2) -> Double.compare(o1.getPricePerNight(), o2.getPricePerNight());
+		    Collections.sort(apartmentsToSort,compare);
+		   
+			if(par.equals("asc"))  {
+				 Collections.sort(apartmentsToSort,compare);
+			}
+			else if(par.equals("desc")){
+				Collections.sort(apartmentsToSort,compare.reversed());
+
+			}
+			
+			System.out.println(Arrays.toString(apartmentsToSort.toArray()));
+		   
+			return apartmentsToSort;
+		}
 
 		
 

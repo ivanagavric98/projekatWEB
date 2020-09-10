@@ -126,7 +126,7 @@ public class ApartmentService {
 	*/
 //------------------------------------
 	//sortiranje apartmana po broju gostiju
-	
+	/*
 	@GET
 	@Path("/{par}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -137,5 +137,19 @@ public class ApartmentService {
 		Collection<Apartment> ret = apartmentDAO.getSortByGuestsNumber(par);
 		return ret;
 	}
+	*/
+	//------------------------------------
+		//sortiranje apartmana po broju gostiju
+		
+		@GET
+		@Path("/{par}")
+		@Produces(MediaType.APPLICATION_JSON)
+		public Collection<Apartment> getSortByPricePerNight(@PathParam("par") String par,
+							@Context HttpServletRequest request) {
+			System.out.println("*****SORTIRANJE PO CIJENI NOCENJA*****");
+			ApartmentDAO apartmentDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+			Collection<Apartment> ret = apartmentDAO.getSortByPricePerNight(par);
+			return ret;
+		}
 	
 }
