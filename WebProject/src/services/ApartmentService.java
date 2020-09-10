@@ -104,9 +104,9 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment edit(@PathParam("id") Long id,
 						 Apartment apartment,	
-						 @Context HttpServletRequest request) {
+						 @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
-		return apartmentsDAO.editApartmentData(apartment);
+		return apartmentsDAO.editApartmanData(id,apartment);
 	}
 	
 	

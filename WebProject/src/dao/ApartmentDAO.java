@@ -33,6 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.research.ws.wadl.Request;
 
 import enumeration.ApartmentType;
+import enumeration.Role;
 import enumeration.Status;
 import model.Address;
 import model.Amenities;
@@ -101,7 +102,7 @@ public class ApartmentDAO {
 			
 			return apartmentsList;
 	}
-		
+	/*	
 	public Apartment editApartmentData(Apartment newApartment){
 		Apartment old_Apartment=null;
 		boolean isUnique=true;
@@ -142,7 +143,38 @@ public class ApartmentDAO {
 		
 		return null;
 	}
+	*/
 	
+	public Apartment editApartmanData(Long id, Apartment newApartmentData) throws NoSuchAlgorithmException, IOException {
+		Apartment apartment = apartments.get(id);
+		if(apartment == null) {
+			return null;
+		}
+		Apartment newApartment = createNewApartment(newApartmentData, id, apartment.getStatus());
+		saveApartments(contextPath);
+		
+		return newApartment;
+	}
+	private Apartment createNewApartment(Apartment newApartmentData, Long id, Status status) {
+		Apartment newApartment = new Apartment();
+		newApartment.setId(id);
+		newApartment.setType(newApartmentData.getType());
+		newApartment.setRoomsNumber(newApartmentData.getRoomsNumber());
+		newApartment.setGuestsNumber(newApartmentData.getGuestsNumber());
+		newApartment.setLocation(newApartmentData.getLocation());
+		newApartment.setHost(newApartmentData.getHost());
+		newApartment.setComments(newApartmentData.getComments());
+		newApartment.setPhotos(newApartmentData.getPhotos());
+		newApartment.setPricePerNight(newApartmentData.getPricePerNight());
+		newApartment.setCheckInTime(newApartmentData.getCheckInTime());
+		newApartment.setCheckOutTime(newApartmentData.getCheckOutTime());
+		newApartment.setStatus(newApartmentData.getStatus());
+		newApartment.setActive(newApartmentData.isActive());
+		
+		apartments.put(newApartmentData.getId(), newApartment);
+		
+		return newApartment;
+	}
 	public boolean deleteApartment(Long id) throws NoSuchAlgorithmException, IOException {
 			
 		Apartment apartment = apartments.get(id);
