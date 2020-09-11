@@ -15,8 +15,8 @@ public class Apartment {
 	public ArrayList<LocalDate> rentalDates;
 	public ArrayList<LocalDate> availableDates;
 	public String host;
-	public String comments;
-	public String photos;
+	public ArrayList<Long> comments;
+	public ArrayList<Long> photos;
 	public double pricePerNight;
 	public int checkInTime;
 	public int checkOutTime;
@@ -30,7 +30,7 @@ public class Apartment {
 	}
 	
 	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
-			ArrayList<LocalDate> rentalDates, ArrayList<LocalDate> availableDates, String host, String comments, String photos,
+			ArrayList<LocalDate> rentalDates, ArrayList<LocalDate> availableDates, String host, ArrayList<Long> comments, ArrayList<Long> photos,
 			double pricePerNight, int checkInTime, int checkOutTime, Status status, ArrayList<Long> amenities,
 			ArrayList<Long> reservations, boolean active) {
 		super();
@@ -126,16 +126,16 @@ public class Apartment {
 	public void setHost(String host) {
 		this.host = host;
 	}
-	public String getComments() {
+	public ArrayList<Long> getComments() {
 		return comments;
 	}
-	public void setComments(String comments) {
+	public void setComments(ArrayList<Long> comments) {
 		this.comments = comments;
 	}
-	public String getPhotos() {
+	public ArrayList<Long> getPhotos() {
 		return photos;
 	}
-	public void setPhotos(String photos) {
+	public void setPhotos(ArrayList<Long> photos) {
 		this.photos = photos;
 	}
 	public double getPricePerNight() {
