@@ -129,8 +129,8 @@ public class Apartment {
 	public ArrayList<Long> getComments() {
 		return comments;
 	}
-	public void setComments(ArrayList<Long> comments) {
-		this.comments = comments;
+	public void setComments(long id) {
+		this.comments.add(id);
 	}
 	public ArrayList<Long> getPhotos() {
 		return photos;

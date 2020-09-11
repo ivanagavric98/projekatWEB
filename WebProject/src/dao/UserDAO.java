@@ -45,6 +45,8 @@ public class UserDAO {
 	public UserDAO(String contextPath) throws NoSuchAlgorithmException, IOException {
 		this.contextPath = contextPath;
 		users = loadUsers(contextPath);
+		
+		
 	
 	}
 	

@@ -55,6 +55,7 @@ public class ApartmentService {
 	
 	}
 	
+
 	@POST
 	@Path("/addApartment")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -79,7 +80,8 @@ public class ApartmentService {
 		}
 		
 	}
-	
+
+	/*	
 	@GET
 	@Path("/hostApartment")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -89,7 +91,7 @@ public class ApartmentService {
 		
 		return apartmentsDAO.findAllHostApartment(user.getUsername());
 	}
-	
+	*/
 	/*
 	//--------------------------------------------------------------------------------------
 		//pretraga apartmana po  id
@@ -183,7 +185,7 @@ public class ApartmentService {
 		Collection<Apartment> ret = apartmentDAO.getSort(par);
 		return ret;
 	}
-	*/
+	
 //------------------------------------
 	//sortiranje apartmana po broju gostiju
 	/*
@@ -200,7 +202,7 @@ public class ApartmentService {
 	*/
 	//------------------------------------
 		//sortiranje apartmana po broju gostiju
-/*		
+/*
 		@GET
 		@Path("/{par}")
 		@Produces(MediaType.APPLICATION_JSON)
@@ -211,7 +213,7 @@ public class ApartmentService {
 			Collection<Apartment> ret = apartmentDAO.getSortByPricePerNight(par);
 			return ret;
 		}
-	*/
+	
 	
 	//---------------------------------------------------------------------------
 	//pretrazivanje apartmana po lokaciji(grad)
@@ -249,7 +251,7 @@ public class ApartmentService {
 				System.out.println("pretrazivanje apartmana po opsegu broja soba");
 				 return apartmentsDAO.searchApartmentsByRoomNumber(from,to);
 			}
-			/*
+			
 			//-------------------------------------------------------------------------------
 			//kombinovana pretraga apatrmana--ne radi provjeriti
 			@GET
@@ -266,7 +268,7 @@ public class ApartmentService {
 				System.out.println("kombinovana pretraga");
 				 return apartmentsDAO.combinedSearch(city,fromPrice,toPrice,fromNumRoom,toNumRoom,guestNumber);
 			}
-			*/
+	
 			/*
 			//-------------------------------------------------------------------------------
 			//pretgara apartmana po broju datumu (u rasponu od-do)
@@ -280,7 +282,7 @@ public class ApartmentService {
 				System.out.println("pretrazivanje apartmana datumu od-do");
 				 return apartmentsDAO.searchApartmentsByDatePeriod(from,to);
 			}
-			*/
+	
 			
 						//--------------------------------------------------------------------------------
 			//pretraga po maks broju gostiju
@@ -297,6 +299,6 @@ public class ApartmentService {
 			//-----------------------------------------------------------------------------------
 			
 			
-
+*/
 }
 

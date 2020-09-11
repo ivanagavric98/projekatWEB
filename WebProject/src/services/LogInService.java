@@ -18,9 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import model.Apartment;
 import model.User;
-import dao.ApartmentDAO;
 import dao.UserDAO;
 
 @Path("")

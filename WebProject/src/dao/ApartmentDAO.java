@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import enumeration.Status;
 import model.Apartment;
+import model.Comment;
 
 public class ApartmentDAO {
 	private static Map<Long, Apartment> apartments = new HashMap<>();
@@ -77,7 +78,7 @@ public class ApartmentDAO {
 			
 			return apartmentsList;
 	}
-	
+	/*
 	public Collection<Apartment> findAllHostApartment(String host){
 		ArrayList<Apartment> apartmentList = new ArrayList<Apartment>();
 		
@@ -88,7 +89,7 @@ public class ApartmentDAO {
 		}
 		return apartmentList;
 	}
-	
+	*/
 	
 	//----------------------------------------
 		//pretraga po i i host (za domacina)
@@ -119,13 +120,18 @@ public class ApartmentDAO {
 	
 	private Apartment createNewApartment(Apartment newApartmentData, Long id, Status status) {
 		Apartment newApartment = new Apartment();
+		
+		
+		for (Long a : newApartmentData.getComments()) {
+			newApartment.setComments(a);
+		}
+		
 		newApartment.setId(id);
 		newApartment.setType(newApartmentData.getType());
 		newApartment.setRoomsNumber(newApartmentData.getRoomsNumber());
 		newApartment.setGuestsNumber(newApartmentData.getGuestsNumber());
 		newApartment.setLocation(newApartmentData.getLocation());
 		newApartment.setHost(newApartmentData.getHost());
-		newApartment.setComments(newApartmentData.getComments());
 		newApartment.setPhotos(newApartmentData.getPhotos());
 		newApartment.setPricePerNight(newApartmentData.getPricePerNight());
 		newApartment.setCheckInTime(newApartmentData.getCheckInTime());
@@ -313,6 +319,14 @@ public class ApartmentDAO {
 					}			
 				}
 			return null;
+		}
+
+		public void addNewComment(Apartment apartment, Comment comment) throws NoSuchAlgorithmException, IOException {
+			Apartment ap = apartments.get(apartment.getId());
+			
+			ap.setComments(comment.getId());
+			saveApartments(contextPath);
+			
 		}
 
 		

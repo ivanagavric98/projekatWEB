@@ -51,17 +51,18 @@ public class CommentService {
 		return commentsDAO.findAllComments();		
 	
 	}
-	
+	/*
 	@POST
 	@Path("/addComment")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response comments(Comment comment, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
+	public Response comments(Comment comment, Apartment apartment, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		CommentDAO commentsDAO = (CommentDAO) ctx.getAttribute("commentDAO");
 		System.out.println("successfully added");
 		
 		User guest = (User) request.getSession().getAttribute("user");
-		String guest_username = guest.getUsername();
+		ApartmentDAO apartmentDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		apartmentDAO.addNewComment(apartment, comment);
 		
 		Comment successfulAdd = commentsDAO.addNewComment(comment);		
 		if(successfulAdd != null) {
@@ -72,7 +73,7 @@ public class CommentService {
 		
 	}
 	
-	
+	*/
 	
 	
 }

@@ -20,10 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.AmenitiesDAO;
-import dao.UserDAO;
 import model.Amenities;
-import model.Apartment;
-import model.User;
 
 @Path("/amenities")
 public class AmenitiesService {
