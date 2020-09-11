@@ -20,8 +20,6 @@ import model.Apartment;
 
 public class ApartmentDAO {
 	private static Map<Long, Apartment> apartments = new HashMap<>();
-	
-
 	private String contextPath;
 	
 	public ApartmentDAO() {
@@ -79,6 +77,19 @@ public class ApartmentDAO {
 			
 			return apartmentsList;
 	}
+	
+	public Collection<Apartment> findAllHostApartment(String host){
+		ArrayList<Apartment> apartmentList = new ArrayList<Apartment>();
+		
+		for(Apartment apartment : apartments.values()) {
+			if(apartment.getStatus().equals(Status.ACTIVE) && apartment.getHost().equals(host)) {
+				apartmentList.add(apartment);
+			}
+		}
+		return apartmentList;
+	}
+	
+	
 	//----------------------------------------
 		//pretraga po i i host (za domacina)
 	public Collection<Apartment> searchApByIdAndHost(String id,String host ) {
@@ -94,48 +105,6 @@ public class ApartmentDAO {
 		
 		return apartmentsList;
 }
-	/*
-	public Apartment editApartmentData(Apartment newApartment){
-		Apartment old_Apartment=null;
-		boolean isUnique=true;
-		for(Apartment a:apartments.values()) {
-			if(newApartment.getId()==a.getId()) {
-				isUnique=false;
-			}
-		}
-		for(Apartment a :apartments.values()) {
-			if(newApartment.getId() == a.getId()) {
-				old_Apartment = a;
-				break;
-			}	
-		}
-		
-		if(old_Apartment == null) {
-			return null;
-		}
-		
-		if(isUnique) {
-			old_Apartment.setType(newApartment.getType());
-			old_Apartment.setRoomsNumber(newApartment.getRoomsNumber());
-			old_Apartment.setGuestsNumber(newApartment.getGuestsNumber());
-			old_Apartment.setLocation(newApartment.getLocation());
-			old_Apartment.setHost(newApartment.getHost());
-			old_Apartment.setComments(newApartment.getComments());
-			old_Apartment.setPhotos(newApartment.getPhotos());
-			old_Apartment.setPricePerNight(newApartment.getPricePerNight());
-			old_Apartment.setCheckInTime(newApartment.getCheckInTime());
-			old_Apartment.setCheckOutTime(newApartment.getCheckOutTime());
-			old_Apartment.setStatus(newApartment.getStatus());
-			old_Apartment.setActive(newApartment.isActive());
-
-			apartments.put(old_Apartment.getId(), old_Apartment);
-			System.out.println("mijenjanje apartmana");
-			return old_Apartment;
-		}
-		
-		return null;
-	}
-	*/
 	
 	public Apartment editApartmanData(Long id, Apartment newApartmentData) throws NoSuchAlgorithmException, IOException {
 		Apartment apartment = apartments.get(id);

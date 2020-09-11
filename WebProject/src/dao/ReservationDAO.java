@@ -40,24 +40,14 @@ public class ReservationDAO {
 		
 		return reservations.get(id);
 	}
-/*
-	public boolean addReservation(Reservation reservation, LocalDate ld, int n, ArrayList<LocalDate> available) throws NoSuchAlgorithmException, IOException {
+
+	
+	public boolean addReservation(Reservation reservation, ArrayList<LocalDate> available) throws NoSuchAlgorithmException, IOException {
 		
 		int nightsNumber = reservation.getNightsNumber();
 		LocalDate date =  reservation.getStartDate();
 		
-		
-		//provera dostupnosti apartmana
-
-		for(int i = 0; i < n; i++) {
-			LocalDate loc =  ld.plusDays(i + 1);
-			if(!available.contains(loc)) {
-				return false;
-			}
-		}
-		
-//		LocalDate localDate = LocalDate.of(Integer.parseInt(part[2]), Integer.parseInt(part[0]), Integer.parseInt(part[1]));
-		
+				
 		reservation.setId(reservations.size() + 1);
 		reservation.setReservationStatus(ReservationStatus.CREATED);
 		
@@ -66,7 +56,7 @@ public class ReservationDAO {
 		return true;
 		
 	}
-*/
+
 	public Collection<Reservation> findGuestReservation(String guest){
 		ArrayList<Reservation> res = new ArrayList<Reservation>();
 		
@@ -87,6 +77,20 @@ public class ReservationDAO {
 				res.add(r);
 		}
 		return res;
+	}
+	
+//	public boolean acceptReservation() {}
+	
+	
+	public boolean cancelReservation(long id) {
+		
+		Reservation reservation = reservations.get(id);
+		
+			if(reservation.getReservationStatus().equals(ReservationStatus.CREATED) || reservation.getReservationStatus().equals(ReservationStatus.ACCEPTED)) {
+				reservation.setReservationStatus(ReservationStatus.CANCELED);
+				return true;
+			}
+		return false;
 	}
 	
 	

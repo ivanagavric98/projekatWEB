@@ -143,128 +143,7 @@ public class UserDAO {
 		
 		
 	}
-	
-	/*
-	//metoda za ucitavanje korisnika iz json datoteke
-	@SuppressWarnings("unchecked")
-	public void loadUsers() {
-		System.out.println("load users");
 		
-		JSONParser parser = new JSONParser(); 
-		
-		try {
-			Object obj = parser.parse(new FileReader(contextPath + "/users.json"));
-			JSONArray jsonArray = (JSONArray) obj; 
-			System.out.println(jsonArray);
-			
-			Iterator<JSONObject> iterator = jsonArray.iterator();
-			
-			while (iterator.hasNext()) {
-				JSONObject jsonObject = iterator.next();
-				User user = new User();
-			
-				user.setUsername((String) jsonObject.get("username"));
-				user.setPassword((String) jsonObject.get("password"));
-				user.setFirstName((String) jsonObject.get("firstName"));
-				user.setLastName((String) jsonObject.get("lastName"));
-				user.setGender(getGender((String) jsonObject.get("gender")));
-				user.setActive((boolean) jsonObject.get("active"));
-				user.setRole(getRole((String)jsonObject.get("role")));
-				
-				if(user.getRole().equals("HOST")) {
-					JSONArray apartments = (JSONArray)jsonObject.get("rentalApartments");
-					if(!apartments.isEmpty()) {
-						ArrayList<Long> rentalApartments = new ArrayList<>();
-						for(int i=0; i<apartments.size(); i++) {
-							rentalApartments.add((Long) apartments.get(i));
-						}
-						user.setRentalApartments(rentalApartments);
-					}
-				}else if(user.getRole().equals("GUEST")) {
-					JSONArray rentedApartmentsJSON = (JSONArray)jsonObject.get("rentedApartments");
-					if(!rentedApartmentsJSON.isEmpty()) {
-						ArrayList<Long> rentedApartments = new ArrayList<>();
-						for(int i=0; i<rentedApartmentsJSON.size(); i++) {
-							rentedApartments.add((Long) rentedApartmentsJSON.get(i));
-						}
-						user.setRentalApartments(rentedApartments);
-					}
-					JSONArray reservationsJSON = (JSONArray)jsonObject.get("reservations");
-					if(!reservationsJSON.isEmpty()) {
-						ArrayList<Long> reservations = new ArrayList<>();
-						for(int i=0; i<reservationsJSON.size(); i++) {
-							reservations.add((Long) reservationsJSON.get(i));
-						}
-						user.setRentalApartments(reservations);
-					}
-				}	
-				
-				users.put(user.getUsername(), user);
-			}
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	 }
-	
-	//metoda za cuvanje korisnika u json datoteku
-	@SuppressWarnings({ "unchecked", "resource" })
-	public void saveUsers() {
-		 JSONArray listUsers = new JSONArray();
-		 
-		 for (String username : users.keySet()) {
-		    	User user = users.get(username);
-		    	
-		    	JSONObject obj = new JSONObject();
-		        
-		    	obj.put("username",user.getUsername());
-		    	obj.put("password",user.getPassword());
-		    	obj.put("firstName",user.getFirstName());
-		    	obj.put("lastName",user.getLastName());
-		    	obj.put("gender", user.getGender().toString());
-		    	obj.put("active",user.isActive());
-		    	obj.put("role",user.getRole().toString());
-		  
-		    	JSONArray rentedApartments = new JSONArray();
-		    	JSONArray rentalApartments = new JSONArray();
-		    	JSONArray reservationList = new JSONArray();
-		   
-		    	if(user.getRole().equals(Role.GUEST)) {
-		    		for(Long apartment_id: user.getRentedApartments()) {
-		    			rentedApartments.add(apartment_id);
-		    		}
-		    		for(Long reservation_id: user.getReservations()) {
-		    			reservationList.add(reservation_id);
-		    		}
-		    	} else if (user.getRole().equals(Role.HOST)) {
-		    		for(Long host_apartment_id: user.getRentalApartments()) {
-		    			rentalApartments.add(host_apartment_id);
-		    		}
-		    	}
-		        obj.put("rentedApartments",rentedApartments);	 
-		        obj.put("rentalApartments",rentalApartments);	
-		        obj.put("reservations",rentedApartments);	
-		    	
-		    	listUsers.add(obj);
-				System.out.println(contextPath+"/users.json");
-
-		   }
-		   try{
-			   
-				FileWriter fw = new FileWriter(contextPath + "/users.json"); 
-				fw.write(listUsers.toJSONString());
-				fw.flush();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}   
-	}
-
-	*/
-	
 	//-------------------------------------------------------------------
 		//filtriranje korisnika po ulozi(administrator)
 	public Collection<User> filtrateUsersByRole(String role) {
@@ -277,6 +156,16 @@ public class UserDAO {
 		return filtratedUsers;
 	}
 	
+	//filtriranje korisnika po polu
+	public Collection<User> filtrateUsersByGender(String gender) {
+		List<User>filtratedUsers=new ArrayList<User>();
+		for(User u : users.values()) {
+			if( u.getGender().toString().equals(gender)) {
+				filtratedUsers.add(u);
+				}			
+			}
+		return filtratedUsers;
+	}
 	
 	
 	
@@ -298,16 +187,5 @@ public class UserDAO {
 			    usersFile.createNewFile();
 			    mapper.writeValue(usersFile, users);
 			}
-//---------------------------------------------------
-			//filtriranje korisnika po polu
-			public Collection<User> filtrateUsersByGender(String gender) {
-				List<User>filtratedUsers=new ArrayList<User>();
-				for(User u : users.values()) {
-					if( u.getGender().toString().equals(gender)) {
-						filtratedUsers.add(u);
-						}			
-					}
-				return filtratedUsers;
-			}
-	
+
 }
