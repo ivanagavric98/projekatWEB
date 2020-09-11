@@ -207,7 +207,7 @@ public class ApartmentService {
 				System.out.println("pretrazivanje apartmana po lokaciji");
 				 return apartmentsDAO.searchApartmentsByLocation(city);
 			}
-			/*
+			
 	//-------------------------------------------------------------------------------
 			//pretgara apartmana po cijeni (u rasponu od -do)
 			@GET
@@ -220,9 +220,8 @@ public class ApartmentService {
 				System.out.println("pretrazivanje apartmana po opsegu cijene");
 				 return apartmentsDAO.searchApartmentsByPriceAmount(from,to);
 			}
-			*/
 			//-------------------------------------------------------------------------------
-			//pretgara apartmana po broju soba (u rasponu od -do)
+			//pretgara apartmana po broju soba(od-do)
 			@GET
 			@Path("/{from}/{to}")
 			@Produces(MediaType.APPLICATION_JSON)
@@ -233,6 +232,54 @@ public class ApartmentService {
 				System.out.println("pretrazivanje apartmana po opsegu broja soba");
 				 return apartmentsDAO.searchApartmentsByRoomNumber(from,to);
 			}
+			/*
+			//-------------------------------------------------------------------------------
+			//kombinovana pretraga apatrmana--ne radi provjeriti
+			@GET
+			@Path("/{city}/{fromPrice}/{toPrice}/{fromNumRoom}/{toNumRoom}/{guestNumber}")
+			@Produces(MediaType.APPLICATION_JSON)
+			public Collection<Apartment> combinedSearch(@QueryParam("city") String city,
+					@QueryParam("fromPrice") String fromPrice,
+					@QueryParam("toPrice") String toPrice,
+					@QueryParam("fromNumRoom") String fromNumRoom,
+					@QueryParam("toNumRoom") String toNumRoom,
+					@PathParam("guestNumber") String guestNumber,
+					@Context HttpServletRequest request) {
+				ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+				System.out.println("kombinovana pretraga");
+				 return apartmentsDAO.combinedSearch(city,fromPrice,toPrice,fromNumRoom,toNumRoom,guestNumber);
+			}
+			*/
+			/*
+			//-------------------------------------------------------------------------------
+			//pretgara apartmana po broju datumu (u rasponu od-do)
+			@GET
+			@Path("/{from}/{to}")
+			@Produces(MediaType.APPLICATION_JSON)
+			public Collection<Apartment> searchApartmentsByDatePeriod(@PathParam("from") String from,
+					@PathParam("to") String to,
+					@Context HttpServletRequest request) {
+				ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+				System.out.println("pretrazivanje apartmana datumu od-do");
+				 return apartmentsDAO.searchApartmentsByDatePeriod(from,to);
+			}
+			*/
+			
+						//--------------------------------------------------------------------------------
+			//pretraga po maks broju gostiju
+			@GET
+			@Path("/{to}")
+			@Produces(MediaType.APPLICATION_JSON)
+			public Collection<Apartment> searchApartmentsByMaxGuestNumber(@PathParam("to") String to,
+					@Context HttpServletRequest request) {
+				ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+				System.out.println("pretrazivanje apartmana po opsegu broja soba");
+				 return apartmentsDAO.searchApartmentsByMaxGuestNumber(to);
+			}
+			
+			//-----------------------------------------------------------------------------------
 			
 			
+
 }
+

@@ -317,6 +317,34 @@ public class ApartmentDAO {
 				}
 			return resultApartmnts;
 		}
+//-----------------------------------------------------------------------------------
+				//filtriranje apartmana po broju gostiju(do koliko gostiju)
+		public Collection<Apartment> searchApartmentsByMaxGuestNumber( String to) {
+					List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+					for(Apartment a : apartments.values()) {
+						if( a.isActive() && a.getGuestsNumber()<=Integer.parseInt(to)) {
+							resultApartmnts.add(a);
+							}			
+						}
+					return resultApartmnts;
+				}
+
+		public Collection<Apartment> combinedSearch(String city, String fromPrice, String toPrice, String fromNumRoom,
+				String toNumRoom, String guestNumber) {
+			List<Apartment>locationSearch=(List<Apartment>) searchApartmentsByLocation(city);
+			List<Apartment>priceSearch=(List<Apartment>) searchApartmentsByPriceAmount(fromPrice,toPrice);
+			List<Apartment>roomNumSearc=(List<Apartment>) searchApartmentsByRoomNumber(fromNumRoom,toNumRoom);
+			List<Apartment>guestNumberSearch =(List<Apartment>) searchApartmentsByMaxGuestNumber(guestNumber);
+			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+
+
+			for(Apartment a : apartments.values()) {
+				if( a.isActive() && locationSearch.contains(a) && priceSearch.contains(a) && roomNumSearc.contains(a) && guestNumberSearch.contains(a)) {
+					resultApartmnts.add(a);
+					}			
+				}
+			return null;
+		}
 
 		
 }
