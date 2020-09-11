@@ -306,6 +306,17 @@ public class ApartmentDAO {
 				}
 			return resultApartmnts;
 		}
+//-----------------------------------------------------------------------------------
+		//filtriranje apartmana po opsegu broja soba
+		public Collection<Apartment> searchApartmentsByRoomNumber(String from, String to) {
+			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+			for(Apartment a : apartments.values()) {
+				if( a.isActive() && a.getRoomsNumber()>=Integer.parseInt(from) && a.getRoomsNumber()<=Integer.parseInt(to)) {
+					resultApartmnts.add(a);
+					}			
+				}
+			return resultApartmnts;
+		}
 
 		
 }
