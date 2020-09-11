@@ -284,5 +284,16 @@ public class ApartmentDAO {
 				}
 			return filtratedApartments;
 		}
+
+		public Collection<Apartment> searchApartmentsByLocation(String city) {
+			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+			for(Apartment a : apartments.values()) {
+				if( a.isActive() && a.getLocation().address.city.toString().equals(city)) {
+					resultApartmnts.add(a);
+					}			
+				}
+			return resultApartmnts;
+		}
+
 		
 }
