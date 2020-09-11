@@ -23,6 +23,7 @@ import javax.ws.rs.core.Response;
 import dao.ApartmentDAO;
 
 import model.Apartment;
+import model.User;
 
 
 @Path("apartment")
@@ -73,6 +74,17 @@ public class ApartmentService {
 		}
 		
 	}
+	
+	@GET
+	@Path("/hostApartment")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Apartment> findActiveHostApartment(@Context HttpServletRequest request){
+		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		User user = (User) request.getSession(false).getAttribute("user");
+		
+		return apartmentsDAO.findAllHostApartment(user.getUsername());
+	}
+	
 	/*
 	//--------------------------------------------------------------------------------------
 		//pretraga apartmana po  id

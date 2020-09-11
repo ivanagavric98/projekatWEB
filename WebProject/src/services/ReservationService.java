@@ -126,5 +126,19 @@ public class ReservationService {
 		 return apartmentsDAO.searchApByIdAndHost(id,host);
 	}
 	
-
+	@PUT
+	@Path("/cancel")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cancel(@QueryParam("id")Long id) {
+		ReservationDAO reservationDAO = (ReservationDAO) ctx.getAttribute("reservationDAO");
+		
+		boolean successful = reservationDAO.cancelReservation(id);
+		if(successful) {
+			return Response.status(200).build();
+		}
+		return Response.status(400).entity("Canceled is not allowed!").build();
+	}
+	
+	
 }
