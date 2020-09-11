@@ -99,8 +99,8 @@ public class User {
 		public ArrayList<Long> getRentalApartments() {
 			return rentalApartments;
 		}
-		public void setRentalApartments(ArrayList<Long> rentalApartments) {
-			this.rentalApartments = rentalApartments;
+		public void setRentalApartments(long id) {
+			this.rentalApartments.add(id);
 		}
 		public ArrayList<Long> getRentedApartments() {
 			return rentedApartments;

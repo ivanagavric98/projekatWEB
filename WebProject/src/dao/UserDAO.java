@@ -167,6 +167,19 @@ public class UserDAO {
 		return filtratedUsers;
 	}
 	
+	public void addHostApartment(String host, long id) throws NoSuchAlgorithmException, IOException {
+		
+		User hostUser = new User();
+		
+		for(User user : users.values()) {
+			if(user.getUsername().equals(host)) {
+				hostUser = user;
+			}
+		}
+		hostUser.setRentalApartments(id);
+		saveUsers(contextPath);
+	}
+	
 	
 	
 	//ucitavanje liste korisnika iz fajla
@@ -187,5 +200,7 @@ public class UserDAO {
 			    usersFile.createNewFile();
 			    mapper.writeValue(usersFile, users);
 			}
+
+			
 
 }

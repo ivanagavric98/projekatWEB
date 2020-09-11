@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.ApartmentDAO;
-
+import dao.UserDAO;
 import model.Apartment;
 import model.User;
 
@@ -63,9 +63,14 @@ public class ApartmentService {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		System.out.println("successfully added");
 		
-		String host_username = (String) request.getSession().getAttribute("users");
+		User host = (User) request.getSession().getAttribute("user");
+		String host_username = host.getUsername();
+		
 		apartment.setHost(host_username);
 		Apartment successfulAdd = apartmentsDAO.addApartment(apartment);
+		
+		UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
+		userDAO.addHostApartment(host_username, successfulAdd.getId());
 		
 		if(successfulAdd != null) {
 			return Response.status(200).build();	
