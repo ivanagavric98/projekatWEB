@@ -253,5 +253,39 @@ public class ApartmentDAO {
 				}
 			return filtratedApartments;
 		}
+//-----------------------------------------------------------------------------
+		//pretraga apartmana po lokaciji
+		public Collection<Apartment> searchApartmentsByLocation(String city) {
+			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+			for(Apartment a : apartments.values()) {
+				if( a.isActive() && a.getLocation().address.city.toString().equals(city)) {
+					resultApartmnts.add(a);
+					}			
+				}
+			return resultApartmnts;
+		}
+//---------------------------------------------------------------------------------
+		//filtriranje apartmana po opsegu cijene
+		public Collection<Apartment> searchApartmentsByPriceAmount(String from, String to) {
+			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+			for(Apartment a : apartments.values()) {
+				if( a.isActive() && a.getPricePerNight()>=Double.parseDouble(from) && a.getPricePerNight()<=Double.parseDouble(to)) {
+					resultApartmnts.add(a);
+					}			
+				}
+			return resultApartmnts;
+		}
+//-----------------------------------------------------------------------------------
+		//filtriranje apartmana po opsegu broja soba
+		public Collection<Apartment> searchApartmentsByRoomNumber(String from, String to) {
+			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+			for(Apartment a : apartments.values()) {
+				if( a.isActive() && a.getRoomsNumber()>=Integer.parseInt(from) && a.getRoomsNumber()<=Integer.parseInt(to)) {
+					resultApartmnts.add(a);
+					}			
+				}
+			return resultApartmnts;
+		}
+
 		
 }
