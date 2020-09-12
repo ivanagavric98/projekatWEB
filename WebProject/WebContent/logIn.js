@@ -4,7 +4,6 @@ function clearWorkspace() {
     $('#registration-form').hide();
     $('#admin-list-users').hide();
     $('#mod_pretraga').hide();
-
 }
 
 let activeUserRole = '-1';
@@ -30,7 +29,6 @@ $(document).ready(function() {
     });
 
     $('#logout_li').on('click', function() {
-
         $.ajax({
             type: 'GET',
             url: 'rest/logout',
@@ -38,7 +36,9 @@ $(document).ready(function() {
             success: function() {
                 alert('Goodbay!');
                 activeUserRole = undefined;
+                clearWorkspace();
                 $('#login-form').show();
+                $('#logout_li').hide();
                 hideFuncByRole(activeUserRole);
             },
             error: function(message) {}
@@ -98,6 +98,8 @@ function login() {
 //        event.preventDefault();
 //        console.log('logout-submit');
 //
+//        var currentUser = 
+//        
 //        $.ajax({
 //            type: 'POST',
 //            url: 'rest/logout',
@@ -121,6 +123,7 @@ function login() {
 function hideFuncByRole(role) {
     if (role === "ADMINISTRATOR") {
         $('#profile_li').hide();
+        $('#logout_li').hide();
     } else if (role === "HOST") {
         $('#users_li').hide();
     } else {
