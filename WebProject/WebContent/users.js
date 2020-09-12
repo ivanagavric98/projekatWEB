@@ -46,9 +46,9 @@ $(document).ready(function() {
             }
         })
     });
-
+/*
     $('#search_li').click(function() {
         $('#mod_pretraga').show();
     });
-
+*/
 });

@@ -76,7 +76,7 @@ function login() {
 }
 
 function hideFuncByRole(role) {
-    if(role === "ADMIN") {
+    if(role === "ADMINISTRATOR") {
         $('#profile_li').hide();
     } else if(role === "HOST") {
         $('#users_li').hide();
