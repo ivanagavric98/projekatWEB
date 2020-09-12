@@ -147,11 +147,15 @@ public class LogInService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUser(@PathParam("username") String username, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		
+		
 		User loginUser = (User) request.getSession(false).getAttribute("user");
+
 		return userDao.getUser(loginUser.getUsername());
-	} 
+		
+		} 
 	
-	@POST
+	@GET
 	@Path("/logout")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
