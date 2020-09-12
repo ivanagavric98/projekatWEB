@@ -16,10 +16,12 @@ function login() {
 			$('#error_username').text('Please enter valid username!');
 			$('#error_password').val();
 			$('input[name="username"]').focus();
+			return;
 		}else if(!password){
 			$('#error_password').text('Please enter valid password!');
 			$('#error_username').val();
 			$('input[name="password"]').focus();
+			return;
 		}else{
             var obj = {
                     "username" : username,

@@ -14,12 +14,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.User;
 import dao.UserDAO;
+import enumeration.Gender;
 
 @Path("")
 public class LogInService {
@@ -39,11 +41,12 @@ public class LogInService {
 			ctx.setAttribute("userDAO", new UserDAO(contextPath));
 		}
 	}
-	/*
+	
 	@GET
-	@Path("/{username}")
+	@Path("/searchUsers")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<User> searchUserByUsername(@PathParam("username") String username, @Context HttpServletRequest request) {
+	public Collection<User> searchUserByUsername(@QueryParam("username") String username,
+			@Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		Collection<User> ret = userDao.searchUserByUsername(username);
 		System.out.println("pretraga pocela");
@@ -51,7 +54,7 @@ public class LogInService {
 		return ret;
 	
 	}
-	*/
+	
 	@POST
 	@Path("/registration")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -68,33 +71,24 @@ public class LogInService {
 			
 		}
 	}
-	/*
-	//------------------------------------------------
-		//filtriranje korisnika po ulogama
 	@GET
-	@Path("/{role}")
+	@Path("/filtrateRole/{role}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<User> filtrateUsersByRole(@PathParam("role") String role,
 			@Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		System.out.println("filtracija korisnika pocela");
 		 return userDao.filtrateUsersByRole(role);
 	}
-	*/
-	//------------------------------------------------
-			//filtriranje korisnika po polu
-		@GET
-		@Path("/{gender}")
-		@Produces(MediaType.APPLICATION_JSON)
-		public Collection<User> filtrateUsersByGender(@PathParam("gender") String gender,
-				@Context HttpServletRequest request) {
-			UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-			System.out.println("filtracija korisnika polu");
-			 return userDao.filtrateUsersByGender(gender);
-		}
 	
-//--------------------------------------------------------
-	/*
+	@GET
+	@Path("/filtrateGender/{gender}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> filtrateUsersByGender(@PathParam("gender") String gender, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+	 return userDao.filtrateUsersByGender(gender);
+	 }
+	
+
 	@GET
 	@Path("/findAllUsers")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -103,7 +97,7 @@ public class LogInService {
 		return userDao.findAll();		
 	
 	}
-	*/
+	
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -131,9 +125,10 @@ public class LogInService {
 						 @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		System.out.println("editovanje korisnika");
+		
 		return userDao.editPersonalData(username, newUserData);
 	} 
-	/*
+	
 	@POST
 	@Path("/logout")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -141,5 +136,5 @@ public class LogInService {
 	public void logout(@Context HttpServletRequest request) {
 		request.getSession().invalidate();
 	}
-*/	
+	
 }

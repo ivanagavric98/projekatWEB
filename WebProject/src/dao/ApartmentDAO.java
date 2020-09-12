@@ -78,7 +78,7 @@ public class ApartmentDAO {
 			
 			return apartmentsList;
 	}
-	/*
+	
 	public Collection<Apartment> findAllHostApartment(String host){
 		ArrayList<Apartment> apartmentList = new ArrayList<Apartment>();
 		
@@ -89,7 +89,7 @@ public class ApartmentDAO {
 		}
 		return apartmentList;
 	}
-	*/
+	
 	
 	//----------------------------------------
 		//pretraga po i i host (za domacina)

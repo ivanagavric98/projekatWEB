@@ -39,8 +39,10 @@ public class CommentService {
 		if (ctx.getAttribute("commentDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 			ctx.setAttribute("commentDAO", new CommentDAO(contextPath));
+		}else if(ctx.getAttribute("apartmentDAO") == null) {
+	    	String contextPath = ctx.getRealPath("");
+			ctx.setAttribute("apartmentDAO", new ApartmentDAO(contextPath));
 		}
-		
 	}
 	
 	@GET
@@ -53,18 +55,21 @@ public class CommentService {
 	}
 	/*
 	@POST
-	@Path("/addComment")
+	@Path("/createComment")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response comments(Comment comment, Apartment apartment, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
+	public Response comments(Comment comment, 		Apartment apartment, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		CommentDAO commentsDAO = (CommentDAO) ctx.getAttribute("commentDAO");
 		System.out.println("successfully added");
 		
 		User guest = (User) request.getSession().getAttribute("user");
+		comment.setGuest(guest.getUsername());
 		ApartmentDAO apartmentDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
-		apartmentDAO.addNewComment(apartment, comment);
+		
 		
 		Comment successfulAdd = commentsDAO.addNewComment(comment);		
+		
+		apartmentDAO.addNewComment(apartment, successfulAdd);
 		if(successfulAdd != null) {
 			return Response.status(200).build();	
 		}else {

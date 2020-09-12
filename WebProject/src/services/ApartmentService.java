@@ -65,9 +65,10 @@ public class ApartmentService {
 		System.out.println("successfully added");
 		
 		User host = (User) request.getSession().getAttribute("user");
-		String host_username = host.getUsername();
 		
+		String host_username = host.getUsername();
 		apartment.setHost(host_username);
+		
 		Apartment successfulAdd = apartmentsDAO.addApartment(apartment);
 		
 		UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
@@ -75,13 +76,13 @@ public class ApartmentService {
 		
 		if(successfulAdd != null) {
 			return Response.status(200).build();	
-		}else {
-			return Response.status(400).entity("Apartment is already exist.").build();
 		}
+			return Response.status(400).entity("Apartment is already exist.").build();
+		
 		
 	}
 
-	/*	
+	
 	@GET
 	@Path("/hostApartment")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -91,7 +92,7 @@ public class ApartmentService {
 		
 		return apartmentsDAO.findAllHostApartment(user.getUsername());
 	}
-	*/
+	
 	/*
 	//--------------------------------------------------------------------------------------
 		//pretraga apartmana po  id
@@ -146,7 +147,7 @@ public class ApartmentService {
 			 return apartmentsDAO.filtrateApartmentsByStatus(status);
 		}
 		*/
-	/*
+	
 	@DELETE
 	@Path("/")
 	public Response deleteApartment(@QueryParam("id") Long id, @Context HttpServletRequest request)  throws NoSuchAlgorithmException, IOException {
@@ -159,7 +160,7 @@ public class ApartmentService {
 		return Response.status(400).entity("Id is not existed!").build();
 	
 	}
-*/
+
 	/*
 	@PUT
 	@Path("/{id}")
