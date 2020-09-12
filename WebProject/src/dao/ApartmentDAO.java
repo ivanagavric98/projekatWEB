@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,12 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import enumeration.Status;
 import model.Apartment;
 import model.Comment;
+import model.ReservationPeriod;
 
 public class ApartmentDAO {
 	private static Map<Long, Apartment> apartments = new HashMap<>();
@@ -55,7 +60,7 @@ public class ApartmentDAO {
 				);
 		apartments.put(a.getId(), a);
 		
-		saveApartments(contextPath);
+		saveApartments();
 		return a;
 	}
 
@@ -107,7 +112,7 @@ public class ApartmentDAO {
 			return null;
 		}
 		Apartment newApartment = createNewApartment(newApartmentData, id, apartment.getStatus());
-		saveApartments(contextPath);
+		saveApartments();
 		
 		return newApartment;
 	}
@@ -146,7 +151,7 @@ public class ApartmentDAO {
 		if(apartments.containsKey(id)) {
 			apartment.setActive(false);
 			delete_fleg = true;
-			saveApartments(contextPath);
+			saveApartments();
 		}
 		return delete_fleg;
 	}
@@ -162,13 +167,13 @@ public class ApartmentDAO {
 	    return mapper.readValue(apartmentFile, new TypeReference<HashMap<Long,Apartment>>() {});
 	}
 
-	//upisivanje u novi fajl 
-		public void saveApartments(String contextPath) throws IOException, NoSuchAlgorithmException {
-		    ObjectMapper mapper = new ObjectMapper();
-		    File apartmentFile = new File(contextPath + "/apartments.json");
-		    apartmentFile.createNewFile();
-		    mapper.writeValue(apartmentFile, apartments);
-		}
+//	//upisivanje u novi fajl 
+//		public void saveApartments(String contextPath) throws IOException, NoSuchAlgorithmException {
+//		    ObjectMapper mapper = new ObjectMapper();
+//		    File apartmentFile = new File(contextPath + "/apartments.json");
+//		    apartmentFile.createNewFile();
+//		    mapper.writeValue(apartmentFile, apartments);
+//		}
 		//----------------------------------------------------------------------------------------
 				//sortiranje apartmana po broju soba
 		public Collection<Apartment> getSort(String par) {
@@ -322,7 +327,108 @@ public class ApartmentDAO {
 			Apartment ap = apartments.get(apartment.getId());
 			
 			ap.setComments(comment.getId());
-			saveApartments(contextPath);
+			saveApartments();
+			
+		}
+		
+		public void saveApartments() {
+			JSONArray apartmentList = new JSONArray();
+			
+			for(Long apartmentId : apartments.keySet()) {
+				Apartment ap = apartments.get(apartmentId);
+				JSONObject obj_ap = new JSONObject();
+				
+//				obj_ap.put("id", ap.getId());
+				obj_ap.put("type", ap.getType());
+				obj_ap.put("roomsNumber", ap.getRoomsNumber());
+				obj_ap.put("guestsNumber", ap.getGuestsNumber());
+
+				JSONObject loc = new JSONObject();
+				if(ap.getLocation() != null) {
+					loc.put("longitude", ap.getLocation().getLongitude());
+					loc.put("latitude", ap.getLocation().getLatitude());
+
+					JSONObject address = new JSONObject();
+					if(ap.getLocation().getAddress() != null) {
+//						address.put("id", ap.getLocation().getAddress().getId());
+						address.put("street", ap.getLocation().getAddress().getStreet());
+						address.put("number", ap.getLocation().getAddress().getNumber());
+						address.put("city", ap.getLocation().getAddress().getCity());
+						address.put("postalCode", ap.getLocation().getAddress().getPostalCode());
+					}
+					
+					loc.put("address", address);
+				}
+				
+				JSONArray rentalDate = new JSONArray();
+				if(!ap.getRentalDates().isEmpty()) {
+					for(LocalDate rDates : ap.getRentalDates()) {
+						rentalDate.add(rDates);
+					}
+				}
+				obj_ap.put("rentalDates", rentalDate);
+
+				
+				JSONArray busyDate = new JSONArray();
+				if(!ap.getBusyDates().isEmpty()) {
+					for(ReservationPeriod bDates : ap.getBusyDates()) {
+						 busyDate.add(bDates);
+					}
+				}
+				obj_ap.put("busyDates", busyDate);
+
+				JSONArray comment = new JSONArray();
+				if(!ap.getComments().isEmpty()) {
+					for(Long comm : ap.getComments()) {
+						 comment.add(comm);
+					}
+				}
+				obj_ap.put("comments", comment);
+
+				JSONArray photo = new JSONArray();
+				if(!ap.getPhotos().isEmpty()) {
+					for(Long ph : ap.getPhotos()) {
+						 photo.add(ph);
+					}
+				}
+				obj_ap.put("photos", photo);
+
+				
+				obj_ap.put("pricePerNight", ap.getPricePerNight());
+				obj_ap.put("checkInTime", ap.getCheckInTime());
+				obj_ap.put("checkOutTime", ap.getCheckOutTime());
+				obj_ap.put("status", ap.getStatus());
+				obj_ap.put("active", true);
+				
+				
+				JSONArray amenties = new JSONArray();
+				if(!ap.getAmenities().isEmpty()) {
+					for(Long am : ap.getAmenities()) {
+						amenties.add(am);
+					}
+				}
+				
+				obj_ap.put("amenties", amenties);
+
+				JSONArray reservations = new JSONArray();
+				if(!ap.getReservations().isEmpty()) {
+					for(Long rs : ap.getReservations()) {
+						reservations.add(rs);
+					}
+				}
+				
+				obj_ap.put("reservations", reservations);
+				
+				apartmentList.add(obj_ap);
+							
+			}try {
+					System.out.println(contextPath + "/apartments.json");		
+					FileWriter fw = new FileWriter(contextPath+"/apartments.json"); 
+					fw.write(apartmentList.toJSONString());
+					fw.flush();
+			}catch(Exception e) {
+					e.printStackTrace();
+		    }   
 			
 		}
 
