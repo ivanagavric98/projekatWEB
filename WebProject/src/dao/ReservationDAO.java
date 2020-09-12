@@ -101,7 +101,19 @@ public class ReservationDAO {
 		return res;
 	}
 	
-//	public boolean acceptReservation() {}
+	public Reservation acceptReservation(Reservation reservation) {
+		
+//		ApartmentDAO apartmentDAO = apartmentDAO.findAllHostApartment(host);	
+		
+		for(Reservation res : reservations.values()) {
+			if(res.getReservationStatus().equals(ReservationStatus.CREATED)) {
+				reservation.setReservationStatus(ReservationStatus.ACCEPTED);
+				
+			}
+		}
+		
+		return reservation;
+	}
 	
 	
 	public boolean cancelReservation(long id) {

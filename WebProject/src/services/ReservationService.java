@@ -23,6 +23,7 @@ import javax.ws.rs.core.Response;
 
 import dao.ApartmentDAO;
 import dao.ReservationDAO;
+import dao.UserDAO;
 import model.Apartment;
 import model.Reservation;
 import model.User;
@@ -78,6 +79,7 @@ public class ReservationService {
 		return reservationDAO.findHostReservation(user.getUsername());		
 	
 	}
+	
 	
 	
 	
@@ -143,5 +145,27 @@ public class ReservationService {
 		return Response.status(400).entity("Canceled is not allowed!").build();
 	}
 	
-	
+	@POST
+	@Path("/accept")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response accept(Reservation reservation, @Context HttpServletRequest request) {
+		ReservationDAO reservationDAO = (ReservationDAO) ctx.getAttribute("reservationDAO");
+		ApartmentDAO apartmentDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
+
+		User user = (User) request.getSession(false).getAttribute("user");
+		apartmentDAO.findAllHostApartment(user.getUsername());
+		
+		Reservation successful = reservationDAO.acceptReservation(reservation); 
+		
+		
+		if(successful != null) {
+			return Response.status(200).build();
+		}else {
+		
+			return Response.status(400).entity("Canceled is not allowed!").build();
+		}
+	}
+
 }
