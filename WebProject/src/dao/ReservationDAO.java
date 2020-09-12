@@ -1,7 +1,6 @@
 package dao;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
@@ -12,9 +11,11 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import enumeration.ReservationStatus;
 import model.Apartment;
 import model.Reservation;
+import model.ReservationPeriod;
 
 public class ReservationDAO {
 	private Map<Long, Reservation> reservations = new HashMap<>();
@@ -34,27 +35,48 @@ public class ReservationDAO {
 		return reservations.values();
 	}
 	
-
-	
 	public Reservation getReservation(Long id) {
-		
 		return reservations.get(id);
 	}
-
 	
-	public boolean addReservation(Reservation reservation, ArrayList<LocalDate> available) throws NoSuchAlgorithmException, IOException {
+	public Reservation addReservation(String dateFromString, String numberOfNights, String message, Long apartmentId, String username) {
+		Apartment apartment = (Apartment) ApartmentDAO.searchApById(String.valueOf(apartmentId));
+		if(apartment == null) {
+			return null;
+		}
+		LocalDate dateFrom = LocalDate.parse(dateFromString);
+		LocalDate dateTo = dateFrom.plusDays(Long.parseLong(numberOfNights));
+		for (ReservationPeriod busyDate : apartment.getBusyDates()) {
+			LocalDate busyDateTo = busyDate.getDateFrom().plusDays(busyDate.getNumberOfNights());
+			if(busyDate.getDateFrom().isBefore(dateFrom) 
+					&& busyDateTo.isAfter(dateTo)) {
+				return null;
+			} else if(busyDate.getDateFrom().isBefore(dateTo) 
+					&& busyDate.getDateFrom().isAfter(dateTo)) {
+				return null;
+			} else if(busyDateTo.isAfter(dateFrom)
+					&& busyDateTo.isBefore(dateTo)) {
+				return null;
+			}
+		}
 		
-		int nightsNumber = reservation.getNightsNumber();
-		LocalDate date =  reservation.getStartDate();
-		
-				
+		return createReservation(dateFrom, Integer.parseInt(numberOfNights), message, apartment, username);
+	}
+	
+	public Reservation createReservation(LocalDate dateFrom, int numberOfNights, String message, Apartment apartment, String username) {
+		Reservation reservation = new Reservation();
 		reservation.setId(reservations.size() + 1);
+		reservation.setActive(true);
+		reservation.setBookedApartment(apartment);
+		reservation.setGuest(username);
+		reservation.setNightsNumber(numberOfNights);
+		reservation.setReservationMessage(message);
 		reservation.setReservationStatus(ReservationStatus.CREATED);
-		
+		reservation.setStartDate(dateFrom);
+		reservation.setTotalPrice(numberOfNights * apartment.getPricePerNight());
 		reservations.put(reservation.getId(), reservation);
-		saveReservations(contextPath);
-		return true;
 		
+		return reservation;
 	}
 
 	public Collection<Reservation> findGuestReservation(String guest){

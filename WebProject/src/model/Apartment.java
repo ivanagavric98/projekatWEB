@@ -13,7 +13,7 @@ public class Apartment {
 	public int guestsNumber;
 	public Location location;
 	public ArrayList<LocalDate> rentalDates;
-	public ArrayList<LocalDate> availableDates;
+	public ArrayList<ReservationPeriod> busyDates;
 	public String host;
 	public ArrayList<Long> comments;
 	public ArrayList<Long> photos;
@@ -30,7 +30,7 @@ public class Apartment {
 	}
 	
 	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
-			ArrayList<LocalDate> rentalDates, ArrayList<LocalDate> availableDates, String host, ArrayList<Long> comments, ArrayList<Long> photos,
+			ArrayList<LocalDate> rentalDates, ArrayList<ReservationPeriod> busyDates, String host, ArrayList<Long> comments, ArrayList<Long> photos,
 			double pricePerNight, int checkInTime, int checkOutTime, Status status, ArrayList<Long> amenities,
 			ArrayList<Long> reservations, boolean active) {
 		super();
@@ -40,7 +40,7 @@ public class Apartment {
 		this.guestsNumber = guestsNumber;
 		this.location = location;
 		this.rentalDates = rentalDates;
-		this.availableDates = availableDates;
+		this.busyDates = busyDates;
 		this.host = host;
 		this.comments = comments;
 		this.photos = photos;
@@ -114,11 +114,11 @@ public class Apartment {
 	public void setRentalDates(ArrayList<LocalDate> rentalDates) {
 		this.rentalDates = rentalDates;
 	}
-	public ArrayList<LocalDate> getAvailableDates() {
-		return availableDates;
+	public ArrayList<ReservationPeriod> getBusyDates() {
+		return busyDates;
 	}
-	public void setAvailableDates(ArrayList<LocalDate> availableDates) {
-		this.availableDates = availableDates;
+	public void setBusyDates(ArrayList<ReservationPeriod> busyDates) {
+		this.busyDates = busyDates;
 	}
 	public String getHost() {
 		return host;

@@ -1,13 +1,39 @@
+function clearWorkspace() {
+    $('#user_profile').hide();
+    $('#login-form').hide();
+    $('#registration-form').hide();
+    $('#admin-list-users').hide();
+    $('#mod_pretraga').hide();
+}
+
+let activeUserRole = '-1';
+
 $(document).ready(function(){
-	
+    console.log('document ready login');
+
+    $('.modal-header span').click(function() {
+        $('#mod_pretraga').hide();
+    });
+
 	$('#login').submit(login());
 	$('#registration').submit(registerNewUser());
-	
+    
+    $('#register_form_button').on('click', function(){
+        clearWorkspace();
+        $('#registration-form').show();
+    });
+
+    $('#login-button').on('click', function(){
+        clearWorkspace();
+        $('#login-form').show();
+    });
+
 });
 
 function login() {
 	return function(event) {
-		event.preventDefault();
+        event.preventDefault();
+        console.log('login-submit');
 		
 		let password = $('input[name="password"]').val();
 		let username = $('input[name="username"]').val();
@@ -33,9 +59,11 @@ function login() {
              url: 'rest/login',
              data: JSON.stringify(obj),
              contentType : 'application/json',
-             success : function(){
-                 window.location.href = "http://localhost:8080/WebProject/";
-                 alert('Wellcome!');
+             success : function(user){
+                 alert('Welcome!');
+                 activeUserRole = user.role;
+                 hideFuncByRole(activeUserRole);
+                 clearWorkspace();
              },
             error : function(message){
                  $('#error_username').val("");
@@ -45,6 +73,16 @@ function login() {
 	
 		}
 	}
+}
+
+function hideFuncByRole(role) {
+    if(role === "ADMIN") {
+        $('#profile_li').hide();
+    } else if(role === "HOST") {
+        $('#users_li').hide();
+    } else {
+        $('#users_li').hide();
+    }
 }
 
 

@@ -13,6 +13,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -79,23 +80,25 @@ public class ReservationService {
 	}
 	
 	
-	/*
+	
 	@POST
-	@Path("/addReservation")
+	@Path("/add/{dateFrom}/{numberOfNights}/{message}/{apartmentId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response reservations(Reservation reservation, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
+	public Response addReservation(@PathParam("dateFrom") String dateFrom,
+								 @PathParam("numberOfNights") String numberOfNights,
+								 @PathParam("message") String message,
+								 @PathParam("apartmentId") Long apartmentId,
+								 @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		ReservationDAO reservationDAO = (ReservationDAO) ctx.getAttribute("reservationDAO");
 		System.out.println("successfully added");
-		
-	
-		
-		Reservation successfulAdd = reservationDAO.addReservation(reservation, ld, 0, available);
+		User user = (User) request.getSession(false).getAttribute("user");
+		Reservation successfulAdd = reservationDAO.addReservation(dateFrom, numberOfNights, message, apartmentId, user.username);
 		
 		if(successfulAdd != null) {
-			return Response.status(200).build();	
+			return Response.status(200).entity(successfulAdd).build();	
 		}else {
-			return Response.status(400).entity("Apartment is already exist.").build();
+			return Response.status(400).entity("Reservation is not created.").build();
 		}
 		
 	}

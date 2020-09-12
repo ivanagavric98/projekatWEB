@@ -30,8 +30,8 @@ public class UserDAO {
 
 	public UserDAO(String contextPath) throws NoSuchAlgorithmException, IOException {
 		this.contextPath = contextPath;
-		 loadUsers();
-		
+		System.out.println(contextPath);
+		loadUsers();
 	}
 	
 	public User findUser(String username, String password) {
@@ -88,7 +88,6 @@ public class UserDAO {
 
 	
 	public User getUser(String username) {
-		
 		return users.get(username);
 	}
 
@@ -126,8 +125,19 @@ public class UserDAO {
 		
 			}
 		return listUsers;
-		
-		
+	}
+	
+	public Collection<User> sortUserByUsername(String username) {
+		List <User> listUsers=new ArrayList<>();
+		if(username.equals("prazan_string")) {
+			return users.values();
+		}
+		for(User u : users.values()) {
+			if(u.active && u.getUsername().toLowerCase().contains(username.toLowerCase())) {
+				listUsers.add(u);
+			}
+		}
+		return listUsers;
 	}
 		
 	//-------------------------------------------------------------------

@@ -55,6 +55,18 @@ public class LogInService {
 	
 	}
 	
+	@GET
+	@Path("/users/{username}/sort")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> sortUserByUsername(@PathParam("username") String username,
+			@Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		Collection<User> ret = userDao.sortUserByUsername(username);
+		
+		return ret;
+	
+	}
+	
 	@POST
 	@Path("/registration")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -90,7 +102,7 @@ public class LogInService {
 	
 
 	@GET
-	@Path("/findAllUsers")
+	@Path("/users")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<User> findAll(@Context HttpServletRequest request){
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
@@ -110,14 +122,14 @@ public class LogInService {
 		
 		if (logged != null) {
 			request.getSession().setAttribute("user", logged);
-			return Response.status(200).build();
+			return Response.status(200).entity(logged).build();
 		}
 		
 		return Response.status(400).entity("Username or password is incorrect.").build();
 	}
 	
 	@PUT
-	@Path("/{username}")
+	@Path("/user/{username}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User editPersonalData(@PathParam("username") String username,
@@ -127,6 +139,16 @@ public class LogInService {
 		System.out.println("editovanje korisnika");
 		
 		return userDao.editPersonalData(username, newUserData);
+	} 
+	
+	@GET
+	@Path("/user/{username}/username")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUser(@PathParam("username") String username, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User loginUser = (User) request.getSession(false).getAttribute("user");
+		return userDao.getUser(loginUser.getUsername());
 	} 
 	
 	@POST

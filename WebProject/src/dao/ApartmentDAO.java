@@ -33,7 +33,6 @@ public class ApartmentDAO {
 
 	
 	public Apartment addApartment(Apartment apartment) throws NoSuchAlgorithmException, IOException {
-	
 		if(apartments.containsKey(apartment.getId())) {
 			return null;
 		}
@@ -65,18 +64,13 @@ public class ApartmentDAO {
 			return apartments.values();
 		}
 
-	public Collection<Apartment> searchApById(String id) {
-			List <Apartment> apartmentsList=new ArrayList<>();
-			
-			for(Apartment a : apartments.values()) {
-				if((a.getStatus().equals(Status.INACTIVE)) && a.getId() == Long.parseLong(id)) {
-					System.out.println(a.getId());
-					apartmentsList.add(a);
-					}
-			
-				}
-			
-			return apartmentsList;
+	public static Apartment searchApById(String id) {
+		for(Apartment a : apartments.values()) {
+			if((a.getStatus().equals(Status.INACTIVE)) && a.getId() == Long.parseLong(id)) {
+				return a;
+			}
+		}
+		return null;
 	}
 	
 	public Collection<Apartment> findAllHostApartment(String host){
@@ -262,10 +256,13 @@ public class ApartmentDAO {
 //-----------------------------------------------------------------------------
 		//pretraga apartmana po lokaciji
 		public Collection<Apartment> searchApartmentsByLocation(String city) {
+			if(city.equals("prazan_string")) {
+				city = "";
+			}
 			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
 			for(Apartment a : apartments.values()) {
-				if( a.isActive() && a.getLocation().address.city.toString().equals(city)) {
-					resultApartmnts.add(a);
+				if( a.isActive() && a.getLocation().address.city.toString().toLowerCase().contains(city.toLowerCase())) {
+						resultApartmnts.add(a);
 					}			
 				}
 			return resultApartmnts;
