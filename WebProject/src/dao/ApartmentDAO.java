@@ -121,9 +121,9 @@ public class ApartmentDAO {
 		Apartment newApartment = new Apartment();
 		
 		
-		for (Long a : newApartmentData.getComments()) {
-			newApartment.setComments(a);
-		}
+		//for (Long a : newApartmentData.getComments()) {
+		//	newApartment.setComments(a);
+		//}
 		
 		newApartment.setId(id);
 		newApartment.setType(newApartmentData.getType());
@@ -131,7 +131,7 @@ public class ApartmentDAO {
 		newApartment.setGuestsNumber(newApartmentData.getGuestsNumber());
 		newApartment.setLocation(newApartmentData.getLocation());
 		newApartment.setHost(newApartmentData.getHost());
-		newApartment.setPhotos(newApartmentData.getPhotos());
+		//newApartment.setPhotos(newApartmentData.getPhotos());
 		newApartment.setPricePerNight(newApartmentData.getPricePerNight());
 		newApartment.setCheckInTime(newApartmentData.getCheckInTime());
 		newApartment.setCheckOutTime(newApartmentData.getCheckOutTime());
@@ -326,7 +326,7 @@ public class ApartmentDAO {
 		public void addNewComment(Apartment apartment, Comment comment) throws NoSuchAlgorithmException, IOException {
 			Apartment ap = apartments.get(apartment.getId());
 			
-			ap.setComments(comment.getId());
+			//ap.setComments(comment.getId());
 			saveApartments();
 			
 		}
@@ -358,6 +358,8 @@ public class ApartmentDAO {
 					}
 					
 					loc.put("address", address);
+					System.out.println(contextPath+"/apartmentss.json");
+
 				}
 				
 				JSONArray rentalDate = new JSONArray();
@@ -377,13 +379,13 @@ public class ApartmentDAO {
 				}
 				obj_ap.put("busyDates", busyDate);
 
-				JSONArray comment = new JSONArray();
+				JSONArray comment = new JSONArray();/*
 				if(!ap.getComments().isEmpty()) {
 					for(Long comm : ap.getComments()) {
 						 comment.add(comm);
 					}
-				}
-				obj_ap.put("comments", comment);
+				}*/
+				/*obj_ap.put("comments", comment);
 
 				JSONArray photo = new JSONArray();
 				if(!ap.getPhotos().isEmpty()) {
@@ -392,7 +394,7 @@ public class ApartmentDAO {
 					}
 				}
 				obj_ap.put("photos", photo);
-
+*/
 				
 				obj_ap.put("pricePerNight", ap.getPricePerNight());
 				obj_ap.put("checkInTime", ap.getCheckInTime());

@@ -51,6 +51,7 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Apartment> findAll(@Context HttpServletRequest request){
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		
 		return apartmentsDAO.findAll();		
 	
 	}
@@ -62,7 +63,7 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response apartments(Apartment apartment, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
-		System.out.println("successfully added");
+		System.out.println("successfully added ap");
 		
 		User host = (User) request.getSession().getAttribute("user");
 		
@@ -70,6 +71,7 @@ public class ApartmentService {
 		apartment.setHost(host_username);
 		
 		Apartment successfulAdd = apartmentsDAO.addApartment(apartment);
+		System.out.println(apartment);
 		
 		UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
 		userDAO.addHostApartment(host_username, successfulAdd.getId());
@@ -93,20 +95,20 @@ public class ApartmentService {
 		return apartmentsDAO.findAllHostApartment(user.getUsername());
 	}
 	
-	/*
+	
 	//--------------------------------------------------------------------------------------
 		//pretraga apartmana po  id
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Apartment> searchApById(@PathParam("id") String id, @Context HttpServletRequest request) {
+	public Apartment searchApById(@PathParam("id") String id, @Context HttpServletRequest request) {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		System.out.println("pretraga apartmana pocela");
 
 		 return apartmentsDAO.searchApById(id);
 	}
-	*/
-	/*
+	
+	
 	//----------------------------------------------------------------------------
 	//pretraga apartmana po  id+hostid
 	@GET
@@ -119,7 +121,7 @@ public class ApartmentService {
 
 		 return apartmentsDAO.searchApByIdAndHost(id,host);
 	}
-	*/
+	
 	/*
 	//---------------------------------------------------------------------------------
 	//filtracija apartmana po tipu

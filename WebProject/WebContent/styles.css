@@ -175,6 +175,36 @@ div#admin-list-users {
     color: white;
 }
 
+/* apartments-list */
+div#admin-list-apartments {
+    margin-top: 10%;
+    margin-left: 30%;
+    width: 65%;
+}
+
+#admin-list-apartments-table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#admin-list-apartments-table td, #admin-list-apartments-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#admin-list-apartments-table  tr:nth-child(even){background-color: #f2f2f2;}
+
+#admin-list-apartments-table  tr:hover {background-color: #ddd;}
+
+#admin-list-apartments-table  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
 #search-user {
     width: 200px;
     box-sizing: border-box;

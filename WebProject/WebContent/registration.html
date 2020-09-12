@@ -12,6 +12,7 @@
     <script src="registration.js"></script>
     <script src="profile.js"></script>
     <script src="users.js"></script>
+    <script src="apartments.js"></script>
     <style>
         .error {
             color: red;
@@ -25,6 +26,9 @@
         <ul id="navbar">
             <li class="navbar-item" id="logout_li"><a>Log out</a></li>
             <li class="navbar-item" id="users_li"><a>Users</a></li>
+            <li class="navbar-item" id="apartments_li"><a>Apartments</a></li>
+
+
         </ul>
         <ul id="sidebar">
             <li class="sidebar-item" id="profile_li"><a>Profile</a></li>
@@ -72,6 +76,7 @@
         </table>
     </div>
     <!-- ***************** -->
+    
 
     <!-- login -->
     <div class="container" style="margin-top: 5%; margin-right: 5%;" id="login-form">
@@ -168,6 +173,30 @@
     </div>
     <!-- ********* -->
 
+    <!-- apartments-list -->
+    <div id="admin-list-apartments" hidden>
+        <input type="text" name="" id="search-user" style="margin-bottom: 10px;">
+        <table id="admin-list-apartments-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>roomsNumber</th>
+                    <th>guestsNumber</th>
+                    <th>location</th>
+                    <th>host</th>
+                    <th>pricePerNight</th>
+                    <th>checkInTime</th>
+                    <th>checkOutTime</th>
+                    <th>status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- ********* -->
+   
     <!-- modal-search -->
     <div id="mod_pretraga" class="modal" hidden>
         <div class="modal-content">

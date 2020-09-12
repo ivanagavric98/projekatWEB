@@ -15,8 +15,8 @@ public class Apartment {
 	public ArrayList<LocalDate> rentalDates;
 	public ArrayList<ReservationPeriod> busyDates;
 	public String host;
-	public ArrayList<Long> comments;
-	public ArrayList<Long> photos;
+//	public ArrayList<Long> comments;
+//	public ArrayList<Long> photos;
 	public double pricePerNight;
 	public int checkInTime;
 	public int checkOutTime;
@@ -25,8 +25,9 @@ public class Apartment {
 	public ArrayList<Long> reservations;
 	public boolean active;
 	
+	
 	public Apartment() {
-		active = true;
+		
 	}
 	
 	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
@@ -42,8 +43,8 @@ public class Apartment {
 		this.rentalDates = rentalDates;
 		this.busyDates = busyDates;
 		this.host = host;
-		this.comments = comments;
-		this.photos = photos;
+	//	this.comments = comments;
+		//this.photos = photos;
 		this.pricePerNight = pricePerNight;
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
@@ -125,7 +126,7 @@ public class Apartment {
 	}
 	public void setHost(String host) {
 		this.host = host;
-	}
+	}/*
 	public ArrayList<Long> getComments() {
 		return comments;
 	}
@@ -137,7 +138,7 @@ public class Apartment {
 	}
 	public void setPhotos(ArrayList<Long> photos) {
 		this.photos = photos;
-	}
+	}*/
 	public double getPricePerNight() {
 		return pricePerNight;
 	}
