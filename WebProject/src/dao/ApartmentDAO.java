@@ -277,10 +277,11 @@ public class ApartmentDAO {
 //-----------------------------------------------------------------------------
 		//pretraga apartmana po lokaciji
 		public Collection<Apartment> searchApartmentsByLocation(String city) {
-			if(city.equals("prazan_string")) {
-				city = "";
-			}
 			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+			if(city.equals("prazan_string")) {
+				return apartments.values() ;
+			}
+			
 			for(Apartment a : apartments.values()) {
 				if( a.isActive() && a.getLocation().address.city.toString().toLowerCase().contains(city.toLowerCase())) {
 						resultApartmnts.add(a);

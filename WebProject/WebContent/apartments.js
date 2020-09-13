@@ -160,6 +160,29 @@
          })
      });
 
+     //------------------------------------------------------
+     //PRETRAGA APARTMANA PO LOKACIJI
+     $('#search-apartment').on('input', function() {
+         let city = $('#search-apartment').val();
+         if (city === "") {
+             city = "prazan_string";
+         }
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/" + city + "/filtracija1",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+
+             }
+         })
+     });
+
      /*  $('#search_li').click(function() {
           $('#mod_pretraga').show();
       }); */
