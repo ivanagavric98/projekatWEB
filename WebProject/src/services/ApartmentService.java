@@ -94,12 +94,12 @@ public class ApartmentService {
 		
 		return apartmentsDAO.findAllHostApartment(user.getUsername());
 	}
-	/*
+	
 	
 	//--------------------------------------------------------------------------------------
 		//pretraga apartmana po  id
 	@GET
-	@Path("/{id}")
+	@Path("/pretragapoId/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment searchApById(@PathParam("id") Long id, @Context HttpServletRequest request) {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
@@ -108,7 +108,7 @@ public class ApartmentService {
 		 return ApartmentDAO.searchApById(id);
 	}
 	
-	
+	/*
 	//----------------------------------------------------------------------------
 	//pretraga apartmana po  id+hostid
 	@GET
@@ -122,11 +122,11 @@ public class ApartmentService {
 		 return apartmentsDAO.searchApByIdAndHost(id,host);
 	}
 	*/
-	/*
+	
 	//---------------------------------------------------------------------------------
 	//filtracija apartmana po tipu
 	@GET
-	@Path("/{type}")
+	@Path("/{type}/filtracija/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Apartment> filtrateApartmentsByType(@PathParam("type") String type,
 			@Context HttpServletRequest request) {
@@ -136,7 +136,7 @@ public class ApartmentService {
 		 return apartmentsDAO.filtrateApartmentsByType(type);
 	}
 	
-	*/
+	
 	/*
 	//filtracija apartmana po statusu
 		@GET
@@ -214,6 +214,19 @@ public class ApartmentService {
 			System.out.println("*****SORTIRANJE PO CIJENI NOCENJA*****");
 			ApartmentDAO apartmentDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 			Collection<Apartment> ret = apartmentDAO.getSortByPricePerNight(par);
+			return ret;
+		}
+		//------------------------------------
+		//sortiranje apartmana po lokaciji
+
+		@GET
+		@Path("/lokacija")
+		@Produces(MediaType.APPLICATION_JSON)
+		public Collection<Apartment> getSortByLocation(
+							@Context HttpServletRequest request) {
+			System.out.println("*****SORTIRANJE PO LOKACIJI*****");
+			ApartmentDAO apartmentDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+			Collection<Apartment> ret = apartmentDAO.getSortByLocation();
 			return ret;
 		}
 	
