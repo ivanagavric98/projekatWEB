@@ -137,10 +137,10 @@ public class ApartmentService {
 	}
 	
 	
-	/*
+	
 	//filtracija apartmana po statusu
 		@GET
-		@Path("/{status}")
+		@Path("/{status}/filtracija2/")
 		@Produces(MediaType.APPLICATION_JSON)
 		public Collection<Apartment> filtrateApartmentsByStatus(@PathParam("status") String status,
 				@Context HttpServletRequest request) {
@@ -148,7 +148,7 @@ public class ApartmentService {
 			System.out.println("filtracija apartmana pocela");
 			 return apartmentsDAO.filtrateApartmentsByStatus(status);
 		}
-		*/
+		
 	
 	@DELETE
 	@Path("/")
@@ -300,12 +300,15 @@ public class ApartmentService {
 			}
 	
 			
-						//--------------------------------------------------------------------------------
+				
+			
+*/
+			//--------------------------------------------------------------------------------
 			//pretraga po maks broju gostiju
 			@GET
-			@Path("/{to}")
+			@Path("/{maxNumberGuest}/filtracija3/")
 			@Produces(MediaType.APPLICATION_JSON)
-			public Collection<Apartment> searchApartmentsByMaxGuestNumber(@PathParam("to") String to,
+			public Collection<Apartment> searchApartmentsByMaxGuestNumber(@PathParam("maxNumberGuest") String to,
 					@Context HttpServletRequest request) {
 				ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 				System.out.println("pretrazivanje apartmana po opsegu broja soba");
@@ -314,7 +317,5 @@ public class ApartmentService {
 			
 			//-----------------------------------------------------------------------------------
 			
-			
-*/
 }
 

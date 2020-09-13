@@ -267,8 +267,11 @@ public class ApartmentDAO {
 		//filtracija apartmana po statusu
 		public Collection<Apartment> filtrateApartmentsByStatus(String status) {
 			List<Apartment>filtratedApartments=new ArrayList<Apartment>();
+			if(status.equals("prazan_string")) {
+				return apartments.values();
+			}
 			for(Apartment a : apartments.values()) {
-				if( a.getStatus().toString().equals(status)) {
+				if( a.getStatus().toString().toLowerCase().contains(status.toLowerCase())) {
 					filtratedApartments.add(a);
 					}			
 				}
@@ -313,10 +316,10 @@ public class ApartmentDAO {
 		}
 //-----------------------------------------------------------------------------------
 				//filtriranje apartmana po broju gostiju(do koliko gostiju)
-		public Collection<Apartment> searchApartmentsByMaxGuestNumber( String to) {
+		public Collection<Apartment> searchApartmentsByMaxGuestNumber( String maxNumberGuest) {
 					List<Apartment>resultApartmnts=new ArrayList<Apartment>();
 					for(Apartment a : apartments.values()) {
-						if( a.isActive() && a.getGuestsNumber()<=Integer.parseInt(to)) {
+						if( a.isActive() && a.getGuestsNumber()>=Integer.parseInt(maxNumberGuest)) {
 							resultApartmnts.add(a);
 							}			
 						}

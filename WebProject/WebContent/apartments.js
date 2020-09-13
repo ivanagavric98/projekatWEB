@@ -182,6 +182,52 @@
              }
          })
      });
+     //------------------------------------------------------
+     //PRETRAGA APARTMANA PO statusu
+     $('#search-apartment').on('input', function() {
+         let status = $('#search-apartment').val();
+         if (status === "") {
+             status = "prazan_string";
+         }
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/" + status + "/filtracija2",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+
+             }
+         })
+     });
+
+     //PRETRAGA APARTMANA PO statusu
+     $('#buttonMaxGuests').on('click', function() {
+         let maxNumberGuest = $('#maxGuestNumber').val();
+         if (maxNumberGuest === "") {
+             alert("insert value");
+         }
+
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/" + maxNumberGuest + "/filtracija3",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+
+             }
+         })
+     });
+
 
      /*  $('#search_li').click(function() {
           $('#mod_pretraga').show();

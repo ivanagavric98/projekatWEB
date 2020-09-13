@@ -339,6 +339,26 @@
                     </li>
                 </ul>
             </div>
+
+            <!-- dropmenu za filtriranje -->
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Filtrate by
+      <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-submenu">
+                        <button class="test" tabindex="-1" placeholder="Max guest number">Max guest number <span class="caret"></span></button>
+                        <ul class="dropdown-submenu">
+                            <li> <input type="text" id="maxGuestNumber" name="lname"><button id="buttonMaxGuests">filtrate</button></li>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <button class="test" tabindex="-1">By number of rooms <span class="caret"></span></button>
+                        <ul class="dropdown-submenu">
+                            <li><button tabindex="-1" id="byRoomNumberAsc">ascending</button></li>
+                            <li><button tabindex="-1" id="byRoomNumberDesc">descending</button></li>
+                        </ul>
+                    </li>
+                    </ul>
+            </div>
         </div>
     </div>
     <!-- ********* -->
