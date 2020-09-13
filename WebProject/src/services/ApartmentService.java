@@ -58,7 +58,7 @@ public class ApartmentService {
 	
 
 	@POST
-	@Path("/addApartment")
+	@Path("/addAp")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response apartments(Apartment apartment, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {

@@ -28,11 +28,11 @@
             <li class="navbar-item" id="users_li"><a>Users</a></li>
             <li class="navbar-item" id="apartments_li"><a>Apartments</a></li>
 
-
         </ul>
         <ul id="sidebar">
             <li class="sidebar-item" id="profile_li"><a>Profile</a></li>
             <li class="sidebar-item" id="search_li"><a>Search</a></li>
+            <li class="sidebar-item" id="addApartmant_li"><a>Add apartment</a></li>
         </ul>
     </div>
 
@@ -76,7 +76,59 @@
         </table>
     </div>
     <!-- ***************** -->
-    
+
+    <!-- add-apartment -->
+    <div id="apartment_add" hidden>
+        <table id="apartment_add_table">
+            <tr>
+                <th>Apartment Type</th>
+                <td><input type="text" name="" id="apType_add_table-add"></td>
+            </tr>
+            <tr>
+                <th>Numbers Of Room</th>
+                <td><input type="text" name="" id="room_number_table-add"></td>
+            </tr>
+            <tr>
+                <th>Number Of Guests</th>
+                <td><input type="text" name="" id="guest_number_table-add"></td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td><input type="text" name="" id="location_table-add"></td>
+            </tr>
+            <tr>
+                <th>Rental Dates</th>
+                <td><input type="text" name="" id="rental_dates_table-add"></td>
+            </tr>
+            <tr>
+                <th>Busy Dates</th>
+                <td><input type="text" name="" id="busy_dates_table-add"></td>
+            </tr>
+            <tr>
+                <th>Host</th>
+                <td><input type="text" name="" id="host_table-add" disabled></td>
+            </tr>
+            <tr>
+                <th>Price Per Night</th>
+                <td><input type="text" name="" id="price_table-add"></td>
+            </tr>
+            <tr>
+                <th>Check In Time</th>
+                <td><input type="text" name="" id="check_out_table-add"></td>
+            </tr>
+            <tr>
+                <th>Check Out Time</th>
+                <td><input type="text" name="" id="check_in_table-add"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button id="button-edit-profile">Edit</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- ***************** -->
+
 
     <!-- login -->
     <div class="container" style="margin-top: 5%; margin-right: 5%;" id="login-form">
@@ -179,15 +231,16 @@
         <table id="admin-list-apartments-table">
             <thead>
                 <tr>
-                    <th>Type</th>
-                    <th>roomsNumber</th>
-                    <th>guestsNumber</th>
-                    <th>location</th>
-                    <th>host</th>
-                    <th>pricePerNight</th>
-                    <th>checkInTime</th>
-                    <th>checkOutTime</th>
-                    <th>status</th>
+                    <th>Id</th>
+                    <th>Apartment type</th>
+                    <th>Room number</th>
+                    <th>Guests number</th>
+                    <th>Location</th>
+                    <th>Host</th>
+                    <th>Price per night</th>
+                    <th>Check in time</th>
+                    <th>Check out time</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -196,7 +249,7 @@
         </table>
     </div>
     <!-- ********* -->
-   
+
     <!-- modal-search -->
     <div id="mod_pretraga" class="modal" hidden>
         <div class="modal-content">
