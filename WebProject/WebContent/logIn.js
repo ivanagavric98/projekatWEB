@@ -30,6 +30,7 @@ $(document).ready(function() {
     });
 
     $('#logout_li').on('click', function() {
+
         $.ajax({
             type: 'GET',
             url: 'rest/logout',

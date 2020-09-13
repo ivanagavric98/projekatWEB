@@ -24,6 +24,7 @@ import javax.ws.rs.core.Response;
 import dao.ApartmentDAO;
 import dao.ReservationDAO;
 import dao.UserDAO;
+import enumeration.ReservationStatus;
 import model.Apartment;
 import model.Reservation;
 import model.User;
@@ -92,11 +93,15 @@ public class ReservationService {
 								 @PathParam("message") String message,
 								 @PathParam("apartmentId") Long apartmentId,
 								 @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
-		ReservationDAO reservationDAO = (ReservationDAO) ctx.getAttribute("reservationDAO");
-		System.out.println("successfully added");
-		User user = (User) request.getSession(false).getAttribute("user");
-		Reservation successfulAdd = reservationDAO.addReservation(dateFrom, numberOfNights, message, apartmentId, user.username);
 		
+		ReservationDAO reservationDAO = (ReservationDAO) ctx.getAttribute("reservationDAO");
+		User user = (User) request.getSession(false).getAttribute("user");
+		System.out.println(user.getUsername());
+		Reservation successfulAdd = reservationDAO.addReservation(dateFrom, numberOfNights, message, apartmentId, user.getUsername());
+	
+		//successfulAdd.setReservationStatus(ReservationStatus.CREATED);
+				System.out.println("successfully added");
+
 		if(successfulAdd != null) {
 			return Response.status(200).entity(successfulAdd).build();	
 		}else {

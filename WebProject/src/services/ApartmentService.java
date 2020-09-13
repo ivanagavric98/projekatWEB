@@ -101,11 +101,11 @@ public class ApartmentService {
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Apartment searchApById(@PathParam("id") String id, @Context HttpServletRequest request) {
+	public Apartment searchApById(@PathParam("id") Long id, @Context HttpServletRequest request) {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		System.out.println("pretraga apartmana pocela");
 
-		 return apartmentsDAO.searchApById(id);
+		 return ApartmentDAO.searchApById(id);
 	}
 	
 	

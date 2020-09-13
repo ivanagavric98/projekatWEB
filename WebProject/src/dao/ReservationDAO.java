@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import enumeration.ReservationStatus;
 import model.Apartment;
@@ -40,13 +41,22 @@ public class ReservationDAO {
 	}
 	
 	public Reservation addReservation(String dateFromString, String numberOfNights, String message, Long apartmentId, String username) {
-		Apartment apartment = (Apartment) ApartmentDAO.searchApById(String.valueOf(apartmentId));
-		if(apartment == null) {
-			return null;
-		}
+		ApartmentDAO apartmentDAO = new ApartmentDAO();
+
+		Apartment apartment =ApartmentDAO.searchApById(apartmentId);
+		System.out.println(apartment);
+//		if(apartment == null) {
+//
+//			return null;
+//		}		
+		System.out.println("AA");
+
 		LocalDate dateFrom = LocalDate.parse(dateFromString);
 		LocalDate dateTo = dateFrom.plusDays(Long.parseLong(numberOfNights));
+		
+		System.out.println(apartment.getBusyDates());
 		for (ReservationPeriod busyDate : apartment.getBusyDates()) {
+			
 			LocalDate busyDateTo = busyDate.getDateFrom().plusDays(busyDate.getNumberOfNights());
 			if(busyDate.getDateFrom().isBefore(dateFrom) 
 					&& busyDateTo.isAfter(dateTo)) {

@@ -69,15 +69,28 @@ public class ApartmentDAO {
 			return apartments.values();
 		}
 
-	public static Apartment searchApById(String id) {
+	public  static Apartment searchApById(Long id) {
+		
 		for(Apartment a : apartments.values()) {
-			if((a.getStatus().equals(Status.INACTIVE)) && a.getId() == Long.parseLong(id)) {
+			if(a.getId() == id) {
 				return a;
+				
 			}
 		}
+		
 		return null;
 	}
 	
+//	public Apartment findById(Long id) {
+//		for(Long ap : apartments.keySet()) {
+//			if(ap.getId() == id) {
+//				return ap;
+//			}
+//		}
+//	}
+//	
+//	
+//	
 	public Collection<Apartment> findAllHostApartment(String host){
 		ArrayList<Apartment> apartmentList = new ArrayList<Apartment>();
 		
