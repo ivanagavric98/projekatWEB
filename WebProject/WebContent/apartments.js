@@ -76,22 +76,154 @@
 
 
 
-      $('#byGuestNumber').on('click', function() {
-         
+     //sortiranje po broju soba
+     $('#byRoomNumberAsc').on('click', function() {
          $.ajax({
              type: "get",
              url: "rest/apartment/brojSoba/asc",
              contentType: "application/json",
              success: function(apartments) {
                  clearWorkspace();
-                  $('#admin-list-apartments').show();
-                  $('#admin-list-apartments-table tbody').empty();
-                 for(let apartment of apartments) {
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
                      addNewApartment(apartment);
                  }
              }
          })
-     }); 
+     });
+
+     $('#byRoomNumberDesc').on('click', function() {
+         let prom = "brojSoba"
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/brojSoba/desc",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+             }
+         })
+     });
+     //----------------------------------------------------------
+     //sortiranje po broju gostiju
+     $('#byGuestNumberAsc').on('click', function() {
+         let prom = "brojSoba"
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/brojGostiju/asc",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+             }
+         })
+     });
+
+     $('#byGuestNumberDesc').on('click', function() {
+         let prom = "brojSoba"
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/brojGostiju/desc",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+             }
+         })
+     });
+     //----------------------------------------------------------
+     //sortiranje po cijeni
+     $('#byPriceAsc').on('click', function() {
+         let prom = "brojSoba"
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/cijena/asc",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+             }
+         })
+     });
+
+     $('#byPriceDesc').on('click', function() {
+         let prom = "brojSoba"
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/cijena/desc",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+             }
+         })
+     });
+     //------------------------------------------------------
+     //PRETRAGA APARTMANA PO tipu
+     $('#search-apartment').on('input', function() {
+         let type = $('#search-apartment').val();
+         if (type === "") {
+             type = "prazan_string";
+         }
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/" + type + "/filtracija",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+
+             }
+         })
+     });
+
+     //------------------------------------------------------
+     //PRETRAGA APARTMANA PO LOKACIJI
+     $('#search-apartment').on('input', function() {
+         let city = $('#search-apartment').val();
+         if (city === "") {
+             city = "prazan_string";
+         }
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/" + city + "/filtracija1",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+
+             }
+         })
+     });
 
      /*  $('#search_li').click(function() {
           $('#mod_pretraga').show();

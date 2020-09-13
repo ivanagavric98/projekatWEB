@@ -68,7 +68,8 @@ public class ApartmentDAO {
 	public Collection<Apartment> findAll() {
 			return apartments.values();
 		}
-
+//---------------------------
+	//pretraga po id
 	public  static Apartment searchApById(Long id) {
 		
 		for(Apartment a : apartments.values()) {
@@ -252,8 +253,11 @@ public class ApartmentDAO {
 
 		public Collection<Apartment> filtrateApartmentsByType(String type) {
 			List<Apartment>filtratedApartments=new ArrayList<Apartment>();
+			if(type.equals("prazan_string")) {
+				return apartments.values();
+			}
 			for(Apartment a : apartments.values()) {
-				if( a.getType().toString().equals(type)) {
+				if( a.getType().toString().toLowerCase().contains(type.toLowerCase())) {
 					filtratedApartments.add(a);
 					}			
 				}
@@ -273,10 +277,11 @@ public class ApartmentDAO {
 //-----------------------------------------------------------------------------
 		//pretraga apartmana po lokaciji
 		public Collection<Apartment> searchApartmentsByLocation(String city) {
-			if(city.equals("prazan_string")) {
-				city = "";
-			}
 			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+			if(city.equals("prazan_string")) {
+				return apartments.values() ;
+			}
+			
 			for(Apartment a : apartments.values()) {
 				if( a.isActive() && a.getLocation().address.city.toString().toLowerCase().contains(city.toLowerCase())) {
 						resultApartmnts.add(a);
@@ -341,6 +346,12 @@ public class ApartmentDAO {
 			//ap.setComments(comment.getId());
 			saveApartments(contextPath);
 			
+		}
+
+		public Collection<Apartment> getSortByLocation() {
+			ArrayList<Apartment>apartmentsToSort= new ArrayList<Apartment>(apartments.values());
+			
+			return null;
 		}
 		
 //		

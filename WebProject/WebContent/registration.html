@@ -259,7 +259,11 @@
                         <br/>
                         <input type="date" class="form-control" name="startDate_res" />
                         <br/>
+<<<<<<< HEAD
                         <input type="text" class="form-control" name="nightsNumber_res" placeholder="Number Of Nights *" />
+=======
+
+>>>>>>> ed3e811a9475c676112a432234ab62abb99edd2c
                         <br/>
                         <input type="text" class="form-control" name="totalPrice" placeholder="Total Price *"/>
                         <br/>
@@ -301,7 +305,7 @@
     <!-- apartments-list -->
     <div id="admin-list-apartments" hidden>
 
-        <input type="text" name="" id="search-user" style="margin-bottom: 10px;">
+        <input type="text" name="" id="search-apartment" style="margin-bottom: 10px;">
         <table id="admin-list-apartments-table">
             <thead>
                 <tr>
@@ -323,49 +327,29 @@
             </tbody>
         </table>
         <!-- pokusaj dropmanu -->
-<div class="container">                    
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort
+        <div class="container">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort
       <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li class="dropdown-submenu">
-          <a class="test"  id="byPriceButton" tabindex="-1" href="#">By Price <span class="caret"></span></a>
-          <ul class="dropdown-submenu">
-            <li><a tabindex="-1" href="#">ascending</a></li>
-            <li><a tabindex="-1" href="#">descending</a></li>
-            <li class="dropdown-submenu"></li>
-          </ul>
-        </li>
-        <li class="dropdown-submenu">
-          <button class="test" tabindex="-1" id="byGuestNumber">By number of guests <span class="caret"></span></button>
-          <ul class="dropdown-submenu">
-            <li><a tabindex="-1" href="#">ascending</a></li>
-            <li><a tabindex="-1" href="#">descending</a></li>
-            <li class="dropdown-submenu"></li>
-          </ul>
-        </li>
-        <li class="dropdown-submenu">
-          <a class="test" tabindex="-1" href="#">By number of rooms <span class="caret"></span></a>
-          <ul class="dropdown-submenu">
-            <li><a tabindex="-1" href="#">ascending</a></li>
-            <li><a tabindex="-1" href="#">descending</a></li>
-            <li class="dropdown-submenu"></li>
-          </ul>
-        </li>
-      <li class="dropdown-submenu">
-          <a class="test" tabindex="-1" href="#">By type <span class="caret"></span></a>
-          <ul class="dropdown-submenu">
-            <li><a tabindex="-1" href="#">ROOM</a></li>
-            <li><a tabindex="-1" href="#">FULL_APARTMENT</a></li>
-            <li class="dropdown-submenu"></li>
-          </ul>
-        </li>
-        <li >
-          <a class="test" tabindex="-1" href="#">Location <span class="caret"></span></a>
-        </li>
-      </ul>
-    </div>
-  </div>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-submenu">
+                        <button class="test" tabindex="-1" id="byGuestNumber">By number of guests <span class="caret"></span></button>
+                        <ul class="dropdown-submenu">
+                            <li><button tabindex="-1" id="byGuestNumberAsc">ascending</button></li>
+                            <li><button tabindex="-1" id="byGuestNumberDesc">descending</button></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <button class="test" tabindex="-1">By number of rooms <span class="caret"></span></button>
+                        <ul class="dropdown-submenu">
+                            <li><button tabindex="-1" id="byRoomNumberAsc">ascending</button></li>
+                            <li><button tabindex="-1" id="byRoomNumberDesc">descending</button></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <!-- ********* -->
 
