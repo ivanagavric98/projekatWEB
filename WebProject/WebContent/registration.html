@@ -245,8 +245,8 @@
         </div>
     </div>
     <!-- ************** -->
-
-    <!-- kreiranje rezervacije -->
+<!-- 
+    kreiranje rezervacije -->
     <div class="container" hidden id="createReservation-form">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
@@ -259,11 +259,7 @@
                         <br/>
                         <input type="date" class="form-control" name="startDate_res" />
                         <br/>
-<<<<<<< HEAD
                         <input type="text" class="form-control" name="nightsNumber_res" placeholder="Number Of Nights *" />
-=======
-
->>>>>>> ed3e811a9475c676112a432234ab62abb99edd2c
                         <br/>
                         <input type="text" class="form-control" name="totalPrice" placeholder="Total Price *"/>
                         <br/>
@@ -276,8 +272,8 @@
             </div>
         </div>
     </div>
-    <!-- ************** -->
-
+    <!-- **************
+ -->
 
 
 
@@ -330,14 +326,13 @@
         <div class="container">
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort
-      <span class="caret"></span></button>
+            <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li class="dropdown-submenu">
                         <button class="test" tabindex="-1" id="byGuestNumber">By number of guests <span class="caret"></span></button>
                         <ul class="dropdown-submenu">
                             <li><button tabindex="-1" id="byGuestNumberAsc">ascending</button></li>
                             <li><button tabindex="-1" id="byGuestNumberDesc">descending</button></li>
-
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
@@ -347,6 +342,14 @@
                             <li><button tabindex="-1" id="byRoomNumberDesc">descending</button></li>
                         </ul>
                     </li>
+                    <li class="dropdown-submenu">
+                        <button class="test" tabindex="-1">By number of rooms <span class="caret"></span></button>
+                        <ul class="dropdown-submenu">
+                            <li><button tabindex="-1" id="byPriceAsc">ascending</button></li>
+                            <li><button tabindex="-1" id="byPriceDesc">descending</button></li>
+                        </ul>
+                    </li>
+     
                 </ul>
             </div>
 

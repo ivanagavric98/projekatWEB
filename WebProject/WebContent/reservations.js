@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     
-    $('#').click(function() {
+    $('#aa').click(function() {
         $('#mod_pretraga').show();
     });
 
