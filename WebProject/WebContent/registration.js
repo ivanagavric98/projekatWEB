@@ -5,6 +5,10 @@ $(document).ready(function(){
         clearWorkspace();
         $('#dodavanjeApartmana-form').show();
     });
+
+
+	
+
 	console.log('ready');
 	
 	$("#submit_form").click(function(event){
