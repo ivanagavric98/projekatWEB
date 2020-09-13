@@ -73,8 +73,7 @@ public class ApartmentDAO {
 		
 		for(Apartment a : apartments.values()) {
 			if(a.getId() == id) {
-				return a;
-				
+				return a;	
 			}
 		}
 		
@@ -190,7 +189,7 @@ public class ApartmentDAO {
 		
 
 		public Collection<Apartment> getSort(String par) {
-			List<Apartment> apartmentsToSort=(List<Apartment>) findAll();
+			ArrayList<Apartment> apartmentsToSort=new ArrayList<Apartment>(apartments.values());
 		    Comparator<Apartment> compare = (Apartment o1, Apartment o2) -> Double.compare(o1.getRoomsNumber(), o2.getRoomsNumber());
 		    Collections.sort(apartmentsToSort,compare);
 		    

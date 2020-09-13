@@ -3,9 +3,8 @@ function clearWorkspace() {
     $('#login-form').hide();
     $('#registration-form').hide();
     $('#dodavanjeApartmana-form').hide();
-
     //$('#admin-list-users').hide();
-    $('#admin-list-apartments').hide();
+    //$('#admin-list-apartments').hide();
     $('#mod_pretraga').hide();
 }
 

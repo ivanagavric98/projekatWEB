@@ -33,25 +33,22 @@
          })
      });
 
-     /* $('#search-user').on('input', function() {
-         let username = $('#search-user').val();
-         if(username === "") {
-             username = "prazan_string";
-         }
+      $('#byGuestNumber').on('click', function() {
+         let prom="brojSoba"
          $.ajax({
              type: "get",
-             url: "rest/users/"+ username +"/sort",
+             url: "rest/apartment/brojSoba/asc",
              contentType: "application/json",
-             success: function(users) {
+             success: function(apartments) {
                  clearWorkspace();
-                 $('#admin-list-users').show();
-                 $('#admin-list-users-table tbody').empty();
-                 for(let user of users) {
-                     addNewUser(user);
+                  $('#admin-list-apartments').show();
+                  $('#admin-list-apartments-table tbody').empty();
+                 for(let apartment of apartments) {
+                     addNewApartment(apartment);
                  }
              }
          })
-     }); */
+     }); 
 
      /*  $('#search_li').click(function() {
           $('#mod_pretraga').show();

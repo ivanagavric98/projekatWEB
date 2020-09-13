@@ -293,3 +293,15 @@ div#admin-list-apartments {
     background-color: #e7e7e7;
     color: black;
 }
+
+
+/* dropdown menu */
+.dropdown-submenu {
+    position: relative;
+  }
+  
+  .dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+  }

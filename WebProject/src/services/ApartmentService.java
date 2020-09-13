@@ -94,7 +94,7 @@ public class ApartmentService {
 		
 		return apartmentsDAO.findAllHostApartment(user.getUsername());
 	}
-	
+	/*
 	
 	//--------------------------------------------------------------------------------------
 		//pretraga apartmana po  id
@@ -121,7 +121,7 @@ public class ApartmentService {
 
 		 return apartmentsDAO.searchApByIdAndHost(id,host);
 	}
-	
+	*/
 	/*
 	//---------------------------------------------------------------------------------
 	//filtracija apartmana po tipu
@@ -175,11 +175,11 @@ public class ApartmentService {
 		return apartmentsDAO.editApartmanData(id,apartment);
 	}
 	*/
-	/*
+	
 //--------------------------
 	//sortiranje apartmana po broju soba
 	@GET
-	@Path("/{par}")
+	@Path("brojSoba/{par}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Apartment> getSortApartmentByRoomNumber(@PathParam("par") String par,
 						@Context HttpServletRequest request) {
