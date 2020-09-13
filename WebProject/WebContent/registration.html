@@ -205,6 +205,73 @@
     </div>
     <!-- ************** -->
 
+    <!-- dodavanjeApartmana -->
+    <div class="container" hidden id="dodavanjeApartmana-form">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Registration
+                </div>
+                <div class="panel-body">
+                    <form id="addApartmants">
+                        <div class="type">
+                            <label>Gender</label>
+                            <label class="radio-inline"><input type="radio" name="type" value="ROOM" class = "form-contorl"/>ROOM</label>
+                            <label class="radio-inline"><input type="radio" name="type" value="FULL_APARTMENT" class = "form-contorl"/>FULL_APARTMENT</label>
+                        </div>
+                        <input type="text" class="form-control" name="numberOfRooms" placeholder="Number of rooms *" />
+                        <br/>
+                        <label id="error_fname" style="color: red"></label>
+                        <br/>
+                        <input type="text" class="form-control" name="numberOfGuest" placeholder="Number Of guest*" />
+                        <br/>
+                        <label id="error_lname" style="color: red"></label>
+                        <br/>
+                        <input type="text" class="form-control" name="Location" placeholder="Location(adress,longitude,latitude) *" />
+                        <br/>
+                        <label id="error_username" style="color: red"></label>
+                        <br/>
+                        <input type="text" class="form-control" name="datumi" placeholder="datumi *" id="datumi" />
+                        <br/>
+                        <label id="error_password" style="color: red"></label>
+                        <br/>
+                        <input type="comments" class="form-control" name="comments" placeholder=" Comments *" />
+                        <br/>
+                        <label id="error_confirm" style="color: red"></label>
+                        <br/>
+                        <input type="pricePerNight" class="form-control" name="pricePerNight" placeholder="Price per night *" />
+                        <br/>
+                        <label id="error_confirm" style="color: red"></label>
+                        <br/>
+                        <input type="checkInTime" class="form-control" name="checkInTime" placeholder=" checkIn time *" />
+                        <br/>
+                        <label id="error_confirm" style="color: red"></label>
+                        <br/>
+                        <input type="checkOutTime" class="form-control" name="checkOutTime" placeholder=" checkout time *" />
+                        <br/>
+                        <label id="error_confirm" style="color: red"></label>
+                        <br/>
+                        <input type="sadrzajApartmana" class="form-control" name="sadrzajApartmana" placeholder=" sadrzajApartmana *" />
+                        <br/>
+                        <label id="error_confirm" style="color: red"></label>
+                        <br/>
+                        <input type="listaRezervacija" class="form-control" name="listaRezervacija" placeholder="listaRezervacija *" />
+                        <br/>
+                        <label id="error_confirm" style="color: red"></label>
+                        <br/>
+    
+                        <br/>
+                        <input id="submit_form" type="submit" value="Dodaj"></input>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ************** -->
+
     <!-- user-list -->
     <div id="admin-list-users" hidden>
         <input type="text" name="" id="search-user" style="margin-bottom: 10px;">

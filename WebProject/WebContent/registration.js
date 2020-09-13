@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+
+    $('#addApartmant_li').on('click', function() {
+        clearWorkspace();
+        $('#dodavanjeApartmana-form').show();
+    });
 	console.log('ready');
 	
 	$("#submit_form").click(function(event){
