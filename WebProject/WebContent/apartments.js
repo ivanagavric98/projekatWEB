@@ -32,8 +32,9 @@
              }
          })
      });
-
-     $('#byGuestNumberAsc').on('click', function() {
+     //------------------------------------------------------------
+     //sortiranje po broju soba
+     $('#byRoomNumberAsc').on('click', function() {
          let prom = "brojSoba"
          $.ajax({
              type: "get",
@@ -50,7 +51,7 @@
          })
      });
 
-     $('#byGuestNumberDesc').on('click', function() {
+     $('#byRoomNumberDesc').on('click', function() {
          let prom = "brojSoba"
          $.ajax({
              type: "get",
@@ -66,6 +67,77 @@
              }
          })
      });
+     //----------------------------------------------------------
+     //sortiranje po broju gostiju
+     $('#byGuestNumberAsc').on('click', function() {
+         let prom = "brojSoba"
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/brojGostiju/asc",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+             }
+         })
+     });
+
+     $('#byGuestNumberDesc').on('click', function() {
+         let prom = "brojSoba"
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/brojGostiju/desc",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+             }
+         })
+     });
+     //----------------------------------------------------------
+     //sortiranje po cijeni
+     $('#byPriceAsc').on('click', function() {
+         let prom = "brojSoba"
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/cijena/asc",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+             }
+         })
+     });
+
+     $('#byPriceDesc').on('click', function() {
+         let prom = "brojSoba"
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/cijena/desc",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
+             }
+         })
+     });
+
 
      /*  $('#search_li').click(function() {
           $('#mod_pretraga').show();
