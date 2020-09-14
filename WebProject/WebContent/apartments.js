@@ -4,6 +4,7 @@
      let roomsNumber = $('<td>' + apartment.roomsNumber + '</td>');
      let guestsNumber = $('<td>' + apartment.guestsNumber + '</td>');
      let location = $('<td>' + apartment.location + '</td>');
+     let city = $('<td>' + apartment.city + '</td>');
      let host = $('<td>' + apartment.host + '</td>');
      let pricePerNight = $('<td>' + apartment.pricePerNight + '</td>');
      let checkInTime = $('<td>' + apartment.checkInTime + '</td>');
@@ -14,7 +15,7 @@
 
      let tr = $('<tr></tr>');
      tr.append(id).append(type).append(roomsNumber).append(guestsNumber)
-         .append(location).append(host).append(pricePerNight).append(checkInTime).append(checkOutTime).append(status).append(createRes);
+         .append(location).append(city).append(host).append(pricePerNight).append(checkInTime).append(checkOutTime).append(status).append(createRes);
      $('#admin-list-apartments-table').append(tr);
  }
 
@@ -50,16 +51,14 @@
          let dataObj = {
              "roomsNumber": $("input[name=numberOfRooms]").val(),
              "guestsNumber": $("input[name=numberOfGuest]").val(),
-             "location": $("input[name=Location]").val(),
-             "datumi": $("input[name=datumi]").val(),
-             "comments": $("input[name=comments]").val(),
+             "location": $("input[name=location]").val(),
+             "city": $("input[name=city]").val(),
              "pricePerNight": $("input[name=pricePerNight]").val(),
              "checkInTime": $("input[name=checkInTime]").val(),
              "checkOutTime": $("input[name=checkOutTime]").val(),
-             "sadrzajApartmana": $("input[name=sadrzajApartmana]").val(),
              "type": type
          };
-
+            console.log(dataObj);
          $.ajax({
              type: 'POST',
              url: 'rest/apartment/addAp',
