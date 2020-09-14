@@ -242,20 +242,7 @@ public class ApartmentService {
 				System.out.println("pretrazivanje apartmana po lokaciji");
 				 return apartmentsDAO.searchApartmentsByLocation(city);
 			}
-			
-//	//-------------------------------------------------------------------------------
-//			//pretgara apartmana po cijeni (u rasponu od -do)
-//			@GET
-//			@Path("/{from}/{to}")
-//			@Produces(MediaType.APPLICATION_JSON)
-//			public Collection<Apartment> searchApartmentsByPriceAmount(@PathParam("from") String from,
-//					@PathParam("to") String to,
-//					@Context HttpServletRequest request) {
-//				ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
-//				System.out.println("pretrazivanje apartmana po opsegu cijene");
-//				 return apartmentsDAO.searchApartmentsByPriceAmount(from,to);
-//			}
-//		//			
+	
 			//-------------------------------------------------------------------------------
 			//kombinovana pretraga apatrmana--ne radi provjeriti
 			@GET
@@ -316,6 +303,21 @@ public class ApartmentService {
 				System.out.println("pretrazivanje apartmana po opsegu broja soba");
 				 return apartmentsDAO.searchApartmentsByRoomNumber(from,to);
 			}
+			
+			
+//			//-------------------------------------------------------------------------------
+//					//pretgara apartmana po cijeni (u rasponu od -do)
+				@GET
+				@Path("/{from}/{to}/filtracija5")
+				@Produces(MediaType.APPLICATION_JSON)
+				public Collection<Apartment> searchApartmentsByPriceAmount(@PathParam("from") String from,
+						@PathParam("to") String to,
+						@Context HttpServletRequest request) {
+					ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+					System.out.println("pretrazivanje apartmana po opsegu cijene");
+				 return apartmentsDAO.searchApartmentsByPriceAmount(from,to);
+ 			}
+					
 
 }
 

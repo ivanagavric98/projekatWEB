@@ -295,6 +295,29 @@
              }
          })
      });
+     //---------------------------------------------------
+     //filtracija apartmana po opsegu broja cijene
+     $('#buttonPriceB').on('click', function() {
+        let minPrice1 = $('#minPrice').val();
+        let maxPrice1 = $('#maxPrice').val();
+        if (minPrice === "" || maxPrice === "") {
+            alert("insert both value");
+        }
+        $.ajax({
+            type: "get",
+            url: "rest/apartment/" + minPrice1 + "/" + maxPrice1 + "/filtracija5",
+            contentType: "application/json",
+            success: function(apartments) {
+                clearWorkspace();
+                $('#admin-list-apartments').show();
+                $('#admin-list-apartments-table tbody').empty();
+                for (let apartment of apartments) {
+                    addNewApartment(apartment);
+                }
+
+            }
+        })
+    });
 
      /*  $('#search_li').click(function() {
           $('#mod_pretraga').show();
