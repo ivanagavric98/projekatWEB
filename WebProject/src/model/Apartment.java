@@ -11,7 +11,8 @@ public class Apartment {
 	public ApartmentType type;
 	public int roomsNumber;
 	public int guestsNumber;
-	public Location location;
+	public String location;
+	public String city;	
 	public ArrayList<LocalDate> rentalDates;
 	public ArrayList<ReservationPeriod> busyDates;
 	public String host;
@@ -30,7 +31,7 @@ public class Apartment {
 		
 	}
 	
-	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
+	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, String location, String city,
 			ArrayList<LocalDate> rentalDates, ArrayList<ReservationPeriod> busyDates, String host, ArrayList<Long> comments, ArrayList<Long> photos,
 			double pricePerNight, int checkInTime, int checkOutTime, Status status, ArrayList<Long> amenities,
 			ArrayList<Long> reservations, boolean active) {
@@ -40,6 +41,7 @@ public class Apartment {
 		this.roomsNumber = roomsNumber;
 		this.guestsNumber = guestsNumber;
 		this.location = location;
+		this.city = city;
 		this.rentalDates = rentalDates;
 		this.busyDates = busyDates;
 		this.host = host;
@@ -54,7 +56,7 @@ public class Apartment {
 		this.active = active;
 	}
 
-	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
+	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, String location, String city,
 			String host, double pricePerNight, int checkInTime, int checkOutTime, Status status, boolean active) {
 		super();
 		this.id = id;
@@ -62,6 +64,7 @@ public class Apartment {
 		this.roomsNumber = roomsNumber;
 		this.guestsNumber = guestsNumber;
 		this.location = location;
+		this.city = city;
 		this.host = host;
 		this.pricePerNight = pricePerNight;
 		this.checkInTime = checkInTime;
@@ -103,11 +106,17 @@ public class Apartment {
 	public void setGuestsNumber(int guestsNumber) {
 		this.guestsNumber = guestsNumber;
 	}
-	public Location getLocation() {
+	public String getLocation() {
 		return location;
 	}
-	public void setLocation(Location location) {
+	public void setLocation(String location) {
 		this.location = location;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
 	}
 	public ArrayList<LocalDate> getRentalDates() {
 		return rentalDates;
