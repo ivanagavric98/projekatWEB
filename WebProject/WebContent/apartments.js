@@ -255,7 +255,7 @@
          if (maxNumberGuest === "") {
              alert("insert value");
          }
-console.log("hejjj")
+         console.log("hejjj")
          $.ajax({
              type: "get",
              url: "rest/apartment/" + maxNumberGuest + "/filtracija3",
@@ -271,30 +271,30 @@ console.log("hejjj")
              }
          })
      });
-//---------------------------------------------------
- //filtracija apartmana po opsegu broja soba
- $('#buttonNumRooms').on( 'click',function() {
-    let minRoomNumber1 = $('#minRoomNumber').val();
-    let maxRoomNumber1 = $('#maxRoomNumber').val();
-    if (minRoomNumber1 === "") {
-        alert("insert both value");
-    }
-console.log("majaaaaa")
-    $.ajax({
-        type: "get",
-        url: "rest/apartment/" + minRoomNumber1 + maxRoomNumber1 + "/filtracija4",
-        contentType: "application/json",
-        success: function(apartments) {
-            clearWorkspace();
-            $('#admin-list-apartments').show();
-            $('#admin-list-apartments-table tbody').empty();
-            for (let apartment of apartments) {
-                addNewApartment(apartment);
-            }
+     //---------------------------------------------------
+     //filtracija apartmana po opsegu broja soba
+     $('#buttonNumRooms').on('click', function() {
+         let minRoomNumber1 = $('#minRoomNumber').val();
+         let maxRoomNumber1 = $('#maxRoomNumber').val();
+         if (minRoomNumber1 === "" || maxRoomNumber1 === "") {
+             alert("insert both value");
+         }
+         console.log("majaaaaa")
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/" + minRoomNumber1 + "/" + maxRoomNumber1 + "/filtracija4",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
 
-        }
-    })
-});
+             }
+         })
+     });
 
      /*  $('#search_li').click(function() {
           $('#mod_pretraga').show();
