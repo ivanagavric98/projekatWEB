@@ -125,7 +125,7 @@
                 <td colspan="2">
                     <button id="button-edit-profile">Edit</button>
                 </td>
-                
+
             </tr>
         </table>
     </div>
@@ -227,7 +227,7 @@
                         <br/>
                         <input type="text" class="form-control" name="Location" placeholder="Location(adress,longitude,latitude) *" />
                         <br/>
-                        <input type="date" class="form-control" name="datumi" placeholder=" id="datumi" />
+                        <input type="date" class="form-control" name="datumi" id="datum" />
                         <br/>
                         <input type="text" class="form-control" name="pricePerNight" placeholder="Price Per Night *" />
                         <br/>
@@ -245,7 +245,7 @@
         </div>
     </div>
     <!-- ************** -->
-<!-- 
+    <!-- 
     kreiranje rezervacije -->
     <div class="container" hidden id="createReservation-form">
         <div class="col-md-6 col-md-offset-3">
@@ -261,7 +261,7 @@
                         <br/>
                         <input type="text" class="form-control" name="nightsNumber_res" placeholder="Number Of Nights *" />
                         <br/>
-                        <input type="text" class="form-control" name="totalPrice" placeholder="Total Price *"/>
+                        <input type="text" class="form-control" name="totalPrice" placeholder="Total Price *" />
                         <br/>
                         <input type="text" class="form-control" name="message_res" placeholder="Message For Host *" />
                         <br/>
@@ -315,13 +315,13 @@
                     <th>Check in time</th>
                     <th>Check out time</th>
                     <th>Status</th>
-                    <th>Create Reservation For This Apartment</th>    
+                    <th>Create Reservation For This Apartment</th>
                 </tr>
             </thead>
             <tbody>
-
             </tbody>
         </table>
+
         <!-- pokusaj dropmanu -->
         <div class="container">
             <div class="dropdown">
@@ -349,7 +349,7 @@
                             <li><button tabindex="-1" id="byPriceDesc">descending</button></li>
                         </ul>
                     </li>
-     
+
                 </ul>
             </div>
 
@@ -382,9 +382,19 @@
             <div class="modal-header">
                 <span class="close">&times;</span>
                 <!-- header -->
+                <label>Create Reservation For Apartment</label>
             </div>
             <div class="modal-body">
                 <!-- modal-body -->
+                <label>From Date:</label>
+                <input type="date"></br>
+                </br>
+                <label>Nights Number:</label>
+                <input type="text" name="nights_number" id="nights_number_reservation"></br>
+                </br>
+                <label>Reservation message:</label>
+                <textarea name="message"></textarea></br>
+                <button type="submit" style="margin-right: 10px;" id="create_res_button_mod">Create</button>
             </div>
             <div class="modal-footer">
                 <!-- footer -->
