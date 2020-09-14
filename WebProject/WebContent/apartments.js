@@ -35,7 +35,8 @@
          })
      });
 
-     $('#createReservation_button').on('click', function() {
+     $('#createReservation_button').click(function() {
+    	 alert("aaa");
          $('#mod_pretraga').show();
      });
 
