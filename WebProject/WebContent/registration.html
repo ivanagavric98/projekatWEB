@@ -14,6 +14,8 @@
     <script src="users.js"></script>
     <script src="apartments.js"></script>
     <script src="reservations.js"></script>
+    <script src="amenities.js"></script>
+
     <style>
         .error {
             color: red;
@@ -28,7 +30,7 @@
             <li class="navbar-item" id="logout_li"><a>Log out</a></li>
             <li class="navbar-item" id="users_li"><a>Users</a></li>
             <li class="navbar-item" id="apartments_li"><a>Apartments</a></li>
-
+            <li class="navbar-item" id="amenities_li"><a>Amenities</a></li>
         </ul>
         <ul id="sidebar">
             <li class="sidebar-item" id="profile_li"><a>Profile</a></li>
@@ -123,7 +125,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <button id="button-edit-profile">Edit</button>
+                    <button id="button-edit-profile1">Edit</button>
                 </td>
 
             </tr>
@@ -246,8 +248,8 @@
     </div>
     <!-- ************** -->
     <!-- 
-    kreiranje rezervacije -->
-    <div class="container" hidden id="createReservation-form">
+    <!-- kreiranje rezervacije -->
+    <!-- <div class="container" hidden id="createReservation-form">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -271,7 +273,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --> -->
     <!-- **************
  -->
 
@@ -316,43 +318,65 @@
                     <th>Check out time</th>
                     <th>Status</th>
                     <th>Create Reservation For This Apartment</th>
+                    <th></th>>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
+    </div>
 
-        <!-- pokusaj dropmanu -->
-        <div class="container">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort
+    <!-- amenities-list -->
+    <div id="admin-list-amenities" hidden>
+
+        <input type="text" name="" id="search-amenities" style="margin-bottom: 10px;">
+        <table id="admin-list-amenities-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- pokusaj dropmanu -->
+    <div class="container">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort
             <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-submenu">
-                        <button class="test" tabindex="-1" id="byGuestNumber">By number of guests <span class="caret"></span></button>
-                        <ul class="dropdown-submenu">
-                            <li><button tabindex="-1" id="byGuestNumberAsc">ascending</button></li>
-                            <li><button tabindex="-1" id="byGuestNumberDesc">descending</button></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <button class="test" tabindex="-1">By number of rooms <span class="caret"></span></button>
-                        <ul class="dropdown-submenu">
-                            <li><button tabindex="-1" id="byRoomNumberAsc">ascending</button></li>
-                            <li><button tabindex="-1" id="byRoomNumberDesc">descending</button></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <button class="test" tabindex="-1">By price <span class="caret"></span></button>
-                        <ul class="dropdown-submenu">
-                            <li><button tabindex="-1" id="byPriceAsc">ascending</button></li>
-                            <li><button tabindex="-1" id="byPriceDesc">descending</button></li>
-                        </ul>
-                    </li>
+            <ul class="dropdown-menu">
+                <li class="dropdown-submenu">
+                    <button class="test" tabindex="-1" id="byGuestNumber">By number of guests <span class="caret"></span></button>
+                    <ul class="dropdown-submenu">
+                        <li><button tabindex="-1" id="byGuestNumberAsc">ascending</button></li>
+                        <li><button tabindex="-1" id="byGuestNumberDesc">descending</button></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <button class="test" tabindex="-1">By number of rooms <span class="caret"></span></button>
+                    <ul class="dropdown-submenu">
+                        <li><button tabindex="-1" id="byRoomNumberAsc">ascending</button></li>
+                        <li><button tabindex="-1" id="byRoomNumberDesc">descending</button></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <button class="test" tabindex="-1">By price <span class="caret"></span></button>
+                    <ul class="dropdown-submenu">
+                        <li><button tabindex="-1" id="byPriceAsc">ascending</button></li>
+                        <li><button tabindex="-1" id="byPriceDesc">descending</button></li>
+                    </ul>
+                </li>
 
-                </ul>
-            </div>
+            </ul>
+        </div>
 
+<<<<<<< HEAD
             <!-- dropmenu za filtriranje -->
             <div class="container">
                 <div class="dropdown">
@@ -380,8 +404,37 @@
                     </ul>
                 </div>
 
+=======
+        <!-- dropmenu za filtriranje -->
+        <div class="container">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Filtrate by
+            <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-submenu">
+                        <button class="test" tabindex="-1" placeholder="Max guest number">Max guest number <span class="caret"></span></button>
+                        <ul class="dropdown-submenu">
+                            <li> <input type="text" id="maxGuestNumber" name="lname"><button id="buttonMaxGuests">filtrate</button></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <button class="test" tabindex="-1">By room number <span class="caret"></span></button>
+                        <ul class="dropdown-submenu">
+                            <li> <input type="text" id="minRoomNumber" name="lname"><input type="text" id="maxRoomNumber" name="lname"><button id="buttonNumRooms">filtrate</button></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <button class="test" tabindex="-1">Byprice <span class="caret"></span></button>
+                        <ul class="dropdown-submenu">
+                            <li> <input type="text" id="minPrice" name="lname"><input type="text" id="maxPrice" name="lname"><button id="buttonPriceB">filtrate</button></li>
+                        </ul>
+                    </li>
+                </ul>
+>>>>>>> 0b94f8f2dfccc0dae51bd1a44126a1dc2bc882e3
             </div>
+
         </div>
+    </div>
     </div>
     <!-- ********* -->
 

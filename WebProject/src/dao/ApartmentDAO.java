@@ -51,6 +51,7 @@ public class ApartmentDAO {
 					apartment.getRoomsNumber(),
 					apartment.getGuestsNumber(),
 					apartment.getLocation(),
+					apartment.getCity(),
 					apartment.getHost(),
 					apartment.getPricePerNight(),
 					apartment.getCheckInTime(),
@@ -286,7 +287,11 @@ public class ApartmentDAO {
 			}
 			.address.city.toString().toLowerCase().contains(city.toLowerCase())
 			for(Apartment a : apartments.values()) {
+<<<<<<< HEAD
 				if( a.isActive() && a.getLocation()) {
+=======
+				if( a.isActive() && a.getCity().toLowerCase().contains(city.toLowerCase())) {
+>>>>>>> 0b94f8f2dfccc0dae51bd1a44126a1dc2bc882e3
 						resultApartmnts.add(a);
 					}			
 				}
