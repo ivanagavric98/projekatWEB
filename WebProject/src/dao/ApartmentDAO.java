@@ -284,9 +284,9 @@ public class ApartmentDAO {
 			if(city.equals("prazan_string")) {
 				return apartments.values() ;
 			}
-			
+			.address.city.toString().toLowerCase().contains(city.toLowerCase())
 			for(Apartment a : apartments.values()) {
-				if( a.isActive() && a.getLocation().address.city.toString().toLowerCase().contains(city.toLowerCase())) {
+				if( a.isActive() && a.getLocation()) {
 						resultApartmnts.add(a);
 					}			
 				}

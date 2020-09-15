@@ -9,7 +9,7 @@
      let checkInTime = $('<td>' + apartment.checkInTime + '</td>');
      let checkOutTime = $('<td>' + apartment.checkOutTime + '</td>');
      let status = $('<td>' + apartment.status + '</td>');
-     let createRes = $('<td>' + '<button type="submit" id="createReservation_button">Create</button>' + '</td>');
+     let createRes = $('<td>' + '<button class="btnSelect" type="submit" >Create</button>' + '</td>');
 
 
      let tr = $('<tr></tr>');
@@ -35,8 +35,7 @@
          })
      });
 
-     $('#createReservation_button').click(function() {
-    	 alert("aaa");
+     $('#admin-list-apartments-table').on('click', '.btnSelect', function() {
          $('#mod_pretraga').show();
      });
 
@@ -45,15 +44,31 @@
 
          console.log('addd');
          let type = $("#addApartmants input[type='radio']:checked").val();
+         let date = $("#datumi");
 
          let date = ("#datumi");
+         let lokacija = $("input[name=Location]").val();
+         let lokacijaNiz = lokacija.split(",");
+         console.log(lokacijaNiz);
 
+         letAdresaObj = {
+             "street": lokacijaNiz[0],
+             "number": lokacijaNiz[1],
+             "city": lokacijaNiz[2],
+             "postalCode": lokacijaNiz[3]
+         };
+
+         let LocationObj = {
+             "latitude": lokacijaNiz[4],
+             "longitude": lokacijaNiz[5],
+             "adress": letAdresaObj
+         };
          let dataObj = {
              "roomsNumber": $("input[name=numberOfRooms]").val(),
              "guestsNumber": $("input[name=numberOfGuest]").val(),
-             "location": $("input[name=Location]").val(),
+             "location": LocationObj,
              "datumi": $("input[name=datumi]").val(),
-             "comments": $("input[name=comments]").val(),
+             //  s "comments": $("input[name=comments]").val(),
              "pricePerNight": $("input[name=pricePerNight]").val(),
              "checkInTime": $("input[name=checkInTime]").val(),
              "checkOutTime": $("input[name=checkOutTime]").val(),
@@ -299,26 +314,26 @@
      //---------------------------------------------------
      //filtracija apartmana po opsegu broja cijene
      $('#buttonPriceB').on('click', function() {
-        let minPrice1 = $('#minPrice').val();
-        let maxPrice1 = $('#maxPrice').val();
-        if (minPrice === "" || maxPrice === "") {
-            alert("insert both value");
-        }
-        $.ajax({
-            type: "get",
-            url: "rest/apartment/" + minPrice1 + "/" + maxPrice1 + "/filtracija5",
-            contentType: "application/json",
-            success: function(apartments) {
-                clearWorkspace();
-                $('#admin-list-apartments').show();
-                $('#admin-list-apartments-table tbody').empty();
-                for (let apartment of apartments) {
-                    addNewApartment(apartment);
-                }
+         let minPrice1 = $('#minPrice').val();
+         let maxPrice1 = $('#maxPrice').val();
+         if (minPrice === "" || maxPrice === "") {
+             alert("insert both value");
+         }
+         $.ajax({
+             type: "get",
+             url: "rest/apartment/" + minPrice1 + "/" + maxPrice1 + "/filtracija5",
+             contentType: "application/json",
+             success: function(apartments) {
+                 clearWorkspace();
+                 $('#admin-list-apartments').show();
+                 $('#admin-list-apartments-table tbody').empty();
+                 for (let apartment of apartments) {
+                     addNewApartment(apartment);
+                 }
 
-            }
-        })
-    });
+             }
+         })
+     });
 
      /*  $('#search_li').click(function() {
           $('#mod_pretraga').show();

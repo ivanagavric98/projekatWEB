@@ -11,12 +11,12 @@ public class Apartment {
 	public ApartmentType type;
 	public int roomsNumber;
 	public int guestsNumber;
-	public Location location;
+	public String location;
 	public ArrayList<LocalDate> rentalDates;
 	public ArrayList<ReservationPeriod> busyDates;
 	public String host;
-//	public ArrayList<Long> comments;
-//	public ArrayList<Long> photos;
+	public ArrayList<Long> comments;
+	public ArrayList<Long> photos;
 	public double pricePerNight;
 	public int checkInTime;
 	public int checkOutTime;
@@ -30,7 +30,7 @@ public class Apartment {
 		
 	}
 	
-	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
+	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, String location,
 			ArrayList<LocalDate> rentalDates, ArrayList<ReservationPeriod> busyDates, String host, ArrayList<Long> comments, ArrayList<Long> photos,
 			double pricePerNight, int checkInTime, int checkOutTime, Status status, ArrayList<Long> amenities,
 			ArrayList<Long> reservations, boolean active) {
@@ -54,7 +54,7 @@ public class Apartment {
 		this.active = active;
 	}
 
-	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, Location location,
+	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, String location,
 			String host, double pricePerNight, int checkInTime, int checkOutTime, Status status, boolean active) {
 		super();
 		this.id = id;
@@ -103,10 +103,10 @@ public class Apartment {
 	public void setGuestsNumber(int guestsNumber) {
 		this.guestsNumber = guestsNumber;
 	}
-	public Location getLocation() {
+	public String getLocation() {
 		return location;
 	}
-	public void setLocation(Location location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 	public ArrayList<LocalDate> getRentalDates() {

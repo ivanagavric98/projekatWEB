@@ -169,27 +169,27 @@
                 </div>
                 <div class="panel-body">
                     <form id="registration">
-                        <input type="text" class="form-control" name="fname" placeholder="First Name *" />
+                        <input type="text" class="form-control" name="fname" placeholder="First Name *" required/>
                         <br/>
                         <label id="error_fname" style="color: red"></label>
                         <br/>
-                        <input type="text" class="form-control" name="lname" placeholder="Last Name *" />
+                        <input type="text" class="form-control" name="lname" placeholder="Last Name *" required />
                         <br/>
                         <label id="error_lname" style="color: red"></label>
                         <br/>
-                        <input type="text" class="form-control" name="username-register" placeholder="Username *" />
+                        <input type="text" class="form-control" name="username-register" placeholder="Username *" required/>
                         <br/>
                         <label id="error_username" style="color: red"></label>
                         <br/>
-                        <input type="password" class="form-control" name="password-register" placeholder="Password *" id="password" />
+                        <input type="password" class="form-control" name="password-register" placeholder="Password *" id="password" required/>
                         <br/>
                         <label id="error_password" style="color: red"></label>
                         <br/>
-                        <input type="password" class="form-control" name="confirm" placeholder="Confirm Password *" />
+                        <input type="password" class="form-control" name="confirm" placeholder="Confirm Password *" required/>
                         <br/>
                         <label id="error_confirm" style="color: red"></label>
                         <br/>
-                        <div class="gender">
+                        <div class="gender" required>
                             <label>Gender</label>
                             <label class="radio-inline"><input type="radio" name="gender" value="MALE" class = "form-contorl"/>Male</label>
                             <label class="radio-inline"><input type="radio" name="gender" value="FEMALE" class = "form-contorl"/>Female</label>
@@ -355,31 +355,31 @@
 
             <!-- dropmenu za filtriranje -->
             <div class="container">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Filtrate by
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Filtrate by
             <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-submenu">
-                        <button class="test" tabindex="-1" placeholder="Max guest number">Max guest number <span class="caret"></span></button>
-                        <ul class="dropdown-submenu">
-                            <li> <input type="text" id="maxGuestNumber" name="lname"><button id="buttonMaxGuests">filtrate</button></li>
-                        </ul>
-                    </li>
+                    <ul class="dropdown-menu">
                         <li class="dropdown-submenu">
-                             <button class="test" tabindex="-1" >By room number <span class="caret"></span></button>
-                             <ul class="dropdown-submenu">
-                            <li> <input type="text" id="minRoomNumber" name="lname"><input type="text" id="maxRoomNumber" name="lname"><button id="buttonNumRooms">filtrate</button></li>
-                         </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <button class="test" tabindex="-1" >Byprice <span class="caret"></span></button>
-                        <ul class="dropdown-submenu">
-                       <li> <input type="text" id="minPrice" name="lname"><input type="text" id="maxPrice" name="lname"><button id="buttonPriceB">filtrate</button></li>
+                            <button class="test" tabindex="-1" placeholder="Max guest number">Max guest number <span class="caret"></span></button>
+                            <ul class="dropdown-submenu">
+                                <li> <input type="text" id="maxGuestNumber" name="lname"><button id="buttonMaxGuests">filtrate</button></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <button class="test" tabindex="-1">By room number <span class="caret"></span></button>
+                            <ul class="dropdown-submenu">
+                                <li> <input type="text" id="minRoomNumber" name="lname"><input type="text" id="maxRoomNumber" name="lname"><button id="buttonNumRooms">filtrate</button></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <button class="test" tabindex="-1">Byprice <span class="caret"></span></button>
+                            <ul class="dropdown-submenu">
+                                <li> <input type="text" id="minPrice" name="lname"><input type="text" id="maxPrice" name="lname"><button id="buttonPriceB">filtrate</button></li>
+                            </ul>
+                        </li>
                     </ul>
-               </li>
-                </ul>
-            </div> 
-             
+                </div>
+
             </div>
         </div>
     </div>
