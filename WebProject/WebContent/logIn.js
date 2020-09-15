@@ -141,15 +141,15 @@ function registerNewUser() {
     return function(event) {
         event.preventDefault();
 
-        let fname = $('input[name=fname]').val();
-        let lname = $('input[name=lname]').val();
+        let fname = $('input[name="fname"]').val();
+        let lname = $('input[name="lname"]').val();
         let password = $('input[name="password"]').val();
         let username = $('input[name="username"]').val();
         let gender = "";
-        if (document.getElementById("female").checked === true) {
-            gender = "female";
-        } else if (document.getElementById("male").checked === true) {
-            gender = "male";
+        if (document.getElementById("FEMALE").checked === true) {
+            gender = "FEMALE";
+        } else if (document.getElementById("MALE").checked === true) {
+            gender = "MALE";
         }
 
         let passwordConfirm = $('input[name="confirm"]').val();

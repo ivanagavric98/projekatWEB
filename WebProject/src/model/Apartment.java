@@ -12,10 +12,7 @@ public class Apartment {
 	public int roomsNumber;
 	public int guestsNumber;
 	public String location;
-<<<<<<< HEAD
-=======
 	public String city;	
->>>>>>> 0b94f8f2dfccc0dae51bd1a44126a1dc2bc882e3
 	public ArrayList<LocalDate> rentalDates;
 	public ArrayList<ReservationPeriod> busyDates;
 	public String host;
@@ -34,11 +31,7 @@ public class Apartment {
 		
 	}
 	
-<<<<<<< HEAD
-	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, String location,
-=======
 	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, String location, String city,
->>>>>>> 0b94f8f2dfccc0dae51bd1a44126a1dc2bc882e3
 			ArrayList<LocalDate> rentalDates, ArrayList<ReservationPeriod> busyDates, String host, ArrayList<Long> comments, ArrayList<Long> photos,
 			double pricePerNight, int checkInTime, int checkOutTime, Status status, ArrayList<Long> amenities,
 			ArrayList<Long> reservations, boolean active) {
@@ -52,8 +45,8 @@ public class Apartment {
 		this.rentalDates = rentalDates;
 		this.busyDates = busyDates;
 		this.host = host;
-	//	this.comments = comments;
-		//this.photos = photos;
+		this.comments = comments;
+		this.photos = photos;
 		this.pricePerNight = pricePerNight;
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
@@ -63,11 +56,8 @@ public class Apartment {
 		this.active = active;
 	}
 
-<<<<<<< HEAD
-	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, String location,
-=======
+
 	public Apartment(long id, ApartmentType type, int roomsNumber, int guestsNumber, String location, String city,
->>>>>>> 0b94f8f2dfccc0dae51bd1a44126a1dc2bc882e3
 			String host, double pricePerNight, int checkInTime, int checkOutTime, Status status, boolean active) {
 		super();
 		this.id = id;
@@ -146,7 +136,7 @@ public class Apartment {
 	}
 	public void setHost(String host) {
 		this.host = host;
-	}/*
+	}
 	public ArrayList<Long> getComments() {
 		return comments;
 	}
@@ -158,7 +148,7 @@ public class Apartment {
 	}
 	public void setPhotos(ArrayList<Long> photos) {
 		this.photos = photos;
-	}*/
+	}
 	public double getPricePerNight() {
 		return pricePerNight;
 	}

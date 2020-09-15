@@ -30,7 +30,7 @@
             <li class="navbar-item" id="logout_li"><a>Log out</a></li>
             <li class="navbar-item" id="users_li"><a>Users</a></li>
             <li class="navbar-item" id="apartments_li"><a>Apartments</a></li>
-                        <li class="navbar-item" id="amenities_li"><a>Amenities</a></li>
+            <li class="navbar-item" id="amenities_li"><a>Amenities</a></li>
             
 
         </ul>
@@ -157,7 +157,7 @@
                     </form>
 
                     <br>
-                    <button id="register_form_button">Or register?</button>
+                    <button id="register_form_button">Create an account?</button>
                 </div>
             </div>
         </div>
@@ -202,13 +202,14 @@
                         <input id="submit_form" type="submit" value="Submit"></input>
                         <br/>
                         <br/>
-                        <p>Već posedujete nalog? <a id="login-button">   Log In</a></p>
+                        <p>	Have you got the account? <a id="login-button">   Log In</a></p>
                         <br/>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+                </div>
+        
     <!-- ************** -->
 
     <!-- dodavanjeApartmana -->
@@ -229,7 +230,9 @@
                         <br/>
                         <input type="text" class="form-control" name="numberOfGuest" placeholder="Number Of Guest*" />
                         <br/>
-                        <input type="text" class="form-control" name="Location" placeholder="Location(adress,longitude,latitude) *" />
+                        <input type="text" class="form-control" name="location" placeholder="Address *" />
+                        <br/>
+                        <input type="text" class="form-control" name="city" placeholder="City *" />
                         <br/>
                         <input type="date" class="form-control" name="datumi" id="datum" />
                         <br/>
@@ -312,7 +315,8 @@
                     <th>Apartment type</th>
                     <th>Room number</th>
                     <th>Guests number</th>
-                    <th>Location</th>
+                    <th>Address</th>
+                    <th>City</th>
                     <th>Host</th>
                     <th>Price per night</th>
                     <th>Check in time</th>
@@ -373,6 +377,7 @@
 
                 </ul>
             </div>
+            </div>
 
             <!-- dropmenu za filtriranje -->
             <div class="container">
@@ -402,8 +407,7 @@
             </div> 
              
             </div>
-        </div>
-    </div>
+  
     <!-- ********* -->
 
 

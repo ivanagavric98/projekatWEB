@@ -204,6 +204,35 @@ div#admin-list-apartments {
     background-color: #4CAF50;
     color: white;
 }
+/* amenities-list */
+div#admin-list-amenities {
+    margin-top: 10%;
+    margin-left: 30%;
+    width: 65%;
+}
+
+#admin-list-amenities-table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#admin-list-amenities-table td, #admin-list-amenities-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#admin-list-amenities-table  tr:nth-child(even){background-color: #f2f2f2;}
+
+#admin-list-amenities-table  tr:hover {background-color: #ddd;}
+
+#admin-list-amenities-table  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
 
 #search-user {
     width: 200px;
