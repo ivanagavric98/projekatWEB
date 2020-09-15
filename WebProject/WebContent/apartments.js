@@ -37,6 +37,9 @@
          })
      });
 
+
+
+
      $('#admin-list-apartments-table').on('click', '.btnSelect', function() {
          $('#mod_pretraga').show();
      });
@@ -59,7 +62,7 @@
              "checkOutTime": $("input[name=checkOutTime]").val(),
              "type": type
          };
-            console.log(dataObj);
+         console.log(dataObj);
          $.ajax({
              type: 'POST',
              url: 'rest/apartment/addAp',
