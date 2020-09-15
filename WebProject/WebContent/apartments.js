@@ -10,18 +10,13 @@
      let checkInTime = $('<td>' + apartment.checkInTime + '</td>');
      let checkOutTime = $('<td>' + apartment.checkOutTime + '</td>');
      let status = $('<td>' + apartment.status + '</td>');
-<<<<<<< HEAD
-     let createRes = $('<td>' + '<button class="btnSelect" type="submit" >Create</button>' + '</td>');
-=======
      let createRes = $('<td > ' + '<button type="submit" class="btnSelect">Create</button>' + '</td>');
-     let editCol = $('<td > ' + '<button type="submit" class="btnSelect1">Edit</button>' + '</td>');
->>>>>>> 0b94f8f2dfccc0dae51bd1a44126a1dc2bc882e3
 
 
      let tr = $('<tr></tr>');
      tr.append(id).append(type).append(roomsNumber).append(guestsNumber)
-         .append(location).append(city).append(host).append(pricePerNight).append(checkInTime).append(checkOutTime).append(status).append(createRes).append(editCol);
-     $('#admin-list-apartments-table').append(tr).append(tr);
+         .append(location).append(city).append(host).append(pricePerNight).append(checkInTime).append(checkOutTime).append(status).append(createRes);
+     $('#admin-list-apartments-table').append(tr);
  }
 
  $(document).ready(function() {
@@ -41,59 +36,30 @@
          })
      });
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 0b94f8f2dfccc0dae51bd1a44126a1dc2bc882e3
      $('#admin-list-apartments-table').on('click', '.btnSelect', function() {
          $('#mod_pretraga').show();
      });
 
 
-     $('#add_apartment_submit_form').click(function(event) {
+     $('#add_apartment_submit_form').on('click', function(event) {
 
          console.log('addd');
          let type = $("#addApartmants input[type='radio']:checked").val();
-         let date = $("#datumi");
 
-         let date = ("#datumi");
-         let lokacija = $("input[name=Location]").val();
-         let lokacijaNiz = lokacija.split(",");
-         console.log(lokacijaNiz);
 
-         letAdresaObj = {
-             "street": lokacijaNiz[0],
-             "number": lokacijaNiz[1],
-             "city": lokacijaNiz[2],
-             "postalCode": lokacijaNiz[3]
-         };
-
-         let LocationObj = {
-             "latitude": lokacijaNiz[4],
-             "longitude": lokacijaNiz[5],
-             "adress": letAdresaObj
-         };
          let dataObj = {
              "roomsNumber": $("input[name=numberOfRooms]").val(),
              "guestsNumber": $("input[name=numberOfGuest]").val(),
-<<<<<<< HEAD
-             "location": LocationObj,
-             "datumi": $("input[name=datumi]").val(),
-             //  s "comments": $("input[name=comments]").val(),
-=======
              "location": $("input[name=location]").val(),
              "city": $("input[name=city]").val(),
->>>>>>> 0b94f8f2dfccc0dae51bd1a44126a1dc2bc882e3
              "pricePerNight": $("input[name=pricePerNight]").val(),
              "checkInTime": $("input[name=checkInTime]").val(),
              "checkOutTime": $("input[name=checkOutTime]").val(),
              "type": type
          };
-         console.log(dataObj);
+            console.log(dataObj);
          $.ajax({
-             type: 'POST',
+             type: 'post',
              url: 'rest/apartment/addAp',
              data: JSON.stringify(dataObj),
              contentType: 'application/json',
@@ -102,7 +68,7 @@
                  alert("Uspesno dodavanje!");
 
              }
-         });
+         })
 
          event.preventDefault();
      });
@@ -346,22 +312,11 @@
                  for (let apartment of apartments) {
                      addNewApartment(apartment);
                  }
-<<<<<<< HEAD
-
-             }
-         })
-     });
-=======
->>>>>>> 0b94f8f2dfccc0dae51bd1a44126a1dc2bc882e3
 
              }
          })
      });
 
-
-     $('#admin-list-apartments-table').on('click', '.btnSelect1', function() {
-        $('#apartment_add').show();
-    });
      /*  $('#search_li').click(function() {
           $('#mod_pretraga').show();
       }); */
