@@ -66,21 +66,23 @@ public class AmenitiesService {
 	}
 	
 	@PUT
-	@Path("/{id}")
+	@Path("/edit/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Amenities edit(@PathParam("id") Long id,
 						 Amenities amenitie,	
 						 @Context HttpServletRequest request) {
 		AmenitiesDAO amenitiesDao = (AmenitiesDAO) ctx.getAttribute("amenitiesDAO");
-		return amenitiesDao.editAmenitie(amenitie);
+		return amenitiesDao.editAmenitie(id, amenitie);
 	}
 	
 	
 	
-	@DELETE
-	@Path("/")
-	public Response deleteByName(@QueryParam("name") String name, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
+	@PUT
+	@Path("delete/{name}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteByName(@PathParam("name") String name, @Context HttpServletRequest request) throws NoSuchAlgorithmException, IOException {
 		AmenitiesDAO amenitiesDAO = (AmenitiesDAO) ctx.getAttribute("amenitiesDAO");
 		System.out.println(name);
 

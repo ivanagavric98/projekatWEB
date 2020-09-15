@@ -332,17 +332,23 @@
     <!-- amenities-list -->
     <div id="admin-list-amenities" hidden>
 
+		<h1 style="text-align:center;color:blue">Amenities</h1>
         <table id="admin-list-amenities-table">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Name</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
+        
+        <h1 style="text-align:center;color:blue">Add amenitie</h1>
+        <label style="text-align:center;color:blue">Add new amenitie:</label>
+        <input type = "text" name="add_amenitie" id="add_amenitie_form">
+        <button type="button" id="add_amenitie_btn">Add</button>
     </div>
 
 
@@ -350,7 +356,7 @@
         <!-- pokusaj dropmanu -->
         <div class="container">
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort
+                <button class="btn btn-default dropdown-toggle" id= "sort" type="button" data-toggle="dropdown">Sort
             <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li class="dropdown-submenu">
@@ -380,9 +386,9 @@
             </div>
 
             <!-- dropmenu za filtriranje -->
-            <div class="container">
+            <div class="container" >
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Filtrate by
+                <button class="btn btn-default dropdown-toggle" type="button" id= "filtrate" data-toggle="dropdown">Filtrate by
             <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li class="dropdown-submenu">
@@ -411,8 +417,29 @@
     <!-- ********* -->
 
 
-
     <!-- modal-search -->
+    <div id="#mod_add_amenitie" class="modal" hidden>
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <!-- header -->
+                <label>Add new amenitie </label>
+            </div>
+            <div class="modal-body">
+                <!-- modal-body -->
+                <label>Add amenitie:</label>
+                <input type="text" name="add_amenitie_mod" id="add_amenitieModalni"></br>
+                </br>
+                <button type="submit" style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="add_amenitie">Add</button>
+            </div>
+            <div class="modal-footer">
+                <!-- footer -->
+            </div>
+        </div>
+    </div>
+    <!-- ***************** -->
+
+ <!-- modal-amenitie -->
     <div id="mod_pretraga" class="modal" hidden>
         <div class="modal-content">
             <div class="modal-header">
@@ -438,6 +465,8 @@
         </div>
     </div>
     <!-- ***************** -->
+
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>

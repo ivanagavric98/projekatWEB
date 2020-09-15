@@ -54,36 +54,22 @@ public class AmenitiesDAO {
 		return false;
 	}
 
-	public Amenities editAmenitie(Amenities amenitie) {
+	public Amenities editAmenitie(long id, Amenities amenitie) {
+		Amenities old = amenities.get(id);
 		
-		Amenities old_Amenitie = null;
 		boolean isUnique = true;
 		for (Amenities a : amenities.values()) {
 			if (amenitie.getName().equals(a.getName())) {
 				isUnique = false;
 			}
 		}
-
-		
-		for(Amenities a : amenities.values()) {
-			if(amenitie.getId() == a.getId()) {
-				old_Amenitie = a;
-				break;
-			}	
-		}
-		
-		if(old_Amenitie == null) {
+		if(!isUnique) {
 			return null;
 		}
+		old.setName(amenitie.getName());
 		
-		if(isUnique) {
-			old_Amenitie.setName(amenitie.getName());
-			amenities.put(old_Amenitie.getId(), old_Amenitie);
-			return old_Amenitie;
-		}
-		
-		return null;
-		
+		return old;
+
 	}
 
 	// brisanje sadrzaja apartmana

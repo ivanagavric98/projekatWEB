@@ -16,8 +16,8 @@ public class Apartment {
 	public ArrayList<LocalDate> rentalDates;
 	public ArrayList<ReservationPeriod> busyDates;
 	public String host;
-	public ArrayList<Long> comments;
-	public ArrayList<Long> photos;
+	public ArrayList<Long> comments = new ArrayList<Long>();
+	public ArrayList<Long> photos = new ArrayList<Long>();
 	public double pricePerNight;
 	public int checkInTime;
 	public int checkOutTime;
