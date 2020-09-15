@@ -5,6 +5,7 @@ function clearWorkspace() {
     $('#dodavanjeApartmana-form').hide();
     $('#admin-list-users').hide();
     $('#admin-list-apartments').hide();
+    $('#admin-list-amenities').hide();
     $('#mod_pretraga').hide();
 }
 
