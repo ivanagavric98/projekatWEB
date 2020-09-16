@@ -204,6 +204,23 @@ public class ApartmentService {
 		return Response.status(400).entity("Id is not existed!").build();
 	
 	}
+	
+	
+	@DELETE
+	@Path("/{id}/deleteId")
+	public Response deleteApartmentHost(@PathParam("id") Long id, @Context HttpServletRequest request)  throws NoSuchAlgorithmException, IOException {
+		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		User host1 = (User) request.getSession().getAttribute("user");
+		String host=host1.getUsername();
+		boolean succesfulDeleted = apartmentsDAO.deleteApartmentHost(id,host);
+		if(succesfulDeleted) {
+			return Response.status(200).build();
+		}
+		return Response.status(400).entity("Id is not existed!").build();
+	
+	}
+	
+	
 
 	
 	@PUT

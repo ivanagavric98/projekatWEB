@@ -115,6 +115,15 @@ public class ApartmentDAO {
 //	
 //	
 //	
+	
+//	public String getHostForApartman(Long id) {
+//		for(Apartment apartment : apartments.values()) {
+//			if(apartment.getStatus().equals(Status.ACTIVE) && apartment.getId()==id) {
+//				return apartment.getHost();
+//			}
+//		}
+//		return null;
+	
 	public Collection<Apartment> findAllHostApartment(String host){
 		ArrayList<Apartment> apartmentList = new ArrayList<Apartment>();
 		
@@ -203,6 +212,20 @@ public class ApartmentDAO {
 		return delete_fleg;
 	}
 			
+	public boolean deleteApartmentHost(Long id,String host) throws NoSuchAlgorithmException, IOException {
+		
+		boolean delete_fleg = false;
+
+		for(Apartment a : apartments.values()) {
+			if(a.getHost().toLowerCase().equals(host.toLowerCase()) && a.getId()==id) {
+				a.setActive(false);
+				delete_fleg = true;
+				saveApartments(contextPath);				}			
+			}
+		return delete_fleg;
+	}
+		
+		
 	//ucitavanje liste korisnika iz fajla
 	public HashMap<Long,Apartment> loadApartments(String contextPath) throws IOException, NoSuchAlgorithmException {
 	    ObjectMapper mapper = new ObjectMapper();
