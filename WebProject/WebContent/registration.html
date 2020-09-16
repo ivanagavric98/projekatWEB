@@ -318,6 +318,7 @@
     <div id="admin-list-apartments" hidden>
 
         <input type="text" name="" id="search-apartment" style="margin-bottom: 10px;">
+        <input type="text" name="" id="search-apartment1" style="margin-bottom: 10px;">
         <table id="admin-list-apartments-table">
             <thead>
                 <tr>
@@ -368,7 +369,7 @@
 
 
         <!-- pokusaj dropmanu -->
-        <div class="container">
+        <div class="container" >
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" id= "sort" type="button" data-toggle="dropdown">Sort
             <span class="caret"></span></button>
@@ -429,8 +430,71 @@
             </div>
   
     <!-- ********* -->
+<!--  -->
+<!-- za aktivne apartmane -->
+<!-- pokusaj dropmanu -->
+<div class="container" >
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" id= "sort1" type="button" data-toggle="dropdown">Sort
+    <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li class="dropdown-submenu">
+                <button class="test" tabindex="-1" id="byGuestNumber1">By number of guests <span class="caret"></span></button>
+                <ul class="dropdown-submenu">
+                    <li><button tabindex="-1" id="byGuestNumberAsc1">ascending</button></li>
+                    <li><button tabindex="-1" id="byGuestNumberDesc1">descending</button></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <button class="test" tabindex="-1">By number of rooms <span class="caret"></span></button>
+                <ul class="dropdown-submenu">
+                    <li><button tabindex="-1" id="byRoomNumberAsc1">ascending</button></li>
+                    <li><button tabindex="-1" id="byRoomNumberDesc1">descending</button></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <button class="test" tabindex="-1">By price <span class="caret"></span></button>
+                <ul class="dropdown-submenu">
+                    <li><button tabindex="-1" id="byPriceAsc1">ascending</button></li>
+                    <li><button tabindex="-1" id="byPriceDesc1">descending</button></li>
+                </ul>
+            </li>
 
+        </ul>
+    </div>
+    </div>
 
+    <!-- dropmenu za filtriranje -->
+    <div class="container" >
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id= "filtrate1" data-toggle="dropdown">Filtrate by
+    <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li class="dropdown-submenu">
+                <button class="test" tabindex="-1" placeholder="Max guest number">Max guest number <span class="caret"></span></button>
+                <ul class="dropdown-submenu">
+                    <li> <input type="text" id="maxGuestNumber1" name="lname1"><button id="buttonMaxGuests1">filtrate</button></li>
+                </ul>
+            </li>
+                <li class="dropdown-submenu">
+                     <button class="test" tabindex="-1" >By room number <span class="caret"></span></button>
+                     <ul class="dropdown-submenu">
+                    <li> <input type="text" id="minRoomNumber1" name="lname1"><input type="text" id="maxRoomNumber1" name="lname1"><button id="buttonNumRooms1">filtrate</button></li>
+                 </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <button class="test" tabindex="-1" >Byprice <span class="caret"></span></button>
+                <ul class="dropdown-submenu">
+               <li> <input type="text" id="minPrice1" name="lname1"><input type="text" id="maxPrice1" name="lname1"><button id="buttonPriceB1">filtrate</button></li>
+            </ul>
+       </li>
+        </ul>
+    </div> 
+     
+    </div>
+
+<!-- ********* -->
+<!--  -->
     <!-- modal-search -->
     <div id="#mod_add_amenitie" class="modal" hidden>
         <div class="modal-content">

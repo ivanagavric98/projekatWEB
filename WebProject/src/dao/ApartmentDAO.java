@@ -82,6 +82,29 @@ public class ApartmentDAO {
 		return null;
 	}
 	
+	public static Apartment pretragapoIdActive(Long id) {
+		for(Apartment a : apartments.values()) {
+			if(a.getId() == id && a.getStatus().equals(Status.ACTIVE)) {
+				return a;	
+			}
+		}
+		
+		return null;
+	}
+	
+	public static Collection<Apartment>aktivniApartmani(){
+		ArrayList<Apartment> apartmentList = new ArrayList<Apartment>();
+
+		for(Apartment a : apartments.values()) {
+			if(a.getStatus().equals(Status.ACTIVE)) {
+				apartmentList.add(a);	
+			}
+		}
+		
+		return apartmentList;
+	}
+	
+	
 //	public Apartment findById(Long id) {
 //		for(Long ap : apartments.keySet()) {
 //			if(ap.getId() == id) {
@@ -219,6 +242,28 @@ public class ApartmentDAO {
 		   
 			return apartmentsToSort;
 		}
+		
+		//----------------------------------------
+		//
+		public Collection<Apartment> getSortActive(String par) {
+			ArrayList<Apartment> apartmentsToSort=(ArrayList<Apartment>) aktivniApartmani();
+		    Comparator<Apartment> compare = (Apartment o1, Apartment o2) -> Double.compare(o1.getRoomsNumber(), o2.getRoomsNumber());
+		    Collections.sort(apartmentsToSort,compare);
+		    
+			
+		   
+			if(par.equals("asc"))  {
+				 Collections.sort(apartmentsToSort,compare);
+			}
+			else if(par.equals("desc")){
+				Collections.sort(apartmentsToSort,compare.reversed());
+
+			}
+			
+			System.out.println(Arrays.toString(apartmentsToSort.toArray()));
+		   
+			return apartmentsToSort;
+		}
 //----------------------------------------------------------------------------------------
 		//sortiranje apartmana po broju gostiju
 		public Collection<Apartment> getSortByGuestsNumber(String par) {
@@ -239,6 +284,27 @@ public class ApartmentDAO {
 		   
 			return apartmentsToSort;
 		}
+		
+		//----------------------------------------------------------------------------------------
+				//sortiranje apartmana po broju gostiju
+				public Collection<Apartment> getSortByGuestsNumberActive(String par) {
+					ArrayList<Apartment>apartmentsToSort= (ArrayList<Apartment>) aktivniApartmani();
+
+				    Comparator<Apartment> compare = (Apartment o1, Apartment o2) -> Double.compare(o1.getGuestsNumber(), o2.getGuestsNumber());
+				    Collections.sort(apartmentsToSort,compare);
+				   
+					if(par.equals("asc"))  {
+						 Collections.sort(apartmentsToSort,compare);
+					}
+					else if(par.equals("desc")){
+						Collections.sort(apartmentsToSort,compare.reversed());
+
+					}
+					
+					System.out.println(Arrays.toString(apartmentsToSort.toArray()));
+				   
+					return apartmentsToSort;
+				}
 //---------------------------------------------------------------------------------------------
 		//sortiranje po cijeni nocenja
 		public Collection<Apartment> getSortByPricePerNight(String par) {
@@ -259,6 +325,27 @@ public class ApartmentDAO {
 		   
 			return apartmentsToSort;
 		}
+		
+		//---------------------------------------------------------------------------------------------
+				//sortiranje po cijeni nocenja aktivni apartmani
+				public Collection<Apartment> getSortByPricePerNightActive(String par) {
+					ArrayList<Apartment>apartmentsToSort= (ArrayList<Apartment>) aktivniApartmani();
+
+				    Comparator<Apartment> compare = (Apartment o1, Apartment o2) -> Double.compare(o1.getPricePerNight(), o2.getPricePerNight());
+				    Collections.sort(apartmentsToSort,compare);
+				   
+					if(par.equals("asc"))  {
+						 Collections.sort(apartmentsToSort,compare);
+					}
+					else if(par.equals("desc")){
+						Collections.sort(apartmentsToSort,compare.reversed());
+
+					}
+					
+					System.out.println(Arrays.toString(apartmentsToSort.toArray()));
+				   
+					return apartmentsToSort;
+				}
 //------------------------------------------------------------------------------
 		//filtracija apartmana po tipu
 
@@ -274,6 +361,22 @@ public class ApartmentDAO {
 				}
 			return filtratedApartments;
 		}
+		
+		//------------------------------------------------------------------------------
+				//filtracija apartmana po tipu aktivni
+		public Collection<Apartment> filtrateApartmentsByTypeActive(String type) {
+			List<Apartment>filtratedApartments=new ArrayList<Apartment>();
+			if(type.equals("prazan_string")) {
+				return apartments.values();
+			}
+			for(Apartment a : apartments.values()) {
+				if( a.getType().toString().toLowerCase().contains(type.toLowerCase()) && a.getStatus().equals(Status.ACTIVE)) {
+					filtratedApartments.add(a);
+					}			
+				}
+			return filtratedApartments;
+		}
+		
 	//-------------------------------------------------------------------------
 		//filtracija apartmana po statusu
 		public Collection<Apartment> filtrateApartmentsByStatus(String status) {
@@ -288,6 +391,22 @@ public class ApartmentDAO {
 				}
 			return filtratedApartments;
 		}
+		
+		
+		//------------------------------------------------------- ------------------
+				//filtracija apartmana po statusu aktivni apartmani
+				public Collection<Apartment> filtrateApartmentsByStatusActive(String status) {
+					List<Apartment>filtratedApartments=new ArrayList<Apartment>();
+					if(status.equals("prazan_string")) {
+						return apartments.values();
+					}
+					for(Apartment a : apartments.values()) {
+						if( a.getStatus().toString().toLowerCase().contains(status.toLowerCase()) &&a.getStatus().equals(Status.ACTIVE)) {
+							filtratedApartments.add(a);
+							}			
+						}
+					return filtratedApartments;
+				}
 //-----------------------------------------------------------------------------
 		//pretraga apartmana po lokaciji
 		public Collection<Apartment> searchApartmentsByLocation(String city) {
@@ -296,15 +415,39 @@ public class ApartmentDAO {
 				return apartments.values() ;
 			}
 			for(Apartment a : apartments.values()) {
-				if( a.isActive() && a.getCity().toLowerCase().contains(city.toLowerCase())) {
+				if( a.getCity().toLowerCase().contains(city.toLowerCase())) {
 						resultApartmnts.add(a);
 					}			
 			}
 			return resultApartmnts;
 		}
+		//pretraga apartmana po lokaciji aktivni
+				public Collection<Apartment> searchApartmentsByLocationActive(String city) {
+					List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+					if(city.equals("prazan_string")) {
+						return apartments.values() ;
+					}
+					for(Apartment a : apartments.values()) {
+						if( a.isActive() && a.getCity().toLowerCase().contains(city.toLowerCase())) {
+								resultApartmnts.add(a);
+							}			
+					}
+					return resultApartmnts;
+				}
+		//---------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------
 		//filtriranje apartmana po opsegu cijene
 		public Collection<Apartment> searchApartmentsByPriceAmount(String from, String to) {
+			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+			for(Apartment a : apartments.values()) {
+				if(  a.getPricePerNight()>=Double.parseDouble(from) && a.getPricePerNight()<=Double.parseDouble(to)) {
+					resultApartmnts.add(a);
+					}			
+				}
+			return resultApartmnts;
+		}
+		//filtriranje apartmana po opsegu cijene aktivni apartmani
+		public Collection<Apartment> searchApartmentsByPriceAmountActive(String from, String to) {
 			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
 			for(Apartment a : apartments.values()) {
 				if( a.isActive() && a.getPricePerNight()>=Double.parseDouble(from) && a.getPricePerNight()<=Double.parseDouble(to)) {
@@ -318,15 +461,37 @@ public class ApartmentDAO {
 		public Collection<Apartment> searchApartmentsByRoomNumber(String from, String to) {
 			List<Apartment>resultApartmnts=new ArrayList<Apartment>();
 			for(Apartment a : apartments.values()) {
-				if( a.isActive() && a.getRoomsNumber()>=Integer.parseInt(from) && a.getRoomsNumber()<=Integer.parseInt(to)) {
+				if(a.getRoomsNumber()>=Integer.parseInt(from) && a.getRoomsNumber()<=Integer.parseInt(to)) {
 					resultApartmnts.add(a);
 					}			
 				}
 			return resultApartmnts;
 		}
+		
+		//filtriranje apartmana po opsegu broja soba akttivni apartmani
+				public Collection<Apartment> searchApartmentsByRoomNumberActive(String from, String to) {
+					List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+					for(Apartment a : apartments.values()) {
+						if( a.getStatus().equals(Status.ACTIVE) && a.getRoomsNumber()>=Integer.parseInt(from) && a.getRoomsNumber()<=Integer.parseInt(to)) {
+							resultApartmnts.add(a);
+							}			
+						}
+					return resultApartmnts;
+				}
 //-----------------------------------------------------------------------------------
 				//filtriranje apartmana po broju gostiju(do koliko gostiju)
 		public Collection<Apartment> searchApartmentsByMaxGuestNumber( String maxNumberGuest) {
+					List<Apartment>resultApartmnts=new ArrayList<Apartment>();
+					for(Apartment a : apartments.values()) {
+						if( a.getGuestsNumber()>=Integer.parseInt(maxNumberGuest)) {
+							resultApartmnts.add(a);
+							}			
+						}
+					return resultApartmnts;
+				}
+		
+		//filtriranje apartmana po broju gostiju(do koliko gostiju) aktivni apartmNI
+		public Collection<Apartment> searchApartmentsByMaxGuestNumberActive( String maxNumberGuest) {
 					List<Apartment>resultApartmnts=new ArrayList<Apartment>();
 					for(Apartment a : apartments.values()) {
 						if( a.isActive() && a.getGuestsNumber()>=Integer.parseInt(maxNumberGuest)) {
@@ -366,7 +531,13 @@ public class ApartmentDAO {
 			
 			return null;
 		}
+
 		
+
+	
+
+
+	
 //		
 //		public void saveApartments() {
 //			JSONArray apartmentList = new JSONArray();

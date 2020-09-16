@@ -168,7 +168,7 @@ public class Apartment {
 		this.checkOutTime = checkOutTime;
 	}
 	public Status getStatus() {
-		return Status.INACTIVE;
+		return this.status;
 	}
 
 	public void setStatus(Status status) {
