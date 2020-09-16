@@ -38,7 +38,13 @@ public class AmenitiesService {
 			ctx.setAttribute("amenitiesDAO", new AmenitiesDAO(contextPath));
 		}
 	}
-	
+	@GET
+	@Path("/{id}/findById/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Amenities findById(@PathParam("id") Long id,@Context HttpServletRequest request){
+		AmenitiesDAO amenitiesDAO = (AmenitiesDAO) ctx.getAttribute("amenitiesDAO");
+		return amenitiesDAO.findById(id);
+	}
 	@POST
 	@Path("/addAmenities")
 	@Consumes(MediaType.APPLICATION_JSON)

@@ -33,8 +33,8 @@
             <li class="navbar-item" id="users_li"><a>Users</a></li>
             <li class="navbar-item" id="apartments_li"><a>Apartments</a></li>
             <li class="navbar-item" id="amenities_li"><a>Amenities</a></li>
-       
-      
+            <li class="navbar-item" id="reservations_li"><a>Reservations</a></li>
+
         </ul>
         <ul id="sidebar">
             <li class="sidebar-item" id="profile_li"><a>Profile</a></li>
@@ -84,54 +84,7 @@
     </div>
     <!-- ***************** -->
 
-<!-- modal-searchusers -->
- <div id="mod_pretraga_apartments" class="modal" hidden>
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-             
-            <label>Edit</label>
-        </div> 
-        <div class="modal-body"> 
-            <!-- modal-body -->
-            <label>Type:</label>
-            <label class="radio-inline"><input type="radio" id="typeRoom" name="type" value="ROOM" class = "form-contorl"/>ROOM</label>
-            <label class="radio-inline"><input type="radio" id="typeFull" name="type" value="FULL_APARTMENT" class = "form-contorl"/>FULL_APARTMENT</label>
-            </br>
-            <label>Room number:</label>
-            <input type="text" name="room_number" id="room_number_id"></br>
-            </br>
-            <label>Guest number:</label>
-            <input type="text" name="guests_number" id="guest_number_id"></br>
-            </br>
-            <label>Location :</label>
-            <input type="text" name="location_name" id="location_id"></br>
-            </br>
-            <label>City:</label>
-            <input type="text" name="city_name" id="city_id"></br>
-            </br>
-            <label>Price per night </label>
-            <input type="text" name="price_perNight" id="pricePerNight_id"></br>
-            </br>
-           
-            <label>Checkout time:</label>
-            <input type="text" name="checkout_time_name" id="checkout_time_id"></br>
-            </br>
-            <label>Checkin time:</label>
-            <input type="text" name="checkin_time_name" id="checkin_time_id"></br>
-            </br>
-            <label>Status</label>
-            <label class="radio-inline1"><input type="radio" id="statusA" name="type1" checked="true" value="INACTIVE" class = "form-contorl1"/>INACTIVE</label>
-            <label class="radio-inline1"><input type="radio" id="statusI" name="type1" value="ACTIVE" class = "form-contorl1"/>ACTIVE</label>
-            </br>
-            <button type="submit" style="margin-right: 10px;" id="create_res_button_mod1">Edit</button>
-        </div>
-        <div class="modal-footer">
-            <!-- footer -->
-         </div>
-    </div>
-</div> 
-<!-- ***************** -->
+
 
 
 <!--     edit-apartment
@@ -197,11 +150,11 @@
                 </div>
                 <div class="panel-body">
                     <form id="login">
-                        <input type="text" class="form-control" name="username" placeholder="Username *" />
+                        <input type="text" class="form-control" name="username" placeholder="Username *" required/>
                         <br/>
                         <label id="error_username" style="color: red"></label>
                         <br/>
-                        <input type="password" class="form-control" name="password" placeholder="Password *" id="password" />
+                        <input type="password" class="form-control" name="password" placeholder="Password *" id="password" required/>
                         <br/>
                         <label id="error_password" style="color: red"></label>
                         <br/>
@@ -225,23 +178,23 @@
                 </div>
                 <div class="panel-body">
                     <form id="registration">
-                        <input type="text" class="form-control" name="fname" placeholder="First Name *" />
+                        <input type="text" class="form-control" name="fname" placeholder="First Name *" required/>
                         <br/>
                         <label id="error_fname" style="color: red"></label>
                         <br/>
-                        <input type="text" class="form-control" name="lname" placeholder="Last Name *" />
+                        <input type="text" class="form-control" name="lname" placeholder="Last Name *" required/>
                         <br/>
                         <label id="error_lname" style="color: red"></label>
                         <br/>
-                        <input type="text" class="form-control" name="username-register" placeholder="Username *" />
+                        <input type="text" class="form-control" name="username-register" placeholder="Username *" required/>
                         <br/>
                         <label id="error_username" style="color: red"></label>
                         <br/>
-                        <input type="password" class="form-control" name="password-register" placeholder="Password *" id="password" />
+                        <input type="password" class="form-control" name="password-register" placeholder="Password *" id="password" required/>
                         <br/>
                         <label id="error_password" style="color: red"></label>
                         <br/>
-                        <input type="password" class="form-control" name="confirm" placeholder="Confirm Password *" />
+                        <input type="password" class="form-control" name="confirm" placeholder="Confirm Password *" required/>
                         <br/>
                         <label id="error_confirm" style="color: red"></label>
                         <br/>
@@ -251,8 +204,9 @@
                             <label class="radio-inline"><input type="radio" name="gender" value="FEMALE" class = "form-contorl"/>Female</label>
                         </div>
                         <br/>
-                        <input id="submit_form" type="submit" value="Submit"></input>
-                        <br/>
+                        <button type="button" id="submit_form" class="btn btn-primary">Register</button>
+<!--                         <input id="submit_form" type="submit" value="Submit"></input>
+ -->                        <br/>
                         <br/>
                         <p>	Have you got the account? <a id="login-button">   Log In</a></p>
                         <br/>
@@ -384,6 +338,9 @@
             </tbody>
         </table>
 </div>
+
+
+
     <!-- amenities-list -->
     <div id="admin-list-amenities" hidden>
 
@@ -494,6 +451,28 @@
     </div>
     <!-- ***************** -->
 
+<!-- modal-amenitieEdit -->
+<div id="mod_pretragaEdit" class="modal" hidden>
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <!-- header -->
+            <label>Edit amenitie</label>
+        </div>
+        <div class="modal-body">
+            <!-- modal-body -->
+            <label>Name:</label>
+            <input type="text"  id="nameAmenitie"></br>
+            </br>
+            <button type="submit" style="margin-right: 10px;" id="edit_mod">Edit</button>
+        </div>
+        <div class="modal-footer">
+            <!-- footer -->
+        </div>
+    </div>
+</div>
+<!-- *************** -->
+
  <!-- modal-amenitie -->
     <div id="mod_pretraga" class="modal" hidden>
         <div class="modal-content">
@@ -521,7 +500,53 @@
     </div>
     <!-- ***************** -->
 
-
+<!-- modal-edit -->
+ <div id="mod_pretraga_apartments" class="modal" hidden>
+    <div class="modal-content">
+        <div class="modal-header">
+                <span class="close">&times;</span>
+             
+            <label>Edit</label>
+        </div> 
+        <div class="modal-body"> 
+            <!-- modal-body -->
+            <label>Type:</label>
+            <label class="radio-inline"><input type="radio" id="typeRoom" name="type" value="ROOM" class = "form-contorl"/>ROOM</label>
+            <label class="radio-inline"><input type="radio" id="typeFull" name="type" value="FULL_APARTMENT" class = "form-contorl"/>FULL_APARTMENT</label>
+            </br>
+            <label>Room number:</label>
+            <input type="text" name="room_number" id="room_number_id"></br>
+            </br>
+            <label>Guest number:</label>
+            <input type="text" name="guests_number" id="guest_number_id"></br>
+            </br>
+            <label>Location :</label>
+            <input type="text" name="location_name" id="location_id"></br>
+            </br>
+            <label>City:</label>
+            <input type="text" name="city_name" id="city_id"></br>
+            </br>
+            <label>Price per night </label>
+            <input type="text" name="price_perNight" id="pricePerNight_id"></br>
+            </br>
+            <label>Checkout time:</label>
+            <input type="text" name="checkout_time_name" id="checkout_time_id"></br>
+            </br>
+            <label>Checkin time:</label>
+            <input type="text" name="checkin_time_name" id="checkin_time_id"></br>
+            </br>
+            <label>Status</label>
+            <label class="radio-inline1"><input type="radio" id="statusA" name="type1" checked="true" value="INACTIVE" class = "form-contorl1"/>INACTIVE</label>
+            <label class="radio-inline1"><input type="radio" id="statusI" name="type1" value="ACTIVE" class = "form-contorl1"/>ACTIVE</label>
+            </br>
+            <button type="submit" style="margin-right: 10px;" id="create_res_button_mod1">Edit</button>
+        </div>
+        <div class="modal-footer">
+            <!-- footer -->
+         </div>
+    </div>
+</div> 
+<!-- ***************** -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>

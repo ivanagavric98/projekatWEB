@@ -13,6 +13,43 @@ function addNewAmenities(amenitie) {
 
 
 $(document).ready(function() {
+	
+	
+	$('#admin-list-amenities').on('click', '.btnAmenitiesEdit', function(event){
+        event.preventDefault();
+            $.ajax({
+            type: 'get',
+            url: 'rest/amenities/1/findById',
+            contentType: 'application/json',
+            success: function(amenitie) {
+            console.log(amenitie);
+            clearWorkspace();
+
+            $('#mod_pretragaEdit').show();
+            $('#nameAmenitie').val(amenitie.name);
+    }
+})
+
+ });
+  
+$('#edit_mod').click(function() {
+    let name = $('#nameAmenitie').val();
+    let amenitieObj={
+        "name":name
+    }
+    $.ajax({
+        type: "put",
+        url: "rest/amenities/edit/1",
+        data: JSON.stringify(amenitieObj),
+        contentType: "application/json",
+        success: function(amenitie) {
+            console.log(amenitie);
+            alert('Uspesna izmena sadrzaja!');
+        }
+    })
+});
+
+
 
 	$('#add_amenitie_btn').click(function(event){
 				event.preventDefault();
@@ -59,7 +96,7 @@ $(document).ready(function() {
 	});
 	
 
-	$('#admin-list-amenities-table').on('click', '.btnAmenitiesEdit', function() {
+/*	$('#admin-list-amenities-table').on('click', '.btnAmenitiesEdit', function() {
         $.ajax({
             type: 'post',
             url: 'rest/amenities/editAmenities',
@@ -73,7 +110,10 @@ $(document).ready(function() {
             }
         });
 	});
-
+*/
+	
+	
+	
 	$('#admin-list-amenities-table').on('click', '.btnAmenitiesDelete', function() {
 		   
 		let name = $('#').val();

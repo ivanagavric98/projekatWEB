@@ -20,6 +20,10 @@
  }
 
  $(document).ready(function() {
+	 
+	 
+	 
+	 
      $('#apartments_li').click(function() {
          $.ajax({
              type: "get",

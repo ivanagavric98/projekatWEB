@@ -25,7 +25,7 @@ import model.User;
 
 public class AmenitiesDAO {
 
-	private Map<Long, Amenities> amenities = new HashMap<>();
+	private static Map<Long, Amenities> amenities = new HashMap<>();
 	private String contextPath;
 
 	public AmenitiesDAO() {
@@ -53,7 +53,15 @@ public class AmenitiesDAO {
 		}
 		return false;
 	}
-
+	public static Amenities findById(Long id) {
+		for(Amenities a : amenities.values()) {
+			if(a.getId() == id) {
+				return a;	
+			}
+		}
+		
+		return null;
+	}
 	public Amenities editAmenitie(long id, Amenities amenitie) {
 		Amenities old = amenities.get(id);
 		
