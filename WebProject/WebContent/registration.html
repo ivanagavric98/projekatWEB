@@ -15,6 +15,7 @@
     <script src="apartments.js"></script>
     <script src="reservations.js"></script>
     <script src="amenities.js"></script>
+    <script src="apartments_profile.js"></script>
     
     <style>
         .error {
@@ -83,7 +84,57 @@
     </div>
     <!-- ***************** -->
 
-    <!-- edit-apartment -->
+<!-- modal-searchusers -->
+ <div id="mod_pretraga_apartments" class="modal" hidden>
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+             
+            <label>Edit</label>
+        </div> 
+        <div class="modal-body"> 
+            <!-- modal-body -->
+            <label>Type:</label>
+            <label class="radio-inline"><input type="radio" id="typeRoom" name="type" value="ROOM" class = "form-contorl"/>ROOM</label>
+            <label class="radio-inline"><input type="radio" id="typeFull" name="type" value="FULL_APARTMENT" class = "form-contorl"/>FULL_APARTMENT</label>
+            </br>
+            <label>Room number:</label>
+            <input type="text" name="room_number" id="room_number_id"></br>
+            </br>
+            <label>Guest number:</label>
+            <input type="text" name="guests_number" id="guest_number_id"></br>
+            </br>
+            <label>Location :</label>
+            <input type="text" name="location_name" id="location_id"></br>
+            </br>
+            <label>City:</label>
+            <input type="text" name="city_name" id="city_id"></br>
+            </br>
+            <label>Price per night </label>
+            <input type="text" name="price_perNight" id="pricePerNight_id"></br>
+            </br>
+           
+            <label>Checkout time:</label>
+            <input type="text" name="checkout_time_name" id="checkout_time_id"></br>
+            </br>
+            <label>Checkin time:</label>
+            <input type="text" name="checkin_time_name" id="checkin_time_id"></br>
+            </br>
+            <label>Status</label>
+            <label class="radio-inline1"><input type="radio" id="statusA" name="type1" checked="true" value="INACTIVE" class = "form-contorl1"/>INACTIVE</label>
+            <label class="radio-inline1"><input type="radio" id="statusI" name="type1" value="ACTIVE" class = "form-contorl1"/>ACTIVE</label>
+            </br>
+            <button type="submit" style="margin-right: 10px;" id="create_res_button_mod1">Edit</button>
+        </div>
+        <div class="modal-footer">
+            <!-- footer -->
+         </div>
+    </div>
+</div> 
+<!-- ***************** -->
+
+
+<!--     edit-apartment
     <div id="apartment_add" hidden>
         <table id="apartment_add_table">
             <tr>
@@ -134,9 +185,9 @@
             </tr>
         </table>
     </div>
-    <!-- ***************** -->
+    *****************
 
-
+ -->
     <!-- login -->
     <div class="container" style="margin-top: 5%; margin-right: 5%;" id="login-form">
         <div class="col-md-6 col-md-offset-3">
@@ -223,7 +274,7 @@
                 <div class="panel-body">
                     <form id="addApartmants">
                         <div class="type">
-                            <label>Apartment Type</label>
+                            <label>Type</label>
                             <label class="radio-inline"><input type="radio" name="type" value="ROOM" class = "form-contorl"/>ROOM</label>
                             <label class="radio-inline"><input type="radio" name="type" value="FULL_APARTMENT" class = "form-contorl"/>FULL_APARTMENT</label>
                         </div>
@@ -243,8 +294,10 @@
                         <br/>
                         <input type="text" class="form-control" name="checkOutTime" placeholder=" Check Out Time *" />
                         <br/>
-                        <input type="text" class="form-control" name="sadrzajApartmana" placeholder=" Amenities *" />
+                        <button type="button" id="btn_apartment_addAmenities" name="sadrzajApartmana" style="background-color:cornflowerBlue;text-align:center;">Add Amenities into Apartment</button>
                         <br/>
+                         <br/>
+                         <br/>
                         <input id="add_apartment_submit_form" type="submit" value="Add New"></input>
                         <br/>
                     </form>
@@ -324,6 +377,7 @@
                     <th>Check out time</th>
                     <th>Status</th>
                     <th>Create Reservation For This Apartment</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>

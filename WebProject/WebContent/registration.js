@@ -21,10 +21,7 @@ $(document).ready(function() {
         let username = $('input[name="username"]').val();
         let passwordConfirm = $('input[name="confirm"]').val();
 
-        if (!username) {
-            document.getElementById("error_fname").innerText("morate popuniiti polja");
-        }
-
+       
         // 	$('#error_username').text('Please enter valid username!');
         //     cleanErrors("username");
         //     return;

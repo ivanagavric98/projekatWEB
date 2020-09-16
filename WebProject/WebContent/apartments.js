@@ -11,11 +11,11 @@
      let checkOutTime = $('<td>' + apartment.checkOutTime + '</td>');
      let status = $('<td>' + apartment.status + '</td>');
      let createRes = $('<td > ' + '<button type="submit" class="btnSelect">Create</button>' + '</td>');
-
+     let editCol = $('<td > ' + '<button type="submit" class="btnSelect1">Edit</button>' + '</td>');
 
      let tr = $('<tr></tr>');
      tr.append(id).append(type).append(roomsNumber).append(guestsNumber)
-         .append(location).append(city).append(host).append(pricePerNight).append(checkInTime).append(checkOutTime).append(status).append(createRes);
+         .append(location).append(city).append(host).append(pricePerNight).append(checkInTime).append(checkOutTime).append(status).append(createRes).append(editCol);
      $('#admin-list-apartments-table').append(tr);
  }
 

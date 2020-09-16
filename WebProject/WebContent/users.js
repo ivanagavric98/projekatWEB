@@ -38,6 +38,8 @@ $(document).ready(function() {
             contentType: "application/json",
             success: function(users) {
                 clearWorkspace();
+                $('#sort').hide();
+                $('#filtrate').hide();
                 $('#admin-list-users').show();
                 $('#admin-list-users-table tbody').empty();
                 for(let user of users) {

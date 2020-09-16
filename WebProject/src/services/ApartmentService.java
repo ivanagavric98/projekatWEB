@@ -166,9 +166,9 @@ public class ApartmentService {
 	
 	}
 
-	/*
+	
 	@PUT
-	@Path("/{id}")
+	@Path("/{id}/edit")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Apartment edit(@PathParam("id") Long id,
@@ -177,7 +177,7 @@ public class ApartmentService {
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
 		return apartmentsDAO.editApartmanData(id,apartment);
 	}
-	*/
+	
 	
 //--------------------------
 	//sortiranje apartmana po broju soba r

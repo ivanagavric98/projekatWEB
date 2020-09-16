@@ -154,9 +154,9 @@ function registerNewUser() {
         let password = $('input[name="password"]').val();
         let username = $('input[name="username"]').val();
         let gender = "";
-        if (document.getElementById("FEMALE").checked === true) {
+        if (document.getElementById('FEMALE').checked) {
             gender = "FEMALE";
-        } else if (document.getElementById("MALE").checked === true) {
+        } else if (document.getElementById('MALE').checked ) {
             gender = "MALE";
         }
 
