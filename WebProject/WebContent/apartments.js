@@ -21,7 +21,37 @@
 
  $(document).ready(function() {
 	 
-	 
+    $('#activeApartmans').click(function() {
+        $.ajax({
+            type: "get",
+            url: "rest/apartment/hostApartment",
+            contentType: "application/json",
+            success: function(apartments) {
+                clearWorkspace();
+                $('#admin-list-apartments').show();
+                $('#admin-list-apartments-table tbody').empty();
+                for (let apartment of apartments) {
+                    addNewApartment(apartment);
+                }
+            }
+        })
+    });
+
+    $('#inactiveApartmans').click(function() {
+        $.ajax({
+            type: "get",
+            url: "rest/apartment/hostApartmentInactive",
+            contentType: "application/json",
+            success: function(apartments) {
+                clearWorkspace();
+                $('#admin-list-apartments').show();
+                $('#admin-list-apartments-table tbody').empty();
+                for (let apartment of apartments) {
+                    addNewApartment(apartment);
+                }
+            }
+        })
+    });
 	 
 	 
      $('#apartments_li').click(function() {

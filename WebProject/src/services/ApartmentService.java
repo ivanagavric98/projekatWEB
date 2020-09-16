@@ -97,6 +97,15 @@ public class ApartmentService {
 		
 		return apartmentsDAO.findAllHostApartment(user.getUsername());
 	}
+	@GET
+	@Path("/hostApartmentInactive")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Apartment> findActiveHostApartmentInactive(@Context HttpServletRequest request){
+		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		User user = (User) request.getSession(false).getAttribute("user");
+		
+		return apartmentsDAO.findAllHostApartmentInactive(user.getUsername());
+	}
 	
 	
 	//--------------------------------------------------------------------------------------

@@ -103,6 +103,16 @@ public class ApartmentDAO {
 		return apartmentList;
 	}
 	
+	public Collection<Apartment> findAllHostApartmentInactive(String host){
+		ArrayList<Apartment> apartmentList = new ArrayList<Apartment>();
+		
+		for(Apartment apartment : apartments.values()) {
+			if(apartment.getStatus().equals(Status.INACTIVE) && apartment.getHost().equals(host)) {
+				apartmentList.add(apartment);
+			}
+		}
+		return apartmentList;
+	}
 	
 	//----------------------------------------
 		//pretraga po i i host (za domacina)
@@ -125,13 +135,13 @@ public class ApartmentDAO {
 		if(apartment == null) {
 			return null;
 		}
-		Apartment newApartment = createNewApartment(newApartmentData, id, apartment.getStatus());
+		Apartment newApartment = createNewApartment(newApartmentData, id);
 		saveApartments(contextPath);
 		
 		return newApartment;
 	}
 	
-	private Apartment createNewApartment(Apartment newApartmentData, Long id, Status status) {
+	private Apartment createNewApartment(Apartment newApartmentData, Long id) {
 		Apartment newApartment = new Apartment();
 		
 		

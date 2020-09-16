@@ -136,10 +136,16 @@ function hideFuncByRole(role) {
     if (role === "ADMINISTRATOR") {
         $('#profile_li').hide();
         $('#logout_li').hide();
+        $('#activeApartmans').hide();
+        $('#inactiveApartmans').hide();
+
     } else if (role === "HOST") {
         $('#users_li').hide();
+        $('#apartments_li').hide();
     } else {
         $('#users_li').hide();
+        $('#activeApartmans').hide();
+        $('#inactiveApartmans').hide();
 
     }
 }
