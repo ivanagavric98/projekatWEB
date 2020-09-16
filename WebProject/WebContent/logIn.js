@@ -26,6 +26,12 @@ $(document).ready(function() {
         $('#registration-form').show();
     });
 
+    $('#login_li').click(function() {
+        $('#login-form').show();
+
+    });
+    
+    
     $('#login-button').on('click', function() {
         clearWorkspace();
         $('#login-form').show();
@@ -85,6 +91,8 @@ function login() {
                     alert('Welcome!');
                     activeUserRole = user.role;
                     hideFuncByRole(activeUserRole);
+                    $('#sort').hide();
+	                $('#filtrate').hide();
                     clearWorkspace();
                 },
                 error: function(message) {

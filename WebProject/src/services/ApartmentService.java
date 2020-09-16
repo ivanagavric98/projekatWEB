@@ -51,6 +51,9 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Apartment> findAll(@Context HttpServletRequest request){
 		ApartmentDAO apartmentsDAO = (ApartmentDAO) ctx.getAttribute("apartmentDAO");
+		UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
+		
+		
 		
 		return apartmentsDAO.findAll();		
 	

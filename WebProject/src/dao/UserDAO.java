@@ -62,7 +62,7 @@ public class UserDAO {
 	}
 	
 
-	private Role getRole(String role) {
+	public Role getRole(String role) {
 		switch (role) {
 		case "HOST":
 			return Role.HOST;
